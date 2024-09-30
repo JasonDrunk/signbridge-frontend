@@ -1,0 +1,55 @@
+/* Library.css */
+
+.library {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .categoryName {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+
+  .sign-wrapper{
+    margin-top: 5vh;
+    width: 50%;
+    height: 75vh;
+    background-color: white;
+    box-shadow: black 0px 0px 4px 0px;
+    border-bottom: 3px solid rgba(69, 49, 36, 0.5);
+    border-top: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 0px 5px 5px 5px;
+  }

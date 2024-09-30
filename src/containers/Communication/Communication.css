@@ -1,0 +1,700 @@
+.communication-body {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+/* Additional styling for specific elements */
+
+.container-wrapper {
+    position: relative;
+    padding: 50px 50px 0px 50px;
+    display: flex;
+    margin-left: 12.5%; /* Add spacing between the elements */
+    width: 75vw;
+    height: 98vh;
+}
+
+.canvas-wrapper {
+    margin-top: 13vh;
+    width: 50%;
+    height: 75vh;
+    background-color: white;
+    box-shadow: black 0px 0px 4px 0px;
+    border-bottom: 3px solid rgba(69, 49, 36, 0.5);
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0px 5px 5px 5px;
+}
+
+.content-wrapper {
+    margin-top: 13vh;
+    margin-left: 2vw;
+    padding: 1rem 2rem 2rem 2rem;
+    height: 75vh;
+    width: 80%;
+    background-color: white;
+    box-shadow: black 0px 0px 4px 0px;
+    border-bottom: 3px solid rgba(69, 49, 36, 0.5);
+    border-radius: 5px 0px 5px 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-navigation {
+    box-shadow: black 0px 0px 4px 0px;
+    position: absolute;
+    height: 33.7vh;
+    width: 4vw;
+    background-color: #77828f;
+    margin-left: -8.5vh;
+    margin-top: 4.8vh;
+    float: left;
+    border-radius: 25px 0px 0px 25px;
+}
+.active {
+    border-radius: 25px 0px 0px 25px;
+}
+.sidebar-navigation ul {
+    text-align: center;
+    color: white;
+    list-style-type: none;
+}
+.sidebar-navigation ul li {
+    height: 11.2vh;
+    padding: 28px 0;
+    cursor: pointer;
+    transition: all ease-out 120ms;
+    border-radius: 25px 0px 0px 25px;
+}
+.sidebar-navigation ul li i {
+    display: block;
+    font-size: 24px;
+    transition: all ease 450ms;
+}
+.sidebar-navigation ul li .tooltip {
+    display: inline-block;
+    position: absolute;
+    background-color: #1c2e4a;
+    width: 100px;
+    padding: 8px 15px;
+    border-radius: 3px;
+    left: -7.5vw;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+.sidebar-navigation ul li .tooltip:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 6.2vw;
+    top: 1vh;
+    transform: rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background-color: inherit;
+}
+.sidebar-navigation ul li:hover {
+    background-color: #1c2e4a;
+}
+.sidebar-navigation ul li:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+.sidebar-navigation ul li.active {
+    background-color: #1c2e4a;
+}
+.sidebar-btn {
+    position: absolute;
+    width: 2.5vw;
+    margin-left: -1.2vw;
+    margin-top: -0.5vh;
+}
+
+.communication-toprow {
+    display: flex;
+    height: 6vh;
+}
+
+.skeleton-checkbox{
+    margin-left: 100px;
+}
+
+.communication-bottomrow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5vh;
+    margin: 0 0.5vw;
+    height: 6vh;
+}
+
+.communication-bottomrow input {
+    width: 5vw;
+    background-color: #f3f3f3;
+    height: 3vh;
+}
+
+.bottomrow{
+    width: 100%;
+}
+
+.status-row {
+    margin: 0 0.5vw;
+}
+
+.status-box {
+    padding: 5px;
+    border-radius: 5px;
+    height: 5vh;
+    width: 100%;
+    background-color: #f3f3f3;
+    border: 1px solid #353535;
+}
+
+.avatarcontrol-btn{
+    width: 10vw;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: left;
+    text-decoration: none;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    background-color: #f3f3f3;
+}
+
+.avatarcontrol-img {
+    position: absolute;
+    width: 2vw;
+    margin-top: -0.5vh;
+    margin-left: 0.5vw;
+}
+
+.avatarcontrol-btn:hover {
+    background-color: #4d85ff !important;
+    color: #fff !important;
+}
+
+.log-bg{
+    background-color: #ffffff !important;
+}
+
+.log-top{
+    background-color: #ead2ae;
+    border-radius: 0% 0% 10% 10%;
+}
+
+.logHeader{
+    margin-top: 5px;
+    font-size: 20px;
+    display: absolute;
+    text-align: center;
+}
+
+.log-item {
+    transition: none; /* Disable transition animations */
+    pointer-events: none;
+}
+
+.log-item .MuiListItemButton-root:hover {
+    background-color: inherit; /* Disable hover background color change */
+}
+
+.log-item .MuiListItemButton-root:focus {
+    background-color: inherit; /* Disable focus background color change */
+}
+
+
+.communicationlog-btn {
+    position: fixed;
+    right: 0;
+    margin: -5vh 1vh;
+    width: 3.5vw;
+    height: 7.5vh;
+    z-index: 1;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    background-color: #f8be64;
+}
+
+.communicationlog-btn:hover img {
+    width: 2.5vw;
+    margin-top: -0.5vh;
+    margin-left: -0.9vw;
+}
+
+.communicationlog-icon {
+    margin-left: -0.6vw;
+    color: white;
+}
+
+.communicationlog-btn:hover .communicationlog-icon .communicationlog-img {
+    transform: scale(1.2); /* Adjust scale as needed */
+    transition: transform 0.1s ease-in-out; /* This line is redundant but included per your request */
+}
+
+.communicationlog-img {
+    font-size: 2rem !important; /* Adjust the size as needed */
+    color: white;
+}
+
+.communication-menu {
+    box-shadow: black 0px 0px 4px 0px;
+    position: absolute;
+    width: 64vw;
+    height: 8vh;
+    background-color: #000;
+    border-radius: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.communication-menu button {
+    font-weight: 600;
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: 25px;
+}
+.communication-menu .animation {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    z-index: 0;
+    transition: all 0.5s ease 0s;
+    border-radius: 15px;
+}
+.communication-menu button:nth-child(1) {
+    width: 32vw;
+}
+.communication-menu button:nth-child(2) {
+    width: 32vw;
+}
+.communication-menu .start-home,
+button:nth-child(1):hover ~ .animation {
+    width: 32vw;
+    left: 0;
+    background-color: #3d648d;
+}
+.communication-menu .start-about,
+button:nth-child(2):hover ~ .animation {
+    width: 32vw;
+    left: 32vw;
+    background-color: #3d648d;
+}
+
+.communication-h1 {
+    padding-bottom: 1rem;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 1.5vw;
+}
+
+
+.closeFa {
+    margin: 0.3vw 0vw 0vw 1vw;
+    float: left;
+    font-size: 28px !important; 
+    cursor: pointer;
+}
+
+.closeFa:hover {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dltLogBtn {
+    z-index: 1;
+    right: -3vw;
+    margin-bottom: 1vh;
+    bottom: 0;
+    border-radius: 100%;
+    position: fixed;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 45px;
+    color: #fff;
+    background-color: red;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    margin-right: 60px;
+}
+
+.dltLogBtn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+.avatar-textbox {
+    font-size: 3vh;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    width: 26vw;
+    height: 25vh;
+    resize: none;
+}
+
+.speed-control {
+    margin-top: 2vh;
+}
+.speed-slider {
+    margin-top: 1vh;
+    width: 15vw;
+}
+.speed-textbox {
+    text-align: center;
+    margin-left: 1vh;
+    width: 3vw;
+    background-color: #d6d4d4;
+    border: none;
+    border-radius: 15px;
+}
+
+.left-handed .canvas-wrapper {
+    transform: scaleX(-1);
+}
+
+.voice-form {
+    display: flex;
+    gap: 1rem;
+}
+
+.voiceToTextBox{
+    position: relative;
+}
+
+.avatar-textbox-container {
+    position: relative;
+}
+
+.avatar-textbox {
+    position: relative;
+    font-size: 3vh;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    width: 26vw;
+    height: 25vh;
+    resize: none;
+    padding: 8px;
+}
+
+.avatar-microphone-btn {
+    position: absolute;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    right: 7px;
+    bottom: 10px;
+}
+
+.fa-microphone, .faStopBtn {
+    font-size: 20px;
+    color: #1c2e4a;   
+    background: transparent; 
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.fa-microphone:hover, .faStopBtn:hover {
+    background-color: #e0e0e0; 
+}
+
+.voice-text-button-group {
+    margin-left: 1.75vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.separator {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 1px;
+    background-color: #1c2e4a;
+}
+
+/* Play Button */
+.avatarplay-btn {
+    font-size: 3vh;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #2ecc71;
+    color: #172808;
+    cursor: pointer;
+    font-weight: 500;
+
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 7vw;
+}
+
+.avatarplay-btn:not([disabled]):hover {
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(50, 154, 107, 0.5),
+        0.125rem 0.125rem 1rem rgba(117, 209, 148, 0.5);
+}
+
+/* Pause Button */
+.avatarpause-btn {
+    font-size: 3vh;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #ff4d4d;
+    color: rgb(82, 1, 1);
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 7vw;
+
+}
+
+.avatarpause-btn:not([disabled]):hover {
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(299, 42, 42, 0.5),
+        0.125rem 0.125rem 1rem rgba(198, 159, 159, 0.5);
+}
+
+.fps-box{
+    border: 1px solid #353535;
+    border-radius: 5px;
+}
+
+.frame-box{
+    padding: 5px;
+    border: 1px solid #353535;
+    border-radius: 5px;
+    width: 9.5vw !important;
+}
+
+.gloss-box{
+    padding: 5px;
+    border: 1px solid #353535;
+    border-radius: 5px;
+    width: 12vw !important;
+}
+
+.disabled {
+    opacity: 0.5; 
+    cursor: pointer;
+}
+
+.tooltip2 {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+}
+
+.avatar-microphone-btn:hover .tooltip2 {
+    visibility: visible;
+}
+
+
+.slr-content-wrapper{
+    margin-top: 13vh;
+    margin-left: 2vw;
+    height: 75vh;
+    width: 80%;
+    background-color: white;
+    box-shadow: black 0px 0px 4px 0px;
+    border-bottom: 3px solid rgba(69, 49, 36, 0.5);
+    border-radius: 5px 0px 5px 5px;
+  }
+
+
+  .dialog_overlay {
+    background-color: var(--black-a9);
+    position: fixed;
+    inset: 0;
+    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+.dialog_title {
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    margin-top: -20px;
+}
+
+.dialog_content {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 410px;
+    max-width: calc(100% - 20px);
+    padding: 30px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+.dialog_content2 {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 240px;
+    max-width: calc(100% - 20px);
+    padding: 30px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialog_description {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.dialog_description2 {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+/* Yes Button */
+.yesButton {
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #2ecc71;
+    color: #172808;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 18px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    padding: 25px 30px;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 2;
+    margin-left: 15px;
+}
+
+.yesButton:not([disabled]):hover {
+    background-color: #2ecc71;
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(50, 154, 107, 0.5),
+        0.125rem 0.125rem 1rem rgba(117, 209, 148, 0.5);
+}
+
+/* No Button */
+.noButton {
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #ff4d4d;
+    color: rgb(82, 1, 1);
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 18px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    padding: 25px 30px;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 2;
+    margin-right: 15px;
+}
+
+.noButton:not([disabled]):hover {
+    background-color: #ff4d4d;
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(299, 42, 42, 0.5),
+        0.125rem 0.125rem 1rem rgba(198, 159, 159, 0.5);
+}
+
+.buttonsConfirmation {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}

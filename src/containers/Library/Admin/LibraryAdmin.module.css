@@ -1,0 +1,612 @@
+.library{
+    width: 100% !important;
+}
+
+.libImage{
+    width: 100%;
+    height: auto;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left
+                bottom, from(transparent), color-stop(0.5, transparent), to(rgba(255, 255, 255, 0.1)));
+    position: relative;
+}
+.titleBack{
+    display: flex;
+    margin-left: -65px;
+}
+
+.backButton{
+    position: relative;
+    width: 35px !important;
+    height: 35px !important;
+    
+}
+
+.backContainer{
+    margin-top: 20px !important;
+    height: 35px !important;
+}
+/* Disable hover animation */
+.backContainer:hover {
+    background-color: initial !important; /* Remove any background color change on hover */
+    color: red !important; /* Remove any color change on hover */
+    box-shadow: none !important; /* Remove any box shadow on hover */
+    border-radius: 200%;
+  }
+
+  .backContainer:focus {
+    background-color: white !important; /* Remove any background color change on hover */
+    box-shadow: none !important; /* Remove any box shadow on hover */
+    border-radius: 200%;
+  }
+
+
+.signPageWrapper{
+    margin-left:11.5vw !important;
+}
+
+.signImages{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dialog_overlay {
+    background-color: var(--black-a9);
+    position: fixed;
+    inset: 0;
+    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+.dialog_title {
+    font-weight: 700 ;
+    font-size: 30px !important;
+    text-align: center;
+    margin-top: -20px;
+}
+
+.dialog_content {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 410px;
+    max-width: calc(100% - 20px);
+    padding: 30px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+.dialog_content2 {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 240px;
+    max-width: calc(100% - 20px);
+    padding: 30px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialog_content3 {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 300px;
+    max-width: calc(100% - 20px);
+    padding: 30px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialog_description {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.dialog_description2 {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.Fieldset_name {
+    border: 0;
+    padding: 0;
+    margin: 35px 0;
+}
+
+.Fieldset_thumbnail{
+    border: 0;
+    padding: 0;
+    margin: -45px 0;
+}
+
+
+/* Save Button */
+.saveButton {
+    position: absolute;
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #2ecc71;
+    color: #172808;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 17px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    padding: 25px 30px;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 2;
+}
+
+.saveButton:not([disabled]):hover {
+    background-color: #2ecc71;
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(50, 154, 107, 0.5),
+        0.125rem 0.125rem 1rem rgba(117, 209, 148, 0.5);
+}
+
+/* Yes Button */
+.yesButton {
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #2ecc71;
+    color: #172808;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 18px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    padding: 25px 30px;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 2;
+    margin-left: 15px;
+}
+
+.yesButton:not([disabled]):hover {
+    background-color: #2ecc71;
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(50, 154, 107, 0.5),
+        0.125rem 0.125rem 1rem rgba(117, 209, 148, 0.5);
+}
+
+/* No Button */
+.noButton {
+    appearance: none;
+    border-radius: 4px;
+    align-items: center;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background-color: #ff4d4d;
+    color: rgb(82, 1, 1);
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 18px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    overflow: visible;
+    padding: 25px 30px;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 2;
+    margin-right: 15px;
+}
+
+.noButton:not([disabled]):hover {
+    background-color: #ff4d4d;
+    color: #fff;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(299, 42, 42, 0.5),
+        0.125rem 0.125rem 1rem rgba(198, 159, 159, 0.5);
+}
+
+.buttonsConfirmation {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}
+
+.icon_button {
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--violet-11);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.icon{
+    height: 35px;
+    width: 35px;
+    text-shadow: -1px -1px 0 black,
+    1px -1px 0 #919191,
+   -1px 1px 0 #999,
+    1px 1px 0 #999;
+    color: black;
+}
+
+.icon:focus {
+    box-shadow: 0 0 0 2px var(--violet-7);
+}
+
+/* LibraryAdmin.module.css */
+/* Adjust the styles of the buttonAdmin class */
+.grid1 {
+    z-index: 1 !important;
+    width: 85% !important;
+    margin: 0 auto !important;
+    padding-bottom: 50px !important;
+}
+
+
+.grid2{
+    display: flex;
+}
+
+.card{
+    background-color: #f3f3f3 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    width: 18vw;
+    height: 30vh;
+    position: relative; /* Set position to relative */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.card:hover{
+    cursor: pointer;
+}
+
+.cardContent{
+    padding: 0px !important;
+    margin: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+
+.buttonAdmin {
+    position: relative; /* Change to relative positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the end of the container */
+  }
+  
+  @media (max-width: 1920px) {
+    .buttonAdmin {
+        margin-right: -6vw; /* Reduce margin-right for smaller screens */
+    }
+}
+
+.libheader{
+    margin-top: 20px !important;
+    text-align: center !important;
+    font-size: 30px !important;
+    font-weight: 700 !important;
+}
+
+.sign_wrapper {
+    margin-left: auto !important;
+    margin-right: 10vw !important;
+    width: 25vw !important;
+    height: 75vh !important;
+    background-color: white;
+    box-shadow: black 0px 0px 4px 0px;
+    border-bottom: 3px solid rgba(69, 49, 36, 0.5);
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 5vh;
+  }
+
+  .signImage {
+    margin-left: 10vw;
+    margin-top: 50px;
+    background-color: white;
+    max-width: 500px;
+    max-height: 400px;
+    align-self: flex-start; /* Align the item to the start (top) */
+  }
+  
+.signBox{
+    margin-left:11.5vw;
+}
+.searchBarWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .searchBar {
+    width: 100%;
+    padding-right: 80px; /* Adjust based on button and separator width */
+    box-sizing: border-box;
+  }
+  
+  .separator {
+    font-weight: 200;
+    font-size: 4.5vh;
+    position: relative;
+    right: 40px;
+    pointer-events: none;
+  }
+
+  .resetIcon{
+    width: 25px !important;
+    height: 25px !important;
+  }
+  
+  .resetButton {
+    position: relative;
+    right: 38px;
+    top: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+.searchBar{
+    height: 5vh;
+    border-radius: 5px;
+    width: 18vw;
+    font-size: 14px;
+    padding: 0px 40px 0px 0px;
+}
+
+.signHeader{
+    margin-top: 20px !important;
+    text-align: left !important;
+    font-size: 30px !important;
+    font-weight: 500 !important;
+}
+  
+/* Update Button */
+.updateCatButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    color: #fff;
+    background-color: #f8be64;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    margin-top: 3vh;
+}
+
+.updateCatButton:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Delete Button */
+.dltCatButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    color: #fff;
+    background-color: red;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    margin-right: 60px;
+}
+
+.dltCatButton:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Delete Button */
+.updateSignButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    color: #fff;
+    background-color: #f8be64;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    margin-right: 60px;
+}
+
+.updateSignButton:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.signInfo{
+    color: #000000 ;
+    position: absolute;
+    margin-left: 25px !important;
+    margin-top: -75px !important;
+    text-align: left !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+
+
+.card:hover img{
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+.card:hover .categoryText {
+    top: 0;
+    transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition for position and opacity */
+    height: 100%;
+    transform: scale(1.1);
+}
+
+.categoryText {
+    text-decoration: underline;
+    position: absolute; /* Change position to absolute */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 0.1rem solid transparent;
+    border-right: 0.1rem solid transparent;
+    height: 20%; /* Set height to 100% to cover the whole card */
+    width: 100%;
+    bottom: 0; /* Initially positioned at the top */
+    box-sizing: border-box; /* Include padding in width and height calculation */
+}
+
+/* Additional styles for image */
+.categoryImg {
+    width: 100%;
+    height: 30vh;
+    position: relative; /* Ensure the container is positioned correctly */
+}
+
+.categoryImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    object-position: center; /* Center the image within the container */
+}
+
+
+
+/* Add Button */
+.addCategoryButton {
+    appearance: none;
+    border-radius: 10px;
+    margin-top: 25px;
+    border-style: none;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+        rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+    color: #fbfbfb;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 18px;
+    font-weight: 500;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: 0.25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 25px 55px;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 2;
+}
+
+.addCategoryButton:not([disabled]):focus {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+        0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.addCategoryButton:not([disabled]):hover {
+    color: #000;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+        -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+        0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    align-items: center; /* Center the button vertically (if needed) *//* Adjust spacing below the button as needed */
+}
+
+
+
+

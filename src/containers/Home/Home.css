@@ -1,0 +1,285 @@
+/* ---------- Image Slider ---------- */
+.slider-container {
+  text-align: center;
+}
+
+.slider {
+  position: relative;
+  display: inline-block;
+}
+
+.slider-image {
+  width: 100%;
+  height: auto;
+}
+
+.dot-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dot {
+  height: 5px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 20%;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #717171;
+}
+
+/* ---------- For available module ---------- */
+.available-module-section {
+  padding: 0 0 2rem 0;
+  margin: 20px auto;
+  width: 80%;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.heading {
+  text-align: center;
+  font-size: 38px;
+  color: #333333;
+  padding: 1rem;
+  margin: 2rem 0;
+  background: #e7f0fd;
+}
+
+.heading span {
+  color: #a0b8da;
+}
+
+.available-module-section .available-module-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.available-module-section .available-module-container .avail-module-box {
+  flex: 1 1 15rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box
+  .avail-module-image {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box
+  .avail-module-image
+  img {
+  height: 100%;
+  width: 80%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box:hover
+  .avail-module-image
+  img {
+  transform: scale(1.1);
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box
+  .avail-module-image
+  .avail-module-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1em;
+  color: #ffffff;
+  transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box:hover
+  .avail-module-image
+  .avail-module-text {
+  top: 0;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition for position and opacity */
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box
+  .avail-module-image
+  .avail-module-text
+  a {
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 26px;
+  width: 50%;
+  color: #ffffff;
+}
+
+.available-module-section
+  .available-module-container
+  .avail-module-box
+  .avail-module-image
+  .avail-module-text
+  .cart-btn {
+  border-left: 0.1rem solid transparent;
+  border-right: 0.1rem solid transparent;
+  width: 100%;
+}
+
+/* ---------- About Us section ---------- */
+.about {
+  width: 80%;
+  background-color: #ffffff;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.about .row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 3rem;
+}
+
+.about .row .video-container {
+  flex: 1 1 40rem;
+  position: relative;
+}
+
+.about .row .video-container img {
+  width: 100%;
+  border: 1rem solid #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  height: 100%;
+  object-fit: cover;
+}
+
+.about .row .content {
+  flex: 1 1 40rem;
+}
+
+.about .row .content h3 {
+  font-size: 25px;
+  color: #333333;
+}
+
+.about .row .content p {
+  font-size: 20px;
+  color: #999999;
+  padding: 0.5rem 0;
+  padding-top: 1rem;
+  line-height: 1.5;
+}
+
+/* ---------- Youtube Section ---------- */
+.youtube-video {
+  width: 80%;
+  margin: auto;
+  background-color: var(--surface-color);
+}
+
+iframe {
+  border: 0;
+  position: relative;
+  width: 100%;
+  height: 500px;
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+
+/* ---------- Location Section ---------- */
+.location {
+  width: 80%;
+  margin: auto;
+}
+
+/* ---------- Back to top ---------- */
+.back-to-top-button {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1.5rem;
+  z-index: 99;
+}
+
+@media screen and (max-width: 768px) {
+  .about .row {
+    flex-wrap: wrap;
+  }
+
+  .about .row .content p {
+    font-size: 15px;
+  }
+}
+
+
+/* ---------- For animation ---------- */
+/* Add keyframes for fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Initial state for fade-in elements */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.75s ease-in-out;
+}
+
+/* Class added when element comes into view */
+.in-view {
+  animation: fadeIn 1s forwards;
+}
+
+/* Slide-in from the left animation */
+/* @keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slideInFromLeft 1s forwards;
+} */

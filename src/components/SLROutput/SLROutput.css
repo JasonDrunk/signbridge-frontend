@@ -1,0 +1,51 @@
+/* slrOutput.css */
+
+/* General styling for the output container */
+.slr-output-container {
+    padding: 20px;
+    margin: 100px auto;
+    text-align: center;
+    /* Center align the content */
+}
+
+.slr-output-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin: 20px 0;
+}   
+
+/* Styling for the output content */
+.output-content {
+    font-size: 1.2em;
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    border-radius: 8px;
+    /* Add border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Enhance box shadow */
+    background-color: #f9f9f9;
+    /* Add a light background color */
+    padding: 20px;
+    /* Add padding inside the content */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effects */
+}
+
+/* Styling for paragraphs inside output content */
+.output-content p {
+    color: #333;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .output-content {
+        height: auto;
+        /* Allow content to expand vertically on smaller screens */
+    }
+}

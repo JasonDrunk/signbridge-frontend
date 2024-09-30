@@ -1,0 +1,309 @@
+.noScroll {
+    overflow: hidden;
+}
+
+.instruction-popup {
+    width: 1000px;
+    height: 600px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    color: #333;
+    padding: 30px 40px 40px 40px;
+    z-index: 1001;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.instruction-popup.shown {
+    display: block;
+}
+
+.instruction_popup_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.instruction_title {
+    margin: 0 auto;
+}
+
+.instruction_popup_details {
+    height: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #888;
+    }
+}
+
+.line_separator {
+    width: 95%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+
+.instruction_popup_details_section1 p {
+    font-size: 20px;
+}
+
+.instruction_popup_details_section1 p strong {
+    font-size: 26px;
+}
+
+
+.instruction_popup_details_section2 p {
+    font-size: 26px;
+    font-weight: bold;
+
+}
+
+.instruction_popup_content {
+    padding: 10px 20px;
+    /* Add padding to the content area */
+}
+
+.instruction_popup_content ul {
+    list-style-type: disc;
+    /* Use disc bullets */
+}
+
+.instruction_popup_content li {
+    margin-bottom: 5px;
+    font-size: 20px;
+    /* Add space between list items */
+}
+
+.instruction_popup_details_image {
+    display: flex;
+    justify-content: center;
+    /* Horizontally center the image */
+    align-items: center;
+    /* Vertically center the image */
+    margin: 30px auto;
+}
+
+.instruction_image {
+    width: 90%;
+    height: auto;
+}
+
+.fa {
+    float: right;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.fa:hover {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* For devices with a max-width of 480px (small screens) */
+@media (min-width: 320px) and (max-width: 480px) {
+    .instruction-popup {
+        width: 90%;
+        height: 80vh;
+        /* Adjust height for smaller screens */
+        padding: 20px;
+        font-size: 16px;
+        /* Enable vertical scroll if content overflows */
+    }
+
+    .instruction_popup_header h1 {
+        font-size: 20px;
+    }
+
+    .fa {
+        font-size: 28px;
+    }
+
+    .instruction_image {
+        width: 100%;
+    }
+
+
+    .instruction_popup_details_section1 p {}
+
+    .instruction_popup_details_section1 p strong {}
+
+    .instruction_popup_details_section2 p {}
+
+    .instruction_popup_content li {}
+}
+
+/* For devices with a width between 481px and 640px (mobile) */
+@media (min-width: 481px) and (max-width: 640px) {
+    .instruction-popup {
+        width: 80%;
+        height: 80vh;
+        padding: 25px;
+        font-size: 16px;
+        /* Enable vertical scroll */
+    }
+
+    .instruction_popup_header h1 {
+        font-size: 24px;
+    }
+
+
+    .fa {
+        font-size: 32px;
+    }
+
+    .instruction_image {
+        width: 100%;
+    }
+
+    .instruction_popup_details_section1 p {}
+
+    .instruction_popup_details_section1 p strong {}
+
+    .instruction_popup_details_section2 p {}
+
+    .instruction_popup_content li {}
+}
+
+/* For devices with a width between 641px and 768px (tablets) */
+@media (min-width: 641px) and (max-width: 768px) {
+    .instruction-popup {
+        width: 70%;
+        height: 75vh;
+        padding: 30px;
+        font-size: 18px;
+        /* Enable vertical scroll */
+    }
+
+    .instruction_popup_header h1 {
+        font-size: 26px;
+    }
+
+
+    .fa {
+        font-size: 34px;
+    }
+
+    .instruction_image {
+        width: 95%;
+    }
+
+    .instruction_popup_details_section1 p {}
+
+    .instruction_popup_details_section1 p strong {}
+
+    .instruction_popup_details_section2 p {}
+
+    .instruction_popup_content li {}
+}
+
+/* For devices with a width between 769px and 1024px (tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .instruction-popup {
+        width: 65%;
+        height: 75vh;
+        padding: 35px;
+        font-size: 18px;
+        /* Enable vertical scroll */
+    }
+
+    .instruction_popup_header h1 {
+        font-size: 28px;
+    }
+
+    .fa {
+        font-size: 36px;
+    }
+
+    .instruction_image {
+        width: 90%;
+    }
+
+
+    .instruction_popup_details_section1 p {}
+
+    .instruction_popup_details_section1 p strong {}
+
+    .instruction_popup_details_section2 p {}
+
+    .instruction_popup_content li {}
+}
+
+/* For devices with a width between 1025px and 1280px (small desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .instruction-popup {
+        width: 60%;
+        height: 70vh;
+        padding: 30px;
+        /* Enable vertical scroll */
+    }
+
+    .instruction_popup_header h1 {
+        font-size: 30px;
+    }
+
+    .fa {
+        font-size: 36px;
+    }
+
+    .instruction_image {
+        width: 85%;
+    }
+
+
+    .instruction_popup_details_section1 p {}
+
+    .instruction_popup_details_section1 p strong {}
+
+    .instruction_popup_details_section2 p {}
+
+    .instruction_popup_content li {}
+}
+
+/* For devices with a width between 1281px and 1440px (small desktops) */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    .instruction-popup {
+        width: 55%;
+        height: 70vh;
+        padding: 30px;
+        /* Enable vertical scroll */
+    }
+
+    .instruction_popup_header h1 {
+        font-size: 32px;
+    }
+
+    .fa {
+        font-size: 36px;
+    }
+
+    .instruction_image {
+        width: 80%;
+    }
+
+    .instruction_popup_details_section1 p {}
+
+    .instruction_popup_details_section1 p strong {}
+
+    .instruction_popup_details_section2 p {}
+
+    .instruction_popup_content li {}
+}

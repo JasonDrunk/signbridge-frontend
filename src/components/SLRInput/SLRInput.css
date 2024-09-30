@@ -1,0 +1,140 @@
+/* Container styles */
+.slr-input-container {
+  margin: 5vh auto;
+  background-color: #fff;
+}
+
+.slr-input-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin: 20px 0;
+}
+
+/* Menu container styles */
+.slr-input-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2%;
+  margin: 0% 5% 12% 5%;
+  padding: 3%;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+}
+
+/* Base button styles with transform on hover */
+.slr-input-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 6vh;
+  font-size: 2vw;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.slr-input-btn:hover {
+  transform: translateY(-3px);
+  /* Move up by 3px on hover */
+}
+
+/* Button 1 and 2 (Get Video) - Adjusted Primary Color */
+.slr-input-btn.get-video {
+  background-color: #2c3f5a;
+  color: #fff;
+}
+
+.slr-input-btn.get-video:hover {
+  background-color: #1c2e4a;
+}
+
+/* Button 3 (Reset) - Darker Red Theme on Hover */
+.slr-input-btn.reset {
+  background-color: #c0392b;
+  color: #fff;
+}
+
+.slr-input-btn.reset:hover {
+  background-color: #962d21;
+  /* Darker red on hover */
+}
+
+/* Button 4 (Submit) - Darker Green Theme on Hover */
+.slr-input-btn.submit {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+.slr-input-btn.submit:hover {
+  background-color: #1e8449;
+  /* Darker green on hover */
+}
+
+/* Disabled state for all buttons */
+.slr-input-btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+
+.slr-video-container {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  padding: 10px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2);
+}
+
+.slr-preview-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.slr-preview-video.active {
+  opacity: 1;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .slr-input-menu {
+    flex-direction: column;
+    align-items: stretch;
+    margin: 5%;
+    padding: 2%;
+  }
+
+  .slr-input-btn {
+    height: 8vh;
+    font-size: 3vw;
+    margin-bottom: 5%;
+  }
+
+  .fa {
+    font-size: 24px;
+  }
+
+  .slr-video-container {
+    height: 30vh;
+    margin: 40px 0 60px;
+    /* Adjusted bottom margin for smaller screens */
+    padding: 10px;
+  }
+}
