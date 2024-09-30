@@ -1,0 +1,233 @@
+.fa_video, .fa_play, .fa_stop, .fa_upload{
+    font-size: 30px;
+    padding: 13px 0;
+}
+
+.open_cam_btn_pushable {
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+  
+.open_cam_btn_shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+}
+  
+.open_cam_btn_edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+      to left,
+      hsl(340deg 100% 16%) 0%,
+      hsl(340deg 100% 32%) 8%,
+      hsl(340deg 100% 32%) 92%,
+      hsl(340deg 100% 16%) 100%
+    );
+}
+  
+.open_cam_btn_front {
+    display: block;
+    position: relative;
+    border-radius: 15px;
+    font-size: 1.25rem;
+    padding: 5px 12px;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+}
+  
+.open_cam_btn_pushable:hover {
+    filter: brightness(110%);
+    -webkit-filter: brightness(110%);
+}
+  
+.open_cam_btn_pushable:hover .open_cam_btn_front {
+    transform: translateY(-6px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+}
+  
+.open_cam_btn_pushable:active .open_cam_btn_front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}
+  
+.open_cam_btn_pushable:hover .open_cam_btn_shadow {
+    transform: translateY(4px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+}
+  
+.open_cam_btn_pushable:active .open_cam_btn_shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+  
+.open_cam_btn_pushable:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.video_controls {
+    display: flex; 
+    margin-bottom: 0px;
+    justify-content: center;
+}
+
+.video_controls button {
+    position: relative;
+}
+
+.video_player,
+.recorded_player {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.livePlayer {
+	width: 100%;
+    border-radius: 10px;
+    margin-bottom: 90px;
+}
+
+.recorded_player .recorded {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 80px;
+}
+
+.initialHeight{
+    height: 300px;
+}
+
+.upload_btn_pushable {
+    position: absolute;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    height: 70px;
+    margin-top: -80px;
+    right: 0;
+}
+  
+.upload_btn_shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+}
+  
+.upload_btn_edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+      to left,
+      hsl(120deg 100% 14%) 0%,
+      hsl(120deg 100% 25%) 8%,
+      hsl(120deg 100% 25%) 92%,
+      hsl(120deg 100% 14%) 100%
+    );
+}
+  
+.upload_btn_front {
+    display: block;
+    position: relative;
+    border-radius: 15px;
+    font-size: 1.25rem;
+    padding: 5px 12px;
+    color: white;
+    background: hsl(120deg 100% 32%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+}
+  
+.upload_btn_pushable:hover {
+    filter: brightness(110%);
+    -webkit-filter: brightness(110%);
+}
+  
+.upload_btn_pushable:hover .upload_btn_front {
+    transform: translateY(-6px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+}
+  
+.upload_btn_pushable:active .upload_btn_front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}
+  
+.upload_btn_pushable:hover .upload_btn_shadow {
+    transform: translateY(4px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+}
+  
+.upload_btn_pushable:active .upload_btn_shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+  
+.upload_btn_pushable:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.upload_btn_pushable a{
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+    font-family: "Russo One", sans-serif;
+}

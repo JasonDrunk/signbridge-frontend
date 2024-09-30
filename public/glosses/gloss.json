@@ -1,0 +1,526 @@
+[
+  {
+    "keyword": "ADIK PEREMPUAN",
+    "animations": ["AdikPerempuan1", "AdikPerempuan2", "AdikPerempuan3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/adikperempuan.png",
+    "frames": 87
+  },
+  {
+    "keyword": "AKAN",
+    "animations": ["Akan1", "Akan2"],
+    "category":"Conversation",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 75
+  },
+  {
+    "keyword": "ASMA",
+    "animations": ["Asma1", "Asma2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 115
+  },
+  {
+    "keyword": "BADAN",
+    "animations": ["Badan1", "Badan2", "Badan3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 90
+  },
+  {
+    "keyword": "BAHU",
+    "animations": ["Bahu1", "Bahu2", "Bahu3", "Bahu4"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 145
+  },
+  {
+    "keyword": "BENGKAK",
+    "animations": ["Bengkak1", "Bengkak2", "Bengkak3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 46
+  },
+  {
+    "keyword": "BIBIR",
+    "animations": ["Bibir1", "Bibir2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 75
+  },
+  {
+    "keyword": "BUAH PINGGANG",
+    "animations": ["BuahPinggang1", "BuahPinggang2", "BuahPinggang3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 70
+  },
+  {
+    "keyword": "DARAH",
+    "animations": ["Darah1", "Darah2", "Darah3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 90
+  },
+  {
+    "keyword": "DATUK",
+    "animations": ["Datuk1", "Datuk2", "Datuk3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 60
+  },
+  {
+    "keyword": "DEMAM",
+    "animations": ["Demam1"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 60
+  },
+  {
+    "keyword": "DOKTOR",
+    "animations": ["Doktor1", "Doktor2", "Doktor3", "Doktor4"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 40
+  },
+  {
+    "keyword": "GATAL",
+    "animations": ["Gatal1", "Gatal2", "Gatal3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 90
+  },
+  {
+    "keyword": "GIGI",
+    "animations": ["Gigi1", "Gigi2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 45
+  },
+  {
+    "keyword": "HABIS",
+    "animations": ["Habis1", "Habis2", "Habis3", "Habis4"],
+    "category":"Conversation",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 85
+  },
+  {
+    "keyword": "HIDUNG",
+    "animations": ["Hidung1"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 45
+  },
+  {
+    "keyword": "HUJAN",
+    "animations": ["Hujan1", "Hujan2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 70
+  },
+  {
+    "keyword": "JANTUNG",
+    "animations": ["Jantung1", "Jantung2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 115
+  },
+  {
+    "keyword": "JARI",
+    "animations": ["Jari1", "Jari2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 30
+  },
+  {
+    "keyword": "JURURAWAT",
+    "animations": ["Jururawat1", "Jururawat2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 45
+  },
+  {
+    "keyword": "KAKI",
+    "animations": ["Kaki1", "Kaki2", "Kaki3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 110
+  },
+  {
+    "keyword": "KECEMASAN",
+    "animations": ["Kecemasan1", "Kecemasan2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 65
+  },
+  {
+    "keyword": "KERANA",
+    "animations": ["Kerana1", "Kerana2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 35
+  },
+  {
+    "keyword": "KESAKITAN",
+    "animations": ["Kesakitan1", "Kesakitan2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 55
+  },
+  {
+    "keyword": "KRIM",
+    "animations": ["Krim1", "Krim2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 105
+  },
+  {
+    "keyword": "KULIT",
+    "animations": ["Kulit1", "Kulit2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 45
+  },
+  {
+    "keyword": "LEHER",
+    "animations": ["Leher1", "Leher2", "Leher3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 45
+  },
+  {
+    "keyword": "LEMAH",
+    "animations": ["Lemah1", "Lemah2", "Lemah3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 130
+  },
+  {
+    "keyword": "LIDAH",
+    "animations": ["Lidah1", "Lidah2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 55
+  },
+  {
+    "keyword": "MAHU",
+    "animations": ["Mahu1", "Mahu2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 45
+  },
+  {
+    "keyword": "MATA",
+    "animations": ["Mata1"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 30
+  },
+  {
+    "keyword": "MENGANDUNG",
+    "animations": ["Mengandung1", "Mengandung2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 55
+  },
+  {
+    "keyword": "MULUT",
+    "animations": ["Mulut1"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 30
+  },
+  {
+    "keyword": "MUNTAH",
+    "animations": ["Muntah1", "Muntah2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 55
+  },
+  {
+    "keyword": "PENAT",
+    "animations": ["Penat1", "Penat2", "Penat3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 60
+  },
+  {
+    "keyword": "PERGI",
+    "animations": ["Pergi1", "Pergi2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 65
+  },
+  {
+    "keyword": "PERUT",
+    "animations": ["Perut1"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 30
+  },
+  {
+    "keyword": "PIL",
+    "animations": ["Pil1", "Pil2", "Pil3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 65
+  },
+  {
+    "keyword": "SAKIT KEPALA",
+    "animations": ["SakitKepala1", "SakitKepala2", "SakitKepala3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 70
+  },
+  {
+    "keyword": "SAKIT PERUT",
+    "animations": ["SakitPerut1", "SakitPerut2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 90
+  },
+  {
+    "keyword": "SAKIT PINGGANG",
+    "animations": ["SakitPinggang1", "SakitPinggang2", "SakitPinggang3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 60
+  },
+  {
+    "keyword": "SAKIT TEKAK",
+    "animations": ["SakitTekak1", "SakitTekak2", "SakitTekak3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 90
+  },
+  {
+    "keyword": "SELSEMA",
+    "animations": ["Selsema1", "Selsema2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 65
+  },
+  {
+    "keyword": "SINAR - X",
+    "animations": ["SinarX1", "SinarX2", "SinarX3", "SinarX4", "SinarX5", "SinarX6"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 105
+  },
+  {
+    "keyword": "TINGGI",
+    "animations": ["Tinggi1", "Tinggi2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 65
+  },
+  {
+    "keyword": "TULANG",
+    "animations": ["Tulang1", "Tulang2", "Tulang3"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 80
+  },
+  {
+    "keyword": "TULANG RUSUK",
+    "animations": ["TulangRusuk1", "TulangRusuk2"],
+    "category":"Medical",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 75
+  },
+  {
+    "keyword": "SAYA",
+    "animations": ["Saya1"],
+    "category":"Conversation",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg",
+    "frames": 30
+  },
+  {
+    "keyword": "SATU",
+    "animations": ["Satu"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "DUA",
+    "animations": ["Dua"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "TIGA",
+    "animations": ["Tiga"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "EMPAT",
+    "animations": ["Empat"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "LIMA",
+    "animations": ["Lima"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "ENAM",
+    "animations": ["Enam"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "TUJUH",
+    "animations": ["Tujuh"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "LAPAN",
+    "animations": ["Lapan"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "SEMBILAN",
+    "animations": ["Sembilan"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "SEPULUH",
+    "animations": ["Sepuluh1", "Sepuluh2"],
+    "category":"Numbers",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "A",
+    "animations": ["A"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "B",
+    "animations": ["B"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "C",
+    "animations": ["C"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "D",
+    "animations": ["D"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "E",
+    "animations": ["E"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "F",
+    "animations": ["F"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "G",
+    "animations": ["G"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "H",
+    "animations": ["H"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "I",
+    "animations": ["I"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  },
+  {
+    "keyword": "J",
+    "animations": ["J"],
+    "category":"Alphabet",
+    "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
+    "thumbnail": "./images/signImages/medical.jpg"
+  }
+]
