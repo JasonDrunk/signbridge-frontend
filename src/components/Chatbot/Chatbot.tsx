@@ -54,11 +54,11 @@ export default function Chatbot() {
     // Fetch input.txt content using useEffect
     useEffect(() => {
         fetch("/input.txt")
-            .then((res) => res.text())
-            .then((data) => {
+            .then(res => res.text())
+            .then(data => {
                 setInputData(data);
             })
-            .catch((err) => console.error("Error loading input.txt:", err));
+            .catch(err => console.error("Error loading input.txt:", err));
     }, []);
 
     // Add greeting when the chat opens and no messages exist
@@ -82,11 +82,11 @@ export default function Chatbot() {
     // Handle the chatbot response
     const handleMessage = async () => {
         if (userInput.trim()) {
-            setMessages((prevMessages) => [...prevMessages, { role: "user", content: userInput }]);
+            setMessages(prevMessages => [...prevMessages, { role: "user", content: userInput }]);
             setUserInput("");
 
             const response = await getGroqResponse(question);
-            setMessages((prevMessages) => [...prevMessages, { role: "bot", content: response }]);
+            setMessages(prevMessages => [...prevMessages, { role: "bot", content: response }]);
         }
     };
 
@@ -144,8 +144,7 @@ export default function Chatbot() {
                                 style={{
                                     position: "relative",
                                 }}
-                                layout
-                            >
+                                layout>
                                 {/* Name Bar */}
                                 <div className={styles.headerBar}>
                                     <h4 className={styles.botName}>Sign Bot</h4>
@@ -168,7 +167,7 @@ export default function Chatbot() {
                                     <div ref={messageEndRef} />
                                 </div>
                                 <div className={styles.inputContainer}>
-                                    <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} onKeyDown={handleKeyPress} placeholder="Message..." />
+                                    <input className={styles.chatbot_input} type="text" value={userInput} onChange={e => setUserInput(e.target.value)} onKeyDown={handleKeyPress} placeholder="Message..." />
                                     <button className={styles.sendBtn} onClick={handleMessage} disabled={!userInput.trim()}>
                                         <IoSend />
                                     </button>

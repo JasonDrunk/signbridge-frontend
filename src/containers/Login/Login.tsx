@@ -111,30 +111,27 @@ function Login() {
 
         if (emailErrors.length === 0 && passwordErrors.length === 0) {
             await signInWithEmailAndPassword(auth, email, password)
-                .then(async (userCredential) => {
-                const user = userCredential.user;
-                if (!user.emailVerified) {
-                    toast.error(t("email_not_verified"));
-                    return;
-                } else if (user.emailVerified) {
-                    await VerifyEmail({
-                        firebase_id: user.uid,
-                    });
+                .then(async userCredential => {
+                    const user = userCredential.user;
+                    if (!user.emailVerified) {
+                        toast.error(t("email_not_verified"));
+                        return;
+                    } else if (user.emailVerified) {
+                        await VerifyEmail({
+                            firebase_id: user.uid,
+                        });
 
-                    toast.success(t("login_successful"));
-                    navigate("/");
-                }
+                        toast.success(t("login_successful"));
+                        navigate("/");
+                    }
                 })
-                .catch((error) => {
-                // invalid email or password
-                if (
-                    error.code === "auth/invalid-credential" ||
-                    error.code === "auth/wrong-password"
-                ) {
-                    toast.error(t("invalid_email_password"));
-                } else {
-                    toast.error(t("login_failed")); // other errors
-                }
+                .catch(error => {
+                    // invalid email or password
+                    if (error.code === "auth/invalid-credential" || error.code === "auth/wrong-password") {
+                        toast.error(t("invalid_email_password"));
+                    } else {
+                        toast.error(t("login_failed")); // other errors
+                    }
                 });
         } else {
             toast.error(t("form_validation_failed") + errorMessage);
@@ -143,7 +140,6 @@ function Login() {
 
     const googleLogin = async () => {
         const response = await signInWithGooglePopup();
-        console.log(response);
         await SignUpUser({
             firebase_id: response.user.uid,
             username: response.user.displayName,
@@ -164,55 +160,30 @@ function Login() {
             {/* <button onClick={() => callApi(`http://localhost:3000/users/${user?.email}/profile`, "GET")}>testing button</button> */}
             <div className="login-form">
                 <form onSubmit={handleSubmit}>
-                <LoginInput
-                    type="email"
-                    placeholder=" "
-                    value={email}
-                    onChange={handleEmailChange}
-                    error={emailError}
-                    label={t("email")}
-                />
+                    <LoginInput type="email" placeholder=" " value={email} onChange={handleEmailChange} error={emailError} label={t("email")} />
 
-                <LoginInput
-                    type={showPassword ? "text" : "password"}
-                    placeholder=" "
-                    value={password}
-                    onChange={handlePasswordChange}
-                    error={passwordError}
-                    label={t("password")}
-                    showPassword={showPassword}
-                    handleTogglePassword={handleTogglePassword}
-                />
+                    <LoginInput type={showPassword ? "text" : "password"} placeholder=" " value={password} onChange={handlePasswordChange} error={passwordError} label={t("password")} showPassword={showPassword} handleTogglePassword={handleTogglePassword} />
 
-                <div className="forgot-pwd-container">
-                    <Link to="/forgot-password" className="forgot-password">
-                        {t("forgot_password")}
-                    </Link>
-                </div>
+                    <div className="forgot-pwd-container">
+                        <Link to="/forgot-password" className="forgot-password">
+                            {t("forgot_password")}
+                        </Link>
+                    </div>
 
-                <button className="login-btn" type="submit">
-                    {t("login")}
-                </button>
+                    <button className="login-btn" type="submit">
+                        {t("login")}
+                    </button>
 
-                <div>{t("or")}</div>
+                    <div>{t("or")}</div>
 
-                <button
-                    className="google-login-btn"
-                    type="button"
-                    onClick={googleLogin}
-                >
-                    <img
-                        src="/images/google-logo.png"
-                        alt="Google Logo"
-                        className="google-logo"
-                    />
-                    {t("login_with_google")}
-                </button>
+                    <button className="google-login-btn" type="button" onClick={googleLogin}>
+                        <img src="/images/google-logo.png" alt="Google Logo" className="google-logo" />
+                        {t("login_with_google")}
+                    </button>
 
-                <div className="sign-up">
-                    <div>{t("no_account")}</div>{" "}
-                    <Link to="/sign-up">{t("sign_up")}</Link>
-                </div>
+                    <div className="sign-up">
+                        <div>{t("no_account")}</div> <Link to="/sign-up">{t("sign_up")}</Link>
+                    </div>
                 </form>
             </div>
         </div>

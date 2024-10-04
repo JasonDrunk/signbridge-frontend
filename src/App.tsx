@@ -1,13 +1,7 @@
 import "./App.css";
 import Navbar from "./containers/Navbar/Navbar";
 import Footer from "./containers/Footer/Footer";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./containers/Home/Home";
 import Library from "./containers/Library/Library";
 import Communication from "./containers/Communication/Communication";
@@ -55,196 +49,188 @@ import useNetworkStatus from "@root/hook/useNetworkStatus";
 import axios from "axios";
 
 i18n.use(initReactI18next).init({
-  resources,
-  lng: "en",
-  fallbackLng: "en",
+    resources,
+    lng: "en",
+    fallbackLng: "en",
 });
 
 function App() {
-  const { isOnline } = useNetworkStatus();
-  const { t } = useTranslation();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { color, updateColors } = useThemeStore();
-  const [loading, setLoading] = useState(true);
-  const { user, setUser, removeUser } = useUserStore();
+    const { isOnline } = useNetworkStatus();
+    const { t } = useTranslation();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { color, updateColors } = useThemeStore();
+    const [loading, setLoading] = useState(true);
+    const { user, setUser, removeUser } = useUserStore();
 
-  useEffect(() => {
-    axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response && error.response.status === 401) {
-          toast.error("Unauthorized");
+    useEffect(() => {
+        axios.interceptors.response.use(
+            response => response,
+            error => {
+                if (error.response && error.response.status === 401) {
+                    toast.error("Unauthorized");
+                }
+                return Promise.reject(error);
+            }
+        );
+    }, []);
+
+    useEffect(() => {
+        const unsubcribe = auth.onAuthStateChanged(async (user: User | null) => {
+            if (user && user.emailVerified) {
+                const result = await GetUserByEmail(user.email, user);
+                setUser(result.data);
+                if (result.data.role_access === "admin") {
+                    updateColors(COLOR_ROLE_ACCESS.admin.color);
+                } else if (result.data.role_access === "signexpert") {
+                    updateColors(COLOR_ROLE_ACCESS.signexpert.color);
+                } else {
+                    updateColors(COLOR_ROLE_ACCESS.public.color);
+                }
+            } else {
+                updateColors(COLOR_ROLE_ACCESS.public.color);
+                removeUser();
+            }
+            setLoading(false);
+        });
+
+        return () => {
+            unsubcribe();
+        };
+    }, []);
+
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
+
+    const [feedbackComponent, setFeedbackComponent] = useState<React.ReactNode>();
+    useEffect(() => {
+        switch (user?.role_access) {
+            case "admin":
+                setFeedbackComponent(<FeedbackAdmin />);
+                break;
+            case "signexpert":
+                setFeedbackComponent(<Feedback />);
+                break;
+            default:
+                setFeedbackComponent(<Feedback />);
+                break;
         }
-        return Promise.reject(error);
-      }
-    );
-  }, []);
+    }, [user?.role_access, location.pathname]);
 
-  useEffect(() => {
-    const unsubcribe = auth.onAuthStateChanged(async (user: User | null) => {
-      if (user && user.emailVerified) {
-        console.log("User is logged in");
-        const result = await GetUserByEmail(user.email, user);
-        setUser(result.data);
-        if (result.data.role_access === "admin") {
-          updateColors(COLOR_ROLE_ACCESS.admin.color);
-        } else if (result.data.role_access === "signexpert") {
-          updateColors(COLOR_ROLE_ACCESS.signexpert.color);
-        } else {
-          updateColors(COLOR_ROLE_ACCESS.public.color);
+    const [faqComponent, setFaqComponent] = useState<React.ReactNode>(<Faq />);
+    useEffect(() => {
+        switch (user?.role_access) {
+            case "admin":
+                setFaqComponent(<FaqAdmin />);
+                break;
+            case "signexpert":
+                setFaqComponent(<Faq />);
+                break;
+            default:
+                setFaqComponent(<Faq />);
+                break;
         }
-      } else {
-        updateColors(COLOR_ROLE_ACCESS.public.color);
-        removeUser();
-      }
-      setLoading(false);
-    });
+    }, [user?.role_access, location.pathname]);
 
-    return () => {
-      unsubcribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
-  const [feedbackComponent, setFeedbackComponent] = useState<React.ReactNode>();
-  useEffect(() => {
-    switch (user?.role_access) {
-      case "admin":
-        setFeedbackComponent(<FeedbackAdmin />);
-        break;
-      case "signexpert":
-        setFeedbackComponent(<Feedback />);
-        break;
-      default:
-        setFeedbackComponent(<Feedback />);
-        break;
-    }
-  }, [user?.role_access, location.pathname]);
-
-  const [faqComponent, setFaqComponent] = useState<React.ReactNode>(<Faq />);
-  useEffect(() => {
-    switch (user?.role_access) {
-      case "admin":
-        setFaqComponent(<FaqAdmin />);
-        break;
-      case "signexpert":
-        setFaqComponent(<Faq />);
-        break;
-      default:
-        setFaqComponent(<Faq />);
-        break;
-    }
-  }, [user?.role_access, location.pathname]);
-
-  const [datasetComponent, setDatasetComponent] = useState<React.ReactNode>(
-    <DataCollectionPublic />
-  );
-  const [datasetReviewComponent, setDatasetReviewComponent] =
-    useState<React.ReactNode>();
-  useEffect(() => {
-    switch (user?.role_access) {
-      case "admin":
-        setDatasetComponent(<DatasetReviewAdmin />);
-        break;
-      case "signexpert":
-        setDatasetComponent(<DatasetCollectionSE />);
-        setDatasetReviewComponent(<DatasetReviewSE />);
-        break;
-      default:
-        setDatasetComponent(<DataCollectionPublic />);
-        break;
-    }
-  }, [user?.role_access, location.pathname]);
-
-  const [libraryComponent, setLibraryComponent] = useState<React.ReactNode>();
-  useEffect(() => {
-    switch (user?.role_access) {
-      case "admin":
-        setLibraryComponent(<LibraryAdmin />);
-        break;
-      case "signexpert":
-        setLibraryComponent(<Library />);
-        break;
-      default:
-        setLibraryComponent(<Library />);
-        break;
-    }
-  }, [user?.role_access, location.pathname]);
-
-  useEffect(() => {
-    if (
-      location.pathname !== "/education" &&
-      location.pathname !== "/guess-the-word" &&
-      location.pathname !== "/do-the-sign"
-    ) {
-      const localVolumeValue = localStorage.getItem("volumeValue");
-      if (localVolumeValue) {
-        localStorage.setItem("volumeValue", "100");
-      }
-    }
-
-    if (location.pathname !== "/guess-the-word") {
-      sessionStorage.removeItem("guessLives");
-      sessionStorage.removeItem("guessCurrentLevel");
-      sessionStorage.removeItem("guessQuestionList");
-      sessionStorage.removeItem("guessScore");
-    }
-
-    if (location.pathname !== "/do-the-sign") {
-      sessionStorage.removeItem("doTheSignLives");
-      sessionStorage.removeItem("doTheSignCurrentLevel");
-      sessionStorage.removeItem("doTheSignScore");
-      sessionStorage.removeItem("doTheSignHintUsedCount");
-      sessionStorage.removeItem("animationKeyword");
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (!loading) {
-      if (location.pathname === "/notifications") {
-        if (!user?.role_access) {
-          toast.error(t("unauthorized_access"));
-          navigate("/login");
+    const [datasetComponent, setDatasetComponent] = useState<React.ReactNode>(<DataCollectionPublic />);
+    const [datasetReviewComponent, setDatasetReviewComponent] = useState<React.ReactNode>();
+    useEffect(() => {
+        switch (user?.role_access) {
+            case "admin":
+                setDatasetComponent(<DatasetReviewAdmin />);
+                break;
+            case "signexpert":
+                setDatasetComponent(<DatasetCollectionSE />);
+                setDatasetReviewComponent(<DatasetReviewSE />);
+                break;
+            default:
+                setDatasetComponent(<DataCollectionPublic />);
+                break;
         }
-      }
-    }
-  }, [user?.role_access, location.pathname, loading, navigate]);
+    }, [user?.role_access, location.pathname]);
 
-  useEffect(() => {
-    if (!loading) {
-      if (location.pathname === "/profile") {
-        if (!user?.role_access) {
-          toast.error(t("unauthorized_access"));
-          navigate("/login");
+    const [libraryComponent, setLibraryComponent] = useState<React.ReactNode>();
+    useEffect(() => {
+        switch (user?.role_access) {
+            case "admin":
+                setLibraryComponent(<LibraryAdmin />);
+                break;
+            case "signexpert":
+                setLibraryComponent(<Library />);
+                break;
+            default:
+                setLibraryComponent(<Library />);
+                break;
         }
-      }
-    }
-  }, [user?.role_access, location.pathname, loading, navigate]);
+    }, [user?.role_access, location.pathname]);
 
-  return (
-    <>
-      <Toaster />
-      {loading ? (
-        <div className="loading_wrapper">
-          <div className="loading_circle"></div>
-          <div className="loading_circle"></div>
-          <div className="loading_circle"></div>
-          <div className="loading_shadow"></div>
-          <div className="loading_shadow"></div>
-          <div className="loading_shadow"></div>
-          <span>Loading</span>
-        </div>
-      ) : (
+    useEffect(() => {
+        if (location.pathname !== "/education" && location.pathname !== "/guess-the-word" && location.pathname !== "/do-the-sign") {
+            const localVolumeValue = localStorage.getItem("volumeValue");
+            if (localVolumeValue) {
+                localStorage.setItem("volumeValue", "100");
+            }
+        }
+
+        if (location.pathname !== "/guess-the-word") {
+            sessionStorage.removeItem("guessLives");
+            sessionStorage.removeItem("guessCurrentLevel");
+            sessionStorage.removeItem("guessQuestionList");
+            sessionStorage.removeItem("guessScore");
+        }
+
+        if (location.pathname !== "/do-the-sign") {
+            sessionStorage.removeItem("doTheSignLives");
+            sessionStorage.removeItem("doTheSignCurrentLevel");
+            sessionStorage.removeItem("doTheSignScore");
+            sessionStorage.removeItem("doTheSignHintUsedCount");
+            sessionStorage.removeItem("animationKeyword");
+        }
+    }, [location.pathname]);
+
+    useEffect(() => {
+        if (!loading) {
+            if (location.pathname === "/notifications") {
+                if (!user?.role_access) {
+                    toast.error(t("unauthorized_access"));
+                    navigate("/login");
+                }
+            }
+        }
+    }, [user?.role_access, location.pathname, loading, navigate]);
+
+    useEffect(() => {
+        if (!loading) {
+            if (location.pathname === "/profile") {
+                if (!user?.role_access) {
+                    toast.error(t("unauthorized_access"));
+                    navigate("/login");
+                }
+            }
+        }
+    }, [user?.role_access, location.pathname, loading, navigate]);
+
+    return (
         <>
-          {isOnline ? (
-            <Routes>
-              <Route path="*" element={<PageNotFound />} />
+            <Toaster />
+            {loading ? (
+                <div className="loading_wrapper">
+                    <div className="loading_circle"></div>
+                    <div className="loading_circle"></div>
+                    <div className="loading_circle"></div>
+                    <div className="loading_shadow"></div>
+                    <div className="loading_shadow"></div>
+                    <div className="loading_shadow"></div>
+                    <span>Loading</span>
+                </div>
+            ) : (
+                <>
+                    {isOnline ? (
+                        <Routes>
+                            <Route path="*" element={<PageNotFound />} />
 
-              {/* <Route path="/loading" element={<><div className="loading_wrapper">
+                            {/* <Route path="/loading" element={<><div className="loading_wrapper">
 									<div className="loading_circle"></div>
 									<div className="loading_circle"></div>
 									<div className="loading_circle"></div>
@@ -254,45 +240,42 @@ function App() {
 									<span>Loading</span>
 								</div></>} /> */}
 
-              <Route element={<HomeLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/library" element={libraryComponent} />
-                <Route path="/communication" element={<Communication />} />
-                <Route path="/education" element={<Education />} />
-                <Route path="/dataset-collection" element={datasetComponent} />
-                <Route
-                  path="/dataset-collection-review"
-                  element={datasetReviewComponent}
-                />
-                <Route path="/feedback" element={feedbackComponent} />
-                <Route path="/faq" element={faqComponent} />
-                <Route path="/notifications" element={<Notification />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/guess-the-word" element={<GuessTheWord />} />
-                <Route path="/do-the-sign" element={<DoTheSign />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/references" element={<References />} />
-              </Route>
-              <Route element={<ForgotResetPasswordLayout />}>
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/feedback-success" element={<FeedbackSuccess />} />
-              </Route>
-            </Routes>
-          ) : (
-            <>
-              <Navbar />
-              <div className="page-container">
-                <InternalServerError />
-              </div>
-              <Footer />
-            </>
-          )}
+                            <Route element={<HomeLayout />}>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/library" element={libraryComponent} />
+                                <Route path="/communication" element={<Communication />} />
+                                <Route path="/education" element={<Education />} />
+                                <Route path="/dataset-collection" element={datasetComponent} />
+                                <Route path="/dataset-collection-review" element={datasetReviewComponent} />
+                                <Route path="/feedback" element={feedbackComponent} />
+                                <Route path="/faq" element={faqComponent} />
+                                <Route path="/notifications" element={<Notification />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/sign-up" element={<SignUp />} />
+                                <Route path="/guess-the-word" element={<GuessTheWord />} />
+                                <Route path="/do-the-sign" element={<DoTheSign />} />
+                                <Route path="/profile" element={<ProfilePage />} />
+                                <Route path="/references" element={<References />} />
+                            </Route>
+                            <Route element={<ForgotResetPasswordLayout />}>
+                                <Route path="/forgot-password" element={<ForgotPassword />} />
+                                <Route path="/reset-password" element={<ResetPassword />} />
+                                <Route path="/feedback-success" element={<FeedbackSuccess />} />
+                            </Route>
+                        </Routes>
+                    ) : (
+                        <>
+                            <Navbar />
+                            <div className="page-container">
+                                <InternalServerError />
+                            </div>
+                            <Footer />
+                        </>
+                    )}
+                </>
+            )}
         </>
-      )}
-    </>
-  );
+    );
 }
 
 export default App;

@@ -1,5 +1,10 @@
+/* ---------- Edit Homepage ---------- */
+.container {
+    position: relative;
+}
+
 /* ---------- Image Slider ---------- */
-.slider-container {
+.slider_container {
     text-align: center;
 }
 
@@ -8,12 +13,12 @@
     display: inline-block;
 }
 
-.slider-image {
+.slider_image {
     width: 100%;
     height: auto;
 }
 
-.dot-container {
+.dot_container {
     position: absolute;
     bottom: 10px;
     left: 50%;
@@ -35,7 +40,7 @@
 }
 
 /* ---------- For available module ---------- */
-.available-module-section {
+.available_module_section {
     padding: 0 0 2rem 0;
     margin: 20px auto;
     width: 80%;
@@ -56,13 +61,13 @@
     color: #a0b8da;
 }
 
-.available-module-section .available-module-container {
+.available_module_section .available_module_container {
     display: flex;
     flex-wrap: wrap;
     gap: 2.5rem;
 }
 
-.available-module-section .available-module-container .avail-module-box {
+.available_module_section .available_module_container .avail_module_box {
     flex: 1 1 15rem;
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
@@ -70,23 +75,23 @@
     position: relative;
 }
 
-.available-module-section .available-module-container .avail-module-box .avail-module-image {
+.available_module_section .available_module_container .avail_module_box .avail_module_image {
     position: relative;
     text-align: center;
     overflow: hidden;
 }
 
-.available-module-section .available-module-container .avail-module-box .avail-module-image img {
+.available_module_section .available_module_container .avail_module_box .avail_module_image img {
     height: 100%;
     width: 80%;
     transition: transform 0.3s ease-in-out;
 }
 
-.available-module-section .available-module-container .avail-module-box:hover .avail-module-image img {
+.available_module_section .available_module_container .avail_module_box:hover .avail_module_image img {
     transform: scale(1.1);
 }
 
-.available-module-section .available-module-container .avail-module-box .avail-module-image .avail-module-text {
+.available_module_section .available_module_container .avail_module_box .avail_module_image .avail_module_text {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -100,12 +105,12 @@
     align-items: center;
 }
 
-.available-module-section .available-module-container .avail-module-box:hover .avail-module-image .avail-module-text {
+.available_module_section .available_module_container .avail_module_box:hover .avail_module_image .avail_module_text {
     top: 0;
     transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition for position and opacity */
 }
 
-.available-module-section .available-module-container .avail-module-box .avail-module-image .avail-module-text a {
+.available_module_section .available_module_container .avail_module_box .avail_module_image .avail_module_text a {
     height: 4rem;
     line-height: 4rem;
     font-size: 26px;
@@ -113,7 +118,7 @@
     color: #ffffff;
 }
 
-.available-module-section .available-module-container .avail-module-box .avail-module-image .avail-module-text .cart-btn {
+.available_module_section .available_module_container .avail_module_box .avail_module_image .avail_module_text .cart_btn {
     border-left: 0.1rem solid transparent;
     border-right: 0.1rem solid transparent;
     width: 100%;
@@ -134,12 +139,12 @@
     padding-bottom: 3rem;
 }
 
-.about .row .video-container {
+.about .row .video_container {
     flex: 1 1 40rem;
     position: relative;
 }
 
-.about .row .video-container img {
+.about .row .video_container img {
     width: 100%;
     border: 1rem solid #ffffff;
     border-radius: 0.5rem;
@@ -166,7 +171,7 @@
 }
 
 /* ---------- Youtube Section ---------- */
-.youtube-video {
+.youtube_video {
     width: 80%;
     margin: auto;
     background-color: var(--surface-color);
@@ -188,7 +193,7 @@ iframe {
 }
 
 /* ---------- Back to top ---------- */
-.back-to-top-button {
+.back_to_top_button {
     width: 40px;
     height: 40px;
     position: fixed;
@@ -202,6 +207,8 @@ iframe {
     transition: background-color 0.3s;
     font-size: 1.5rem;
     z-index: 1;
+    display: grid;
+    place-items: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -226,13 +233,13 @@ iframe {
 }
 
 /* Initial state for fade-in elements */
-.fade-in {
+.fade_in {
     opacity: 0;
     transition: opacity 0.75s ease-in-out;
 }
 
 /* Class added when element comes into view */
-.in-view {
+.in_view {
     animation: fadeIn 1s forwards;
 }
 

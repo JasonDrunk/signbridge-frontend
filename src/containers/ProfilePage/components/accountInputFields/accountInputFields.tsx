@@ -29,10 +29,8 @@ const accountInputField: React.FC<accountInputFieldProps> = ({
   const [inputValue, setInputValue] = useState<string>(value ?? "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    console.log(e.target.value);
     const { value } = e.target;
     setInputValue(value);
-    console.log("inputValue", inputValue);
     onChange(e);
   }
 
