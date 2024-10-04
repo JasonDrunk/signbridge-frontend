@@ -3,10 +3,7 @@ import styles from "./LeaderboardPopup.module.css";
 import buttonClickedSound from "/music/btnClicked.wav";
 import { useTranslation } from "react-i18next";
 
-import {
-    GetAllGuessTheWordPlayer,
-    GetAllDoTheSignPlayer,
-} from "../../../../services/leaderboard.service";
+import { GetAllGuessTheWordPlayer, GetAllDoTheSignPlayer } from "../../../../services/leaderboard.service";
 
 interface LeaderboardPopupProps {
     onClose: () => void;
@@ -18,9 +15,7 @@ type Player = {
     picture: string;
 };
 
-const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
-    onClose,
-}) => {
+const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({ onClose }) => {
     const { t, i18n } = useTranslation();
     const leaderboardRef = useRef<HTMLDivElement>(null);
     const [activeTab, setActiveTab] = useState("Guess The Word"); // State for active tab
@@ -36,11 +31,7 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
         try {
             const response = await GetAllGuessTheWordPlayer();
             setGuessTheWordPlayers(response.data);
-            setGuessTheWordTop3Players(
-                response.data
-                    .sort((a: Player, b: Player) => b.score - a.score)
-                    .slice(0, 3)
-            );
+            setGuessTheWordTop3Players(response.data.sort((a: Player, b: Player) => b.score - a.score).slice(0, 3));
         } catch (err) {
             console.error(err);
         }
@@ -52,11 +43,7 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
             const response = await GetAllDoTheSignPlayer();
             console.log(response.data);
             setDoTheSignPlayers(response.data);
-            setDoTheSignTop3Players(
-                response.data
-                    .sort((a: Player, b: Player) => b.score - a.score)
-                    .slice(0, 3)
-            );
+            setDoTheSignTop3Players(response.data.sort((a: Player, b: Player) => b.score - a.score).slice(0, 3));
         } catch (err) {
             console.error(err);
         }
@@ -76,10 +63,7 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (
-                leaderboardRef.current &&
-                !leaderboardRef.current.contains(event.target as Node)
-            ) {
+            if (leaderboardRef.current && !leaderboardRef.current.contains(event.target as Node)) {
                 onClose();
             }
         };
@@ -93,18 +77,10 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
     return (
         <div className={styles.leaderboard_container}>
             <div ref={leaderboardRef} className={styles.leaderboard_content}>
-                <div
-                    className={`${styles.box__line} ${styles.box__line__top}`}
-                ></div>
-                <div
-                    className={`${styles.box__line} ${styles.box__line__right}`}
-                ></div>
-                <div
-                    className={`${styles.box__line} ${styles.box__line__bottom}`}
-                ></div>
-                <div
-                    className={`${styles.box__line} ${styles.box__line__left}`}
-                ></div>
+                <div className={`${styles.box__line} ${styles.box__line__top}`}></div>
+                <div className={`${styles.box__line} ${styles.box__line__right}`}></div>
+                <div className={`${styles.box__line} ${styles.box__line__bottom}`}></div>
+                <div className={`${styles.box__line} ${styles.box__line__left}`}></div>
                 <h3>{t("leaderboard")}</h3>
                 <button
                     className={styles.close_btn_pushable}
@@ -123,20 +99,10 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
 
                 {/* Tab Buttons */}
                 <div className={styles.tab_buttons}>
-                    <button
-                        className={`${styles.tab_button} ${
-                            activeTab === "Guess The Word" ? styles.active : ""
-                        }`}
-                        onClick={() => setActiveTab("Guess The Word")}
-                    >
+                    <button className={`${styles.tab_button} ${activeTab === "Guess The Word" ? styles.active : ""}`} onClick={() => setActiveTab("Guess The Word")}>
                         {t("guess_the_word")}
                     </button>
-                    <button
-                        className={`${styles.tab_button} ${
-                            activeTab === "Do The Sign" ? styles.active : ""
-                        }`}
-                        onClick={() => setActiveTab("Do The Sign")}
-                    >
+                    <button className={`${styles.tab_button} ${activeTab === "Do The Sign" ? styles.active : ""}`} onClick={() => setActiveTab("Do The Sign")}>
                         {t("do_the_sign")}
                     </button>
 
@@ -153,96 +119,33 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
                         <div>
                             <div className={styles.topThreeContainer}>
                                 <div className={styles.playerCard}>
-                                    <div
-                                        className={`${styles.rankLabel} ${styles.secondPlace}`}
-                                    >
-                                        2nd
-                                    </div>
-                                    <img
-                                        src={
-                                            guessTheWordTop3Players[1]?.picture
-                                        }
-                                        alt="Second Place"
-                                        className={styles.secthird}
-                                    />
-                                    <p className={styles.playerName}>
-                                        {guessTheWordTop3Players[1]?.username ||
-                                            "Anonymous"}
-                                    </p>
-                                    <p className={styles.playerScore}>
-                                        {guessTheWordTop3Players[1]?.score}
-                                    </p>
+                                    <div className={`${styles.rankLabel} ${styles.secondPlace}`}>2nd</div>
+                                    <img src={guessTheWordTop3Players[1]?.picture} alt="Second Place" className={styles.secthird} />
+                                    <p className={styles.playerName}>{guessTheWordTop3Players[1]?.username || "Anonymous"}</p>
+                                    <p className={styles.playerScore}>{guessTheWordTop3Players[1]?.score}</p>
                                 </div>
                                 <div className={styles.playerCard}>
                                     <div className={styles.rankLabel}>1st</div>
-                                    <img
-                                        src={
-                                            guessTheWordTop3Players[0]?.picture
-                                        }
-                                        alt="Champion"
-                                        className={styles.champion}
-                                    />
-                                    <p className={styles.playerName}>
-                                        {guessTheWordTop3Players[0]?.username ||
-                                            "Anonymous"}
-                                    </p>
-                                    <p className={styles.playerScore}>
-                                        {guessTheWordTop3Players[0]?.score}
-                                    </p>
+                                    <img src={guessTheWordTop3Players[0]?.picture} alt="Champion" className={styles.champion} />
+                                    <p className={styles.playerName}>{guessTheWordTop3Players[0]?.username || "Anonymous"}</p>
+                                    <p className={styles.playerScore}>{guessTheWordTop3Players[0]?.score}</p>
                                 </div>
                                 <div className={styles.playerCard}>
-                                    <div
-                                        className={`${styles.rankLabel} ${styles.thirdPlace}`}
-                                    >
-                                        3rd
-                                    </div>
-                                    <img
-                                        src={
-                                            guessTheWordTop3Players[2]?.picture
-                                        }
-                                        alt="Third Place"
-                                        className={styles.secthird}
-                                    />
-                                    <p className={styles.playerName}>
-                                        {guessTheWordTop3Players[2]?.username ||
-                                            "Anonymous"}
-                                    </p>
-                                    <p className={styles.playerScore}>
-                                        {guessTheWordTop3Players[2]?.score}
-                                    </p>
+                                    <div className={`${styles.rankLabel} ${styles.thirdPlace}`}>3rd</div>
+                                    <img src={guessTheWordTop3Players[2]?.picture} alt="Third Place" className={styles.secthird} />
+                                    <p className={styles.playerName}>{guessTheWordTop3Players[2]?.username || "Anonymous"}</p>
+                                    <p className={styles.playerScore}>{guessTheWordTop3Players[2]?.score}</p>
                                 </div>
                             </div>
                             <div className={styles.table_player}>
                                 {/* Filter the top 3 player */}
                                 {guessTheWordPlayers
-                                    .filter(
-                                        (player) =>
-                                            !guessTheWordTop3Players.includes(
-                                                player
-                                            )
-                                    )
+                                    .filter((player) => !guessTheWordTop3Players.includes(player))
                                     .map((player, index) => (
-                                        <div
-                                            key={index}
-                                            className={`${styles.table_row} ${
-                                                index % 2 === 0
-                                                    ? styles.alternateRow
-                                                    : ""
-                                            }`}
-                                        >
+                                        <div key={index} className={`${styles.table_row} ${index % 2 === 0 ? styles.alternateRow : ""}`}>
                                             <div>{index + 4}</div>
-                                            <div
-                                                className={
-                                                    styles.player_image_container
-                                                }
-                                            >
-                                                <img
-                                                    src={player.picture}
-                                                    alt={`${player.username}'s profile`}
-                                                    className={
-                                                        styles.player_profile_picture
-                                                    }
-                                                />
+                                            <div className={styles.player_image_container}>
+                                                <img src={player.picture} referrerPolicy="no-referrer" alt={`${player.username}'s profile`} className={styles.player_profile_picture} />
                                             </div>
                                             <div>{player.username}</div>
                                             <div>{player.score}</div>
@@ -255,90 +158,33 @@ const LeaderboardPopup: React.FC<LeaderboardPopupProps> = ({
                         <div>
                             <div className={styles.topThreeContainer}>
                                 <div className={styles.playerCard}>
-                                    <div
-                                        className={`${styles.rankLabel} ${styles.secondPlace}`}
-                                    >
-                                        2nd
-                                    </div>
-                                    <img
-                                        src={doTheSignTop3Players[1]?.picture}
-                                        alt="Second Place"
-                                        className={styles.secthird}
-                                    />
-                                    <p className={styles.playerName}>
-                                        {doTheSignTop3Players[1]?.username ||
-                                            "Anonymous"}
-                                    </p>
-                                    <p className={styles.playerScore}>
-                                        {doTheSignTop3Players[1]?.score}
-                                    </p>
+                                    <div className={`${styles.rankLabel} ${styles.secondPlace}`}>2nd</div>
+                                    <img src={doTheSignTop3Players[1]?.picture} alt="Second Place" className={styles.secthird} />
+                                    <p className={styles.playerName}>{doTheSignTop3Players[1]?.username || "Anonymous"}</p>
+                                    <p className={styles.playerScore}>{doTheSignTop3Players[1]?.score}</p>
                                 </div>
                                 <div className={styles.playerCard}>
                                     <div className={styles.rankLabel}>1st</div>
-                                    <img
-                                        src={doTheSignTop3Players[0]?.picture}
-                                        alt="Champion"
-                                        className={styles.champion}
-                                    />
-                                    <p className={styles.playerName}>
-                                        {doTheSignTop3Players[0]?.username ||
-                                            "Anonymous"}
-                                    </p>
-                                    <p className={styles.playerScore}>
-                                        {doTheSignTop3Players[0]?.score}
-                                    </p>
+                                    <img src={doTheSignTop3Players[0]?.picture} alt="Champion" className={styles.champion} />
+                                    <p className={styles.playerName}>{doTheSignTop3Players[0]?.username || "Anonymous"}</p>
+                                    <p className={styles.playerScore}>{doTheSignTop3Players[0]?.score}</p>
                                 </div>
                                 <div className={styles.playerCard}>
-                                    <div
-                                        className={`${styles.rankLabel} ${styles.thirdPlace}`}
-                                    >
-                                        3rd
-                                    </div>
-                                    <img
-                                        src={doTheSignTop3Players[2]?.picture}
-                                        alt="Third Place"
-                                        className={styles.secthird}
-                                    />
-                                    <p className={styles.playerName}>
-                                        {doTheSignTop3Players[2]?.username ||
-                                            "Anonymous"}
-                                    </p>
-                                    <p className={styles.playerScore}>
-                                        {doTheSignTop3Players[2]?.score}
-                                    </p>
+                                    <div className={`${styles.rankLabel} ${styles.thirdPlace}`}>3rd</div>
+                                    <img src={doTheSignTop3Players[2]?.picture} alt="Third Place" className={styles.secthird} />
+                                    <p className={styles.playerName}>{doTheSignTop3Players[2]?.username || "Anonymous"}</p>
+                                    <p className={styles.playerScore}>{doTheSignTop3Players[2]?.score}</p>
                                 </div>
                             </div>
                             <div className={styles.table_player}>
                                 {/* Filter the top 3 player */}
                                 {doTheSignPlayers
-                                    .filter(
-                                        (player) =>
-                                            !doTheSignTop3Players.includes(
-                                                player
-                                            )
-                                    )
+                                    .filter((player) => !doTheSignTop3Players.includes(player))
                                     .map((player, index) => (
-                                        <div
-                                            key={index}
-                                            className={`${styles.table_row} ${
-                                                index % 2 === 0
-                                                    ? styles.alternateRow
-                                                    : ""
-                                            }`}
-                                        >
+                                        <div key={index} className={`${styles.table_row} ${index % 2 === 0 ? styles.alternateRow : ""}`}>
                                             <div>{index + 4}</div>
-                                            <div
-                                                className={
-                                                    styles.player_image_container
-                                                }
-                                            >
-                                                <img
-                                                    src={player.picture}
-                                                    alt={`${player.username}'s profile`}
-                                                    className={
-                                                        styles.player_profile_picture
-                                                    }
-                                                />
+                                            <div className={styles.player_image_container}>
+                                                <img src={player.picture} alt={`${player.username}'s profile`} className={styles.player_profile_picture} />
                                             </div>
                                             <div>{player.username}</div>
                                             <div>{player.score}</div>
