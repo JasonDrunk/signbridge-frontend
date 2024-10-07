@@ -25,5 +25,5 @@ jobs:
           source_branch: develop
           target_branch: testing-build
           title: Auto Pull Request Develop to Testing-Build Branch
-          old-string: This PR was automatically created from the develop branch to test build the files
+          old_string: This PR was automatically created from the develop branch to test build the files
           template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
