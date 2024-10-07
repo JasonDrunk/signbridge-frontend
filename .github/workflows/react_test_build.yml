@@ -1,4 +1,4 @@
-name: Build and Test React Application-CI
+name: Push Code to Testing-Build File
 
 # Controls when the action will run
 on:
@@ -27,3 +27,4 @@ jobs:
           title: Auto Pull Request Develop to Testing-Build Branch
           old-string: This PR was automatically created from the develop branch to test build the files
           template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
+          github_token: ${{ secrets.GITHUB_TOKEN }}
