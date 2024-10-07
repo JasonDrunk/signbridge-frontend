@@ -1,4 +1,7 @@
 name: Push Code to Testing-Build to Test Build File
+permissions:
+  contents: write
+  pull-requests: write
 
 # Controls when the action will run
 on:
