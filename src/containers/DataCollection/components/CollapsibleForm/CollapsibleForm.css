@@ -132,19 +132,17 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    height: 100%;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
 }
 
 .collapsible-content-footer .content-left {
-
     flex-grow: 1;
-    margin-left: 15px;
     margin-top: -10px;
+    max-width: 75%;
 }
 
-.collapsible-content-footer .content-left .ant-descriptions {
-    max-width: 50% !important;
-}
 
 .collapsible-content-footer .content-left .ant-descriptions-bordered {
     border: 1px solid #ccc;
@@ -153,31 +151,19 @@
 
 .ant-descriptions.ant-descriptions-bordered .ant-descriptions-row {
     border-bottom: 1px solid #e8e8e8;
-    /* Light gray border by default */
     padding-bottom: 5px;
-    /* Add some space below the border */
 }
 
-/* Optional: Customize border color for descriptions items */
-.ant-descriptions.ant-descriptions-bordered.bordered-primary .ant-descriptions-row {
-    border-color: #f0f6fc;
-    /* Lighter shade of primary blue */
+.collapsible-content-footer .content-left .ant-descriptions {
+    max-width: 100%;
 }
 
 .collapsible-content-footer .content-left .ant-descriptions-item-label {
     font-size: 20px;
     color: rgb(68, 68, 68) !important;
-    width: 250px !important;
     background-color: #ececec !important;
+    width: 30%;
 }
-
-/* .collapsible-content-footer .content-left.admin .ant-descriptions-item-label {
-    background-color: #FFF1C5 !important;
-}
-
-.collapsible-content-footer .content-left.signexpert .ant-descriptions-item-label {
-    background-color: #E7F0FD !important;
-} */
 
 
 .collapsible-content-footer .content-left .ant-descriptions-item-content {
@@ -188,18 +174,143 @@
     color: red;
 }
 
-
-
 .collapsible-content-footer .buttons-right {
-    margin-right: 10px;
-    right: 0;
-    bottom: 0
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 10px;
 }
 
 .dataset-button-container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .dataset-button-individual {
-    margin-left: 20px;
+    margin-left: 10px;
+}
+
+/* For devices with a max-width of 480px (small screens) */
+@media (max-width: 480px) {
+    .collapsible-container {
+        width: 95%;
+        /* Slightly wider on smaller screens */
+    }
+
+    .collapsible-content-header {
+        flex-direction: column;
+        /* Stack header items vertically */
+        align-items: flex-start;
+        /* Align items to the left */
+    }
+
+    .collapsible-content-header .number,
+    .collapsible-content-header .status,
+    .collapsible-content-header .dateTime {
+        min-width: 100%;
+        /* Full width for each item */
+        margin-bottom: 5px;
+        /* Space between items */
+    }
+
+    .collapsible-content-footer {
+        flex-direction: column;
+        /* Stack buttons vertically */
+        align-items: flex-start;
+        /* Align buttons to the left */
+    }
+
+    .dataset-button-container {
+        flex-direction: column;
+        /* Stack buttons in container */
+    }
+
+    .dataset-button-individual {
+        margin-left: 0;
+        /* Remove left margin */
+        margin-bottom: 10px;
+        /* Space between buttons */
+    }
+
+    .personal-details h2,
+    .sentence-details h2,
+    .content-left h2 {
+        font-size: 20px;
+        /* Reduce font size for smaller screens */
+    }
+
+    .sentence-details-content p {
+        font-size: 16px;
+        /* Reduce font size for text */
+    }
+}
+
+/* For devices with a width between 481px and 640px (mobile) */
+@media (min-width: 481px) and (max-width: 640px) {
+    .collapsible-container {
+        width: 90%;
+        /* Slightly wider */
+    }
+
+    .collapsible-content-header {
+        flex-direction: row;
+        /* Keep items in a row */
+    }
+
+    .collapsible-content-header .number,
+    .collapsible-content-header .status,
+    .collapsible-content-header .dateTime {
+        min-width: auto;
+        /* Reset min-width */
+        margin-bottom: 0;
+        /* Reset margin */
+    }
+
+    .collapsible-content-footer {
+        flex-direction: row;
+        /* Keep buttons in a row */
+    }
+
+    .dataset-button-container {
+        flex-direction: row;
+        /* Keep buttons in a row */
+    }
+
+    .dataset-button-individual {
+        margin-left: 10px;
+        /* Add margin back */
+    }
+
+    .personal-details h2,
+    .sentence-details h2,
+    .content-left h2 {
+        font-size: 22px;
+        /* Normal font size */
+    }
+
+    .sentence-details-content p {
+        font-size: 18px;
+        /* Normal font size */
+    }
+}
+
+/* For devices with a width between 641px and 768px (tablets and small devices) */
+@media (min-width: 641px) and (max-width: 768px) {
+    .collapsible-container {
+        width: 85%;
+        /* Default width */
+    }
+
+    .collapsible-content-header {
+        flex-direction: row;
+        /* Keep items in a row */
+    }
+
+    .personal-details h2,
+    .sentence-details h2,
+    .content-left h2 {
+        font-size: 22px;
+        /* Maintain normal size */
+    }
 }

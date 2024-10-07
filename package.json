@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest --config=jest.config.ts"
+    "test": "jest --config=jest.config.ts",
+    "start": "npm run dev"
   },
   "dependencies": {
     "@ariakit/react": "^0.4.6",
@@ -60,7 +61,7 @@
     "nouislider-react": "^3.4.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "react-bootstrap": "^2.10.2",
+    "react-bootstrap": "^2.10.5",
     "react-bootstrap-range-slider": "^3.0.8",
     "react-chartjs-2": "^5.2.0",
     "react-confetti": "^6.1.0",
@@ -74,6 +75,7 @@
     "react-toastify": "^10.0.5",
     "react-use-size": "^3.0.3",
     "session-file-store": "^1.5.0",
+    "signbridge-frontend": "file:",
     "usehooks-ts": "^3.1.0",
     "wnumb": "^1.2.0",
     "zustand": "^4.5.2"
