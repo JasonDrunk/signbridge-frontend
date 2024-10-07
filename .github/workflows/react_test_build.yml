@@ -1,4 +1,7 @@
 name: Push Code to Testing-Build to Test Build File
+permissions:
+  contents: write
+  pull-requests: write
 
 # Controls when the action will run
 on:
@@ -9,7 +12,6 @@ on:
   pull_request:
     branches:
       - develop
-
 jobs:
   build:
     name: Test Building
@@ -25,9 +27,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_branch: develop
           target_branch: testing-build
-          title: 'Auto PR: Develop to Testing-Build'
-          body: '**This PR was automatically created from the develop branch to test build the files**'
-          template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
-          old_string: '<!-- Add your description here -->'
-          new_string: '**Automated pull request from develop to testing-build**'
+          title: "Auto PR: Develop to Testing-Build"
+          body: "**This PR was automatically created from the develop branch to test build the files**"
+          old_string: "<!-- Add your description here -->"
+          new_string: "**Automated pull request from develop to testing-build**"
           draft: false
