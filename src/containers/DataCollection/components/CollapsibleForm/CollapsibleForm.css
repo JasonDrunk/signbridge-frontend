@@ -90,21 +90,28 @@
 .sentence-details h2,
 .content-left h2 {
     display: inline-block;
-    padding: 12px 5px;
     color: #3a3a3a;
     font-size: 22px;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .personal-details .ant-descriptions {
     margin-bottom: 20px;
+    padding: 10px;
+}
+
+.personal-details .ant-descriptions-bordered {
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .personal-details .ant-descriptions-item-label {
     font-size: 20px;
     color: rgb(68, 68, 68) !important;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2); */
     background-color: #ececec !important;
+    width: 25%;
+    font-weight: 450;
 }
 
 /* .personal-details.admin .ant-descriptions-item-label {
@@ -118,14 +125,17 @@
 .personal-details .ant-descriptions-item-content {
     font-size: 18px;
     width: 85% !important;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sentence-details-content p {
     border-radius: 5px;
-    padding: 0 10px;
-    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    background-color: #ececec;
     font-size: 18px;
+    margin: 0 10px;
 }
 
 .collapsible-content-footer {
@@ -134,13 +144,11 @@
     align-items: flex-end;
     flex-wrap: wrap;
     width: 100%;
-    padding: 10px;
 }
 
 .collapsible-content-footer .content-left {
     flex-grow: 1;
     margin-top: -10px;
-    max-width: 75%;
 }
 
 
@@ -151,18 +159,19 @@
 
 .ant-descriptions.ant-descriptions-bordered .ant-descriptions-row {
     border-bottom: 1px solid #e8e8e8;
-    padding-bottom: 5px;
 }
 
 .collapsible-content-footer .content-left .ant-descriptions {
     max-width: 100%;
+    padding: 10px;
 }
 
 .collapsible-content-footer .content-left .ant-descriptions-item-label {
     font-size: 20px;
     color: rgb(68, 68, 68) !important;
     background-color: #ececec !important;
-    width: 30%;
+    width: 25%;
+    font-weight: 450;
 }
 
 
@@ -191,126 +200,143 @@
     margin-left: 10px;
 }
 
-/* For devices with a max-width of 480px (small screens) */
+
 @media (max-width: 480px) {
     .collapsible-container {
         width: 95%;
-        /* Slightly wider on smaller screens */
     }
 
     .collapsible-content-header {
         flex-direction: column;
-        /* Stack header items vertically */
         align-items: flex-start;
-        /* Align items to the left */
+        padding: 10px;
     }
 
     .collapsible-content-header .number,
     .collapsible-content-header .status,
     .collapsible-content-header .dateTime {
         min-width: 100%;
-        /* Full width for each item */
+        font-size: 14px;
         margin-bottom: 5px;
-        /* Space between items */
     }
 
     .collapsible-content-footer {
         flex-direction: column;
-        /* Stack buttons vertically */
         align-items: flex-start;
-        /* Align buttons to the left */
+        width: 100%;
     }
 
     .dataset-button-container {
         flex-direction: column;
-        /* Stack buttons in container */
+        width: 100%;
+        margin-bottom: 10px;
     }
 
     .dataset-button-individual {
-        margin-left: 0;
-        /* Remove left margin */
+        width: 100%;
         margin-bottom: 10px;
-        /* Space between buttons */
+    }
+
+    /* Font sizes and padding for content details */
+    .personal-details h2,
+    .sentence-details h2,
+    .content-left h2 {
+        font-size: 18px;
+        /* Scale down header sizes */
+    }
+
+    .sentence-details-content p {
+        font-size: 16px;
+        /* Decrease paragraph size */
+        padding: 8px;
+        /* Smaller padding for text */
+    }
+
+
+
+    .personal-details .ant-descriptions-item-content,
+    .personal-details .ant-descriptions-item-label,
+    .collapsible-content-footer .content-left .ant-descriptions-item-label,
+    .collapsible-content-footer .content-left .ant-descriptions-item-content {
+        font-size: 12px;
+    }
+}
+
+/* Devices between 481px and 640px (mobile landscape) */
+@media (min-width: 481px) and (max-width: 640px) {
+    .collapsible-container {
+        width: 90%;
+    }
+
+    .collapsible-content-header {
+        flex-direction: row;
+        padding: 15px;
+    }
+
+    .collapsible-content-header .number,
+    .collapsible-content-header .status,
+    .collapsible-content-header .dateTime {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    .dataset-button-container {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .dataset-button-individual {
+        margin-left: 10px;
+    }
+}
+
+/* Devices between 641px and 768px (tablets and small devices) */
+@media (min-width: 641px) and (max-width: 768px) {
+    .collapsible-container {
+        width: 85%;
+    }
+
+    .collapsible-content-header {
+        padding: 18px;
     }
 
     .personal-details h2,
     .sentence-details h2,
     .content-left h2 {
         font-size: 20px;
-        /* Reduce font size for smaller screens */
-    }
-
-    .sentence-details-content p {
-        font-size: 16px;
-        /* Reduce font size for text */
-    }
-}
-
-/* For devices with a width between 481px and 640px (mobile) */
-@media (min-width: 481px) and (max-width: 640px) {
-    .collapsible-container {
-        width: 90%;
-        /* Slightly wider */
-    }
-
-    .collapsible-content-header {
-        flex-direction: row;
-        /* Keep items in a row */
-    }
-
-    .collapsible-content-header .number,
-    .collapsible-content-header .status,
-    .collapsible-content-header .dateTime {
-        min-width: auto;
-        /* Reset min-width */
-        margin-bottom: 0;
-        /* Reset margin */
-    }
-
-    .collapsible-content-footer {
-        flex-direction: row;
-        /* Keep buttons in a row */
-    }
-
-    .dataset-button-container {
-        flex-direction: row;
-        /* Keep buttons in a row */
-    }
-
-    .dataset-button-individual {
-        margin-left: 10px;
-        /* Add margin back */
-    }
-
-    .personal-details h2,
-    .sentence-details h2,
-    .content-left h2 {
-        font-size: 22px;
-        /* Normal font size */
     }
 
     .sentence-details-content p {
         font-size: 18px;
-        /* Normal font size */
+    }
+
+    .collapsible-content-footer {
+        flex-direction: row;
     }
 }
 
-/* For devices with a width between 641px and 768px (tablets and small devices) */
-@media (min-width: 641px) and (max-width: 768px) {
+/* Larger screens (768px and above) */
+@media (min-width: 769px) {
     .collapsible-container {
         width: 85%;
-        /* Default width */
     }
 
     .collapsible-content-header {
         flex-direction: row;
-        /* Keep items in a row */
+        padding: 20px;
     }
 
-    .personal-details h2,
-    .sentence-details h2,
-    .content-left h2 {
-        font-size: 22px;
-        /* Maintain normal size */
+    .collapsible-content-footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .dataset-button-container {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .dataset-button-individual {
+        margin-left: 10px;
     }
 }
