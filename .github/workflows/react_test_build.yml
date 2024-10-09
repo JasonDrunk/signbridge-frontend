@@ -1,0 +1,35 @@
+name: Push Code to Testing-Build to Test Build File
+permissions:
+  contents: write
+  pull-requests: write
+
+# Controls when the action will run
+on:
+  # Trigger on the events
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Test Building
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request from Develop to Testing-Build
+        uses: devops-infra/action-pull-request@v0.5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: develop
+          target_branch: testing-build
+          title: "Auto PR: Develop to Testing-Build"
+          body: "**This PR was automatically created from the develop branch to test build the files**"
+          old_string: "<!-- Add your description here -->"
+          new_string: "**Automated pull request from develop to testing-build**"
+          draft: false
