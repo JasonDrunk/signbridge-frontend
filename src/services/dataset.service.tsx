@@ -22,9 +22,7 @@ export const submitForm = async (formData: FormData): Promise<any> => {
 
 export const getAllFormsForSignExpert = async (): Promise<any> => {
   try {
-    const response = await axios.get(
-      "http://localhost:3000/datasetForms/signexpert"
-    );
+    const response = await axios.get(`${BASE_API_URL}/datasetForms/signexpert`);
     return response.data; // Assuming the forms are returned in the response data
   } catch (err) {
     throw err;
@@ -33,9 +31,7 @@ export const getAllFormsForSignExpert = async (): Promise<any> => {
 
 export const getAllFormsForAdmin = async (): Promise<any> => {
   try {
-    const response = await axios.get(
-      "http://localhost:3000/datasetForms/admin"
-    );
+    const response = await axios.get(`${BASE_API_URL}/datasetForms/admin`);
     return response.data; // Assuming the forms are returned in the response data
   } catch (err) {
     throw err;
@@ -49,7 +45,7 @@ export const updateFormById = async (
 ): Promise<any> => {
   try {
     const response = await axios.put(
-      `http://localhost:3000/datasetForms/${formId}`,
+      `${BASE_API_URL}/datasetForms/${formId}`,
       { ...updatedFormData, message: updatedMessage }, // Combine the form data and message
       {
         headers: {
@@ -79,7 +75,7 @@ export const updateFormWithVideoById = async (
     formData.append("message", updatedMessage); // Add the updated message to form data
 
     const response = await axios.put(
-      `http://localhost:3000/datasetForms/avatarVideo/${formId}`,
+      `${BASE_API_URL}/datasetForms/avatarVideo/${formId}`,
       formData,
       {
         headers: {
@@ -95,9 +91,7 @@ export const updateFormWithVideoById = async (
 
 export const getFormById = async (formId: number): Promise<any> => {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/datasetForms/${formId}`
-    );
+    const response = await axios.get(`${BASE_API_URL}/datasetForms/${formId}`);
 
     return response.data; // Assuming the forms are returned in the response data
   } catch (err) {
@@ -108,7 +102,7 @@ export const getFormById = async (formId: number): Promise<any> => {
 export const getDemoVidById = async (formId: number): Promise<any> => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/datasetForms/demoVid/${formId}`,
+      `${BASE_API_URL}/datasetForms/demoVid/${formId}`,
       { responseType: "arraybuffer" } // Set responseType to 'arraybuffer' to receive raw binary data
     );
     return response; // Return the raw binary data
@@ -120,7 +114,7 @@ export const getDemoVidById = async (formId: number): Promise<any> => {
 export const getAvatarVidById = async (formId: number): Promise<any> => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/datasetForms/avatarVid/${formId}`,
+      `${BASE_API_URL}/datasetForms/avatarVid/${formId}`,
       { responseType: "arraybuffer" } // Set responseType to 'arraybuffer' to receive raw binary data
     );
     return response; // Return the raw binary data
@@ -136,7 +130,7 @@ export const deleteFormById = async (
   try {
     // Assuming updatedMessage needs to be sent as part of the request body
     const response = await axios.delete(
-      `http://localhost:3000/datasetForms/${formId}`,
+      `${BASE_API_URL}/datasetForms/${formId}`,
       {
         data: { message: updatedMessage },
       }
