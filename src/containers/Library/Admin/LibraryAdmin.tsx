@@ -63,19 +63,19 @@ export default function Library() {
     const [categories, setCategories] = useState<LibraryCategories[]>([]);
     const [signs, setSigns] = useState<LibrarySigns[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(
-        null
+        ""
     );
-    const [selectedSignIndex, setSelectedSignIndex] = useState<number | null>(
-        null
+    const [selectedSignIndex, setSelectedSignIndex] = useState<number>(
+        0
     );
     const [currentView, setCurrentView] = useState<View>(View.Categories);
-    const [previousView, setPreviousView] = useState<View | null>(null);
+    const [previousView, setPreviousView] = useState<View | null>(0);
     const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false); // State for delete confirmation dialog
     const [openUpdateConfirm, setOpenUpdateConfirm] = useState(false); // State for update confirmation dialog
     const [openUpdateSignConfirm, setOpenUpdateSignConfirm] = useState(false); // State for update confirmation dialog
-    const [cattodelete, setcattodelete] = useState<number | null>(null);
-    const [cattoupdate, setcattoupdate] = useState<number | null>(null);
-    const [signtoupdate, setsigntoupdate] = useState<number | null>(null);
+    const [cattodelete, setcattodelete] = useState<number | null>(0);
+    const [cattoupdate, setcattoupdate] = useState<number | null>(0);
+    const [signtoupdate, setsigntoupdate] = useState<number | null>(0);
     const [open, setOpen] = useState(false);
     const [resetImage, setResetImage] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -165,7 +165,7 @@ export default function Library() {
         }
     };
 
-    const controls = useRef();
+    const controls = useRef<typeof OrbitControls | null>(null);
 
     const confirmDeleteCategory = async () => {
         if (cattodelete === null) return;
@@ -295,7 +295,7 @@ export default function Library() {
                         <KeyboardReturnIcon className={styles.backButton} />
                     </Button>
                     <Typography variant="h1" className={styles.signHeader}>
-                        {signs[selectedSignIndex]?.keyword || "No sign found"}
+                    {signs[selectedSignIndex] ? signs[selectedSignIndex].keyword : "No sign found"}
                     </Typography>
                 </div>
                 <div className={styles.signImages}>
@@ -325,6 +325,7 @@ export default function Library() {
                                     isPaused={""}
                                 />
                             </CharacterAnimationsProvider>
+                             {/* @ts-ignore */}
                             <OrbitControls ref={controls} />
                         </Canvas>
                     </div>
@@ -350,10 +351,11 @@ export default function Library() {
                             "Unknown"
                         )}
                     </h4>
-                    <h4 variant="body2" className="sign-contributor">
-                        {t("contributor")}
-                        {signs[selectedSignIndex]?.contributor || "Unknown"}
-                    </h4>
+
+                    <Typography variant="body2" className="sign-contributor">
+                    {t("contributor")}
+                    {signs[selectedSignIndex]?.contributor || "Unknown"}
+</Typography>
                 </div>
             </div>
         </div>

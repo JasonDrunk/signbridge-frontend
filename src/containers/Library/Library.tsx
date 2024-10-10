@@ -1,9 +1,20 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Library.css";
-import { Card, CardContent, Typography, Button, Grid } from "@mui/material"; // Import Material-UI components
+import {
+    Card,
+    CardContent,
+    Typography,
+    Button,
+    Grid,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+} from "@mui/material"; // Import Material-UI components
 import { fetchCat, fetchSign } from "../../services/library.service";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei"; // OrbitControls as a value
 import { useThree } from "@react-three/fiber";
 // @ts-ignore
 import { CharacterAnimationsProvider } from "../../components/SLP/CharacterAnimations";
@@ -40,13 +51,13 @@ export default function Library() {
     const [categories, setCategories] = useState<LibraryCategories[]>([]);
     const [signs, setSigns] = useState<LibrarySigns[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(
-        null
+        "null"
     );
-    const [selectedSignIndex, setSelectedSignIndex] = useState<number | null>(
-        null
+    const [selectedSignIndex, setSelectedSignIndex] = useState<number>(
+        0
     );
     const [currentView, setCurrentView] = useState<View>(View.Categories);
-    const [previousView, setPreviousView] = useState<View | null>(null);
+    const [previousView, setPreviousView] = useState<View | null>(0);
     const [searchKeyword, setSearchKeyword] = useState("");
     useEffect(() => {
         fetchCategories();
@@ -103,7 +114,7 @@ export default function Library() {
         }
     };
 
-    const controls = useRef();
+    const controls = useRef(); 
 
     const renderSignWrapper = () => (
         <div className={styles.signPageWrapper}>
@@ -146,6 +157,7 @@ export default function Library() {
                                     isPaused={""}
                                 />
                             </CharacterAnimationsProvider>
+                             {/* @ts-ignore */}
                             <OrbitControls ref={controls} />
                         </Canvas>
                     </div>
@@ -171,10 +183,11 @@ export default function Library() {
                             "Unknown"
                         )}
                     </h4>
-                    <h4 variant="body2" className="sign-contributor">
-                        {t("contributor")}
-                        {signs[selectedSignIndex]?.contributor || "Unknown"}
-                    </h4>
+
+                    <Typography variant="body2" className="sign-contributor">
+                    {t("contributor")}
+                    {signs[selectedSignIndex]?.contributor || "Unknown"}
+</Typography>
                 </div>
             </div>
         </div>

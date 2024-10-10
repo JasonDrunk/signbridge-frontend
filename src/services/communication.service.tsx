@@ -42,3 +42,21 @@ export const fetchLogsByUser = async (data: any) => {
 };
 
 
+// New function to call the SLP API
+export const fetchNLPOutput = async (submittedText: string) => {
+    try {
+        const response = await axios.post(
+            `http://127.0.0.1:5000/api/SLP`,
+            { text: submittedText },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
+

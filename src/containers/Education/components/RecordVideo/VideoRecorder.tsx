@@ -10,17 +10,7 @@ const playButtonClickedSound = () => {
     audio.play();
 };
 
-const VideoRecorder = ({
-    countdown,
-    onStartRecording,
-    onStopRecording,
-    onVideoData,
-}: {
-    countdown: number;
-    onStartRecording: () => void;
-    onStopRecording: () => void;
-    onVideoData: (data: { return: string }) => void;
-}) => {
+const VideoRecorder = ({ countdown, onStartRecording, onStopRecording, onVideoData }: { countdown: number; onStartRecording: () => void; onStopRecording: () => void; onVideoData: (data: { return: string }) => void }) => {
     const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef<MediaRecorder | null>(null);
     const liveVideoFeed = useRef<HTMLVideoElement>(null);
@@ -41,18 +31,11 @@ const VideoRecorder = ({
                 const audioConstraints = { audio: true };
 
                 // create audio and video streams separately
-                const audioStream = await navigator.mediaDevices.getUserMedia(
-                    audioConstraints
-                );
-                const videoStream = await navigator.mediaDevices.getUserMedia(
-                    videoConstraints
-                );
+                const audioStream = await navigator.mediaDevices.getUserMedia(audioConstraints);
+                const videoStream = await navigator.mediaDevices.getUserMedia(videoConstraints);
 
                 setPermission(true);
-                const combinedStream = new MediaStream([
-                    ...videoStream.getVideoTracks(),
-                    ...audioStream.getAudioTracks(),
-                ]);
+                const combinedStream = new MediaStream([...videoStream.getVideoTracks(), ...audioStream.getAudioTracks()]);
                 setStream(combinedStream);
                 if (liveVideoFeed.current) {
                     liveVideoFeed.current.srcObject = videoStream;
@@ -124,13 +107,10 @@ const VideoRecorder = ({
                 const formData = new FormData();
                 formData.append("video", videoBlob);
 
-                const response = await fetch(
-                    "http://localhost:5000/api/individual_SLR",
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
-                );
+                const response = await fetch("http://localhost:5000/api/individual_SLR", {
+                    method: "POST",
+                    body: formData,
+                });
 
                 if (response.ok) {
                     const data = await response.json();
@@ -157,89 +137,24 @@ const VideoRecorder = ({
     }, [countdown, recordingStatus]);
 
     return (
-        <div>
-            <main>
-                <div className={styles.video_controls}>
-                    {!permission ? (
-                        <button
-                            className={styles.open_cam_btn_pushable}
-                            onClick={() => {
-                                getCameraPermission();
-                                playButtonClickedSound();
-                            }}
-                            type="button"
-                        >
-                            <span className={styles.open_cam_btn_shadow}></span>
-                            <span className={styles.open_cam_btn_edge}></span>
-                            <span
-                                className={`${styles.open_cam_btn_front}`}
-                            >
-                                <i
-                                    className={`fa fa-video ${styles.fa_video}`}
-                                ></i>
-                            </span>
-                        </button>
-                    ) : null}
-                    {permission && recordingStatus === "inactive" ? (
-                        <button
-                            className={styles.open_cam_btn_pushable}
-                            onClick={() => {
-                                startRecording();
-                                playButtonClickedSound();
-                            }}
-                            type="button"
-                        >
-                            <span className={styles.open_cam_btn_shadow}></span>
-                            <span className={styles.open_cam_btn_edge}></span>
-                            <span
-                                className={`${styles.open_cam_btn_front}`}
-                            >
-                                <i
-                                    className={`fa fa-play ${styles.fa_play}`}
-                                ></i>
-                            </span>
-                        </button>
-                    ) : null}
-                    {recordingStatus === "recording" ? (
-                        <button
-                            className={styles.open_cam_btn_pushable}
-                            onClick={() => {
-                                stopRecording();
-                                playButtonClickedSound();
-                            }}
-                            type="button"
-                        >
-                            <span className={styles.open_cam_btn_shadow}></span>
-                            <span className={styles.open_cam_btn_edge}></span>
-                            <span
-                                className={`${styles.open_cam_btn_front}`}
-                            >
-                                <i
-                                    className={`fa fa-stop ${styles.fa_stop}`}
-                                ></i>
-                            </span>
-                        </button>
-                    ) : null}
-                </div>
-            </main>
-
-            <div className={styles.video_player}>
-                {!recordedVideo ? (
-                    <video
-                        ref={liveVideoFeed}
-                        autoPlay
-                        className={`${styles.livePlayer} ${
-                            !permission ? styles.initialHeight : ""
-                        }`}
-                    ></video>
-                ) : null}
-                {recordedVideo ? (
-                    <div className={styles.recorded_player}>
-                        <video
-                            className={styles.recorded}
-                            src={recordedVideo}
-                            controls
-                        ></video>
+        <>
+            {!permission ? (
+                <div className={styles.desktop_button_group}>
+                    <button
+                        className={styles.open_cam_btn_pushable}
+                        onClick={() => {
+                            getCameraPermission();
+                            playButtonClickedSound();
+                        }}
+                        type="button"
+                    >
+                        <span className={styles.open_cam_btn_shadow}></span>
+                        <span className={styles.open_cam_btn_edge}></span>
+                        <span className={`${styles.open_cam_btn_front}`}>
+                            <i className={`fa fa-video ${styles.fa_video}`}></i>
+                        </span>
+                    </button>
+                    {recordedVideo ? (
                         <button
                             className={styles.upload_btn_pushable}
                             type="button"
@@ -251,15 +166,95 @@ const VideoRecorder = ({
                             <span className={styles.upload_btn_shadow}></span>
                             <span className={styles.upload_btn_edge}></span>
                             <span className={`${styles.upload_btn_front} text`}>
-                                <i
-                                    className={`fa fa-upload ${styles.fa_upload}`}
-                                ></i>
+                                <i className={`fa fa-upload ${styles.fa_upload}`}></i>
                             </span>
                         </button>
+                    ) : null}
+                </div>
+            ) : null}
+            
+            <main>
+                <div className={styles.video_controls}>
+                    {!permission ? (
+                        <div className={styles.mobile_button_group}>
+                            <button
+                                className={styles.open_cam_btn_pushable}
+                                onClick={() => {
+                                    getCameraPermission();
+                                    playButtonClickedSound();
+                                }}
+                                type="button"
+                            >
+                                <span className={styles.open_cam_btn_shadow}></span>
+                                <span className={styles.open_cam_btn_edge}></span>
+                                <span className={`${styles.open_cam_btn_front}`}>
+                                    <i className={`fa fa-video ${styles.fa_video}`}></i>
+                                </span>
+                            </button>
+                            {recordedVideo ? (
+                                <button
+                                    className={styles.upload_btn_pushable}
+                                    type="button"
+                                    onClick={() => {
+                                        handleUpload();
+                                        playButtonClickedSound();
+                                    }}
+                                >
+                                    <span className={styles.upload_btn_shadow}></span>
+                                    <span className={styles.upload_btn_edge}></span>
+                                    <span className={`${styles.upload_btn_front} text`}>
+                                        <i className={`fa fa-upload ${styles.fa_upload}`}></i>
+                                    </span>
+                                </button>
+                            ) : null}
+                        </div>
+                    ) : null}
+                    <div>
+                        {permission && recordingStatus === "inactive" ? (
+                            <button
+                                className={styles.open_cam_btn_pushable}
+                                onClick={() => {
+                                    startRecording();
+                                    playButtonClickedSound();
+                                }}
+                                type="button"
+                            >
+                                <span className={styles.open_cam_btn_shadow}></span>
+                                <span className={styles.open_cam_btn_edge}></span>
+                                <span className={`${styles.open_cam_btn_front}`}>
+                                    <i className={`fa fa-play ${styles.fa_play}`}></i>
+                                </span>
+                            </button>
+                        ) : null}
+                        {recordingStatus === "recording" ? (
+                            <button
+                                className={styles.open_cam_btn_pushable}
+                                onClick={() => {
+                                    stopRecording();
+                                    playButtonClickedSound();
+                                }}
+                                type="button"
+                            >
+                                <span className={styles.open_cam_btn_shadow}></span>
+                                <span className={styles.open_cam_btn_edge}></span>
+                                <span className={`${styles.open_cam_btn_front}`}>
+                                    <i className={`fa fa-stop ${styles.fa_stop}`}></i>
+                                </span>
+                            </button>
+                        ) : null}
+                    </div>
+                </div>
+            </main>
+
+            <div className={styles.video_player}>
+                {!recordedVideo ? <video ref={liveVideoFeed} autoPlay className={`${styles.livePlayer} ${!permission ? styles.initialHeight : ""}`}></video> : null}
+                {recordedVideo ? (
+                    <div className={styles.recorded_player}>
+                        <video className={styles.recorded} src={recordedVideo} controls></video>
                     </div>
                 ) : null}
             </div>
-        </div>
+        </>
     );
 };
 

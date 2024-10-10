@@ -43,9 +43,7 @@ const loadAnimationKeywords = async (): Promise<GlossAnimation[] | null> => {
     try {
         const response = await fetch("/glosses/gloss.json");
         if (!response.ok) {
-            throw new Error(
-                `Failed to fetch: ${response.status} ${response.statusText}`
-            );
+            throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
         const data: GlossAnimation[] = await response.json();
         return data;
@@ -55,9 +53,7 @@ const loadAnimationKeywords = async (): Promise<GlossAnimation[] | null> => {
     }
 };
 
-const pickRandomKeyword = async (
-    setAnimationKeyword: React.Dispatch<React.SetStateAction<string>>
-) => {
+const pickRandomKeyword = async (setAnimationKeyword: React.Dispatch<React.SetStateAction<string>>) => {
     const data = await loadAnimationKeywords();
 
     if (data) {
@@ -67,10 +63,7 @@ const pickRandomKeyword = async (
         // Format each word to have the first letter capitalized
         const formattedKeyword = randomKeyword
             .split(" ")
-            .map(
-                (word) =>
-                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-            )
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
             .join(" ");
 
         setAnimationKeyword(formattedKeyword); // Set the formatted keyword in state
@@ -78,20 +71,11 @@ const pickRandomKeyword = async (
 };
 
 const DoTheSign: React.FC = () => {
-    const [lives, setLives, removeLives] = useSessionStorage(
-        "doTheSignLives",
-        3
-    );
+    const [lives, setLives, removeLives] = useSessionStorage("doTheSignLives", 3);
     const [score, setScore] = useSessionStorage("doTheSignScore", 0);
     const [level, setLevel] = useSessionStorage("doTheSignCurrentLevel", 1);
-    const [hintUsedCount, setHintUsedCount] = useSessionStorage(
-        "doTheSignHintUsedCount",
-        0
-    );
-    const [animationKeyword, setAnimationKeyword] = useSessionStorage(
-        "animationKeyword",
-        ""
-    );
+    const [hintUsedCount, setHintUsedCount] = useSessionStorage("doTheSignHintUsedCount", 0);
+    const [animationKeyword, setAnimationKeyword] = useSessionStorage("animationKeyword", "");
 
     const { t, i18n } = useTranslation();
     const [isLoginRemindPopupVisible, setIsLoginRemindPopupVisible] = useState(false);
@@ -179,9 +163,7 @@ const DoTheSign: React.FC = () => {
     const formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
         const seconds = time % 60;
-        return `${minutes.toString().padStart(2, "0")}:${seconds
-            .toString()
-            .padStart(2, "0")}`;
+        return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     };
 
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -227,9 +209,7 @@ const DoTheSign: React.FC = () => {
 
     // Function to render hearts for lives
     const renderLives = () => {
-        return Array.from({ length: lives }, (_, i) => (
-            <img key={i} src={heartImage} alt="Heart" />
-        ));
+        return Array.from({ length: lives }, (_, i) => <img key={i} src={heartImage} alt="Heart" />);
     };
 
     useEffect(() => {
@@ -241,111 +221,72 @@ const DoTheSign: React.FC = () => {
 
     return (
         <div className={styles.do_the_sign_layout}>
-            {isLoginRemindPopupVisible && (
-                <LoginRemindPopup
-                    onClose={() => setIsLoginRemindPopupVisible(false)}
-                />
-            )}
-            {gameOver && (
-                <GameOverPopup
-                    score={score}
-                    onClose={() => setGameOver(false)}
-                />
-            )}
+            {isLoginRemindPopupVisible && <LoginRemindPopup onClose={() => setIsLoginRemindPopupVisible(false)} />}
+            {gameOver && <GameOverPopup score={score} onClose={() => setGameOver(false)} />}
             <div className={styles.do_the_sign_container}>
                 <div className={styles.do_the_sign}>
-                    <button
-                        className={`${styles.shared_btn} ${styles.shared_btn2} ${styles.rules_btn}`}
-                        type="button"
-                        onClick={() => {
-                            setShowRules(true);
-                            playButtonClickedSound();
-                        }}
-                    >
-                        {t("rules")}
-                    </button>
-                    <button
-                        className={`${styles.shared_btn} ${styles.shared_btn2} ${styles.hint_btn}`}
-                        type="button"
-                        onClick={() => {
-                            if (hintUsedCount < 2) {
-                                setShowHint(true);
-                                setHintUsedCount(hintUsedCount + 1);
-                                playButtonClickedSound();
-                            } else {
-                                toast(t("hintError"), {
-                                    icon: "🤪",
-                                });
-                            }
-                        }}
-                    >
-                        {t("hint")}
-                    </button>
-                    <h1 className={styles.level_title}>
-                        {t("level")}: {level}
-                    </h1>
-                    <h2 className={styles.score_title}>
-                        {t("score")}: {score}
-                    </h2>
-                    <div className={styles.lives_container}>
-                        {renderLives()}
+                    <div className={styles.header}>
+                        <div className={styles.button_header}>
+                            <div>
+                                <button
+                                    className={`${styles.shared_btn} ${styles.shared_btn2} ${styles.rules_btn}`}
+                                    type="button"
+                                    onClick={() => {
+                                        setShowRules(true);
+                                        playButtonClickedSound();
+                                    }}
+                                >
+                                    {t("rules")}
+                                </button>
+                                <button
+                                    className={`${styles.shared_btn} ${styles.shared_btn2} ${styles.hint_btn}`}
+                                    type="button"
+                                    onClick={() => {
+                                        if (hintUsedCount < 2) {
+                                            setShowHint(true);
+                                            setHintUsedCount(hintUsedCount + 1);
+                                            playButtonClickedSound();
+                                        } else {
+                                            toast(t("hintError"), {
+                                                icon: "🤪",
+                                            });
+                                        }
+                                    }}
+                                >
+                                    {t("hint")}
+                                </button>
+                            </div>
+
+                            <button
+                                className={`${styles.shared_btn} ${styles.setting_btn}`}
+                                type="button"
+                                onClick={() => {
+                                    playButtonClickedSound();
+                                    setIsInnerSettingOpen(true);
+                                }}
+                            >
+                                <img src="./images/setting.png" alt="Setting" />
+                            </button>
+                        </div>
+
+                        <div className={styles.info_header}>
+                            <h1 className={styles.level_title}>
+                                {t("level")}: {level}
+                            </h1>
+                            <h2 className={styles.score_title}>
+                                {t("score")}: {score}
+                            </h2>
+                            <div className={styles.lives_container}>{renderLives()}</div>
+                            <h3 className={styles.timer_title}>{formatTime(countdown)}</h3>
+                        </div>
                     </div>
-                    <h3 className={styles.timer_title}>
-                        {formatTime(countdown)}
-                    </h3>
-                    <button
-                        className={`${styles.shared_btn} ${styles.setting_btn}`}
-                        type="button"
-                        onClick={() => {
-                            playButtonClickedSound();
-                            setIsInnerSettingOpen(true);
-                        }}
-                    >
-                        <img
-                            src="./images/setting.png"
-                            alt="Setting"
-                            width="30"
-                            height="30"
-                        />
-                    </button>
-                    {showRules && (
-                        <RulesPopup
-                            onClose={() => setShowRules(false)}
-                            title={t("game_rules")}
-                            rules={[
-                                t("dts_rules1"),
-                                t("dts_rules2"),
-                                t("dts_rules3"),
-                                t("dts_rules4"),
-                                t("dts_rules5"),
-                                t("dts_rules6"),
-                                t("dts_rules7"),
-                                t("dts_rules8"),
-                                t("dts_rules9"),
-                            ]}
-                        />
-                    )}
-                    {showHint && (
-                        <HintPopup
-                            onClose={() => setShowHint(false)}
-                            title={t("game_hint")}
-                            animationKeyword={animationKeyword}
-                        />
-                    )}
+
+                    {showRules && <RulesPopup onClose={() => setShowRules(false)} title={t("game_rules")} rules={[t("dts_rules1"), t("dts_rules2"), t("dts_rules3"), t("dts_rules4"), t("dts_rules5"), t("dts_rules6"), t("dts_rules7"), t("dts_rules8"), t("dts_rules9")]} />}
+                    {showHint && <HintPopup onClose={() => setShowHint(false)} title={t("game_hint")} animationKeyword={animationKeyword} />}
+                    
                     <div className={styles.box_container}>
-                        <div className={`${styles.box} ${styles.left_box}`}>
-                            {animationKeyword}
-                        </div>
-                        <div className={`${styles.box} ${styles.right_box}`}>
-                            {isCameraVisible && (
-                                <VideoRecorder
-                                    countdown={countdown}
-                                    onStartRecording={startCountdown}
-                                    onStopRecording={stopCountdown}
-                                    onVideoData={handleVideoData}
-                                />
-                            )}
-                        </div>
+                        <div className={`${styles.box} ${styles.left_box}`}>{animationKeyword}</div>
+                        <div className={`${styles.box} ${styles.right_box}`}>{isCameraVisible && <VideoRecorder countdown={countdown} onStartRecording={startCountdown} onStopRecording={stopCountdown} onVideoData={handleVideoData} />}</div>
                     </div>
                 </div>
             </div>
@@ -355,12 +296,7 @@ const DoTheSign: React.FC = () => {
                 {t("not_support_music")}
             </audio>
             {/* Render InnerSetting if isInnerSettingOpen is true */}
-            {isInnerSettingOpen && (
-                <InnerSetting
-                    onClose={() => setIsInnerSettingOpen(false)}
-                    onVolumeChange={updateBackgroundMusicVolume}
-                />
-            )}
+            {isInnerSettingOpen && <InnerSetting onClose={() => setIsInnerSettingOpen(false)} onVolumeChange={updateBackgroundMusicVolume} />}
         </div>
     );
 };

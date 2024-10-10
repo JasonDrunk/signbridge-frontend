@@ -18,6 +18,8 @@ import { useTranslation } from "react-i18next";
 import { Reorder } from "framer-motion";
 import { Item } from "./Item";
 
+import { useHomepageStore } from "@root/store/homepageStore.js";
+
 type ImageModule = {
     image: File | string | null;
     sequence: number;
@@ -34,6 +36,8 @@ type ComponentModule = {
 };
 
 export default function EditDialog() {
+    const { setImageSlider, setComponents } = useHomepageStore();
+
     const { t, i18n } = useTranslation();
     const [open, setOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("image slider");
@@ -45,9 +49,11 @@ export default function EditDialog() {
         status: "Shown",
     });
     const [showAddImage, setShowAddImage] = useState(false);
+
     const [imageRows, setImageRows] = useState<ImageModule[]>([]);
     const [deleteImageRows, setDeleteImageRows] = useState<ImageModule[]>([]);
     const [copyImageRows, setCopyImageRows] = useState<ImageModule[]>([]);
+
     const imageContentRef = useRef<HTMLDivElement>(null);
     const [showSaveButton, setShowSaveButton] = useState(false);
     const [showImageSliderConfirmDialog, setShowImageSliderConfirmDialog] = useState(false);
@@ -70,6 +76,7 @@ export default function EditDialog() {
     const [selectTypeOpen, setSelectTypeOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const types = ["module", "youtube", "about", "location"];
+
     const [hasInteractedWithTitle, setHasInteractedWithTitle] = useState(false);
     const [hasInteractedWithDescription, setHasInteractedWithDescription] = useState(false);
     const [hasInteractedWithLink, setHasInteractedWithLink] = useState(false);
@@ -79,19 +86,21 @@ export default function EditDialog() {
         try {
             const response = await GetComponent();
             setComponentRows(response.data);
+            setComponents(response.data);
         } catch (err) {
-            toast.error("Failed to fetch components");
+            toast.error(t("failed_fetch_components"));
         }
     };
 
     const fetchImageSlider = async () => {
         try {
             const response = await GetImageSlider();
-            setImageRows(response.data);
-            setCopyImageRows(response.data);
+            setImageRows(response.data.sort((a: ImageModule, b: ImageModule) => a.sequence - b.sequence));
+            setCopyImageRows(response.data.sort((a: ImageModule, b: ImageModule) => a.sequence - b.sequence));
+            setImageSlider((response.data as ImageModule[]).filter(slide => slide.status === "Shown").sort((a, b) => a.sequence - b.sequence));
             setShowSaveButton(false);
         } catch (err) {
-            toast.error("Failed to fetch image slider");
+            toast.error(t("failed_fetch_image_sliders"));
         }
     };
 
@@ -105,6 +114,12 @@ export default function EditDialog() {
         setHasInteractedWithImage(true);
 
         if (file) {
+            const fileType = file.type.split("/")[0];
+            if (fileType !== "image") {
+                toast.error(t("please_select_image"));
+                return;
+            }
+
             setComponentModuleData(prevState => ({
                 ...prevState,
                 image: file,
@@ -118,7 +133,7 @@ export default function EditDialog() {
             };
             reader.readAsDataURL(file);
         } else {
-            toast.error("No file selected");
+            toast.error(t("no_file_selected"));
         }
     };
 
@@ -126,6 +141,12 @@ export default function EditDialog() {
         const file = e.target.files && e.target.files[0];
 
         if (file) {
+            const fileType = file.type.split("/")[0];
+            if (fileType !== "image") {
+                toast.error(t("please_select_image"));
+                return;
+            }
+
             setImageModuleData(prevState => ({
                 ...prevState,
                 image: file,
@@ -139,7 +160,7 @@ export default function EditDialog() {
             };
             reader.readAsDataURL(file);
         } else {
-            toast.error("No file selected");
+            toast.error(t("no_file_selected"));
         }
         setShowSaveButton(true);
     };
@@ -180,19 +201,19 @@ export default function EditDialog() {
         toast.promise(
             (async () => {
                 if (componentModuleData.type === "module" && moduleComponentCount >= 3) {
-                    throw new Error("Maximum 3 modules allowed");
+                    throw new Error(t("maximum_module_reached"));
                 }
 
                 if (componentModuleData.type === "about" && aboutComponentCount >= 1) {
-                    throw new Error("Maximum 1 'About Us' section allowed");
+                    throw new Error(t("maximum_about_reached"));
                 }
 
                 if (componentModuleData.type === "youtube" && youtubeComponentCount >= 1) {
-                    throw new Error("Maximum 1 'YouTube Video' allowed");
+                    throw new Error(t("maximum_youtube_reached"));
                 }
 
                 if (componentModuleData.type === "location" && locationComponentCount >= 1) {
-                    throw new Error("Maximum 1 'Location' allowed");
+                    throw new Error(t("maximum_location_reached"));
                 }
 
                 if (componentModuleData.image instanceof File && ["module", "about"].includes(componentModuleData.type)) {
@@ -205,46 +226,37 @@ export default function EditDialog() {
                                 await uploadInputData(downloadURL);
                             })
                             .catch(error => {
-                                throw new Error("Failed to upload image");
+                                throw new Error(t("failed_upload_image"));
                             });
-
-                        await fetchComponent();
-                        setAddComponentOpen(false);
-                        setComponentModuleData({
-                            homepage_component_id: 0,
-                            title: "",
-                            type: "module",
-                            description: "",
-                            image: null,
-                            link: "",
-                        });
-                        setImageUpload(null);
                     } catch (err) {
-                        throw new Error("Failed to add component");
+                        throw new Error(t("failed_add_component"));
                     }
                 } else if (componentModuleData.type === "youtube" || componentModuleData.type === "location") {
                     try {
-                        const response = await AddComponent(componentModuleData);
-                        await fetchComponent();
-                        setAddComponentOpen(false);
-                        setComponentModuleData({
-                            homepage_component_id: 0,
-                            title: "",
-                            type: "module",
-                            description: "",
-                            image: null,
-                            link: "",
-                        });
+                        await AddComponent(componentModuleData);
                     } catch (err) {
-                        throw new Error("Failed to add component");
+                        throw new Error(t("failed_add_component"));
                     }
                 } else {
                     throw new Error("No file to upload, or the image is already a URL.");
                 }
+
+                await fetchComponent().then(() => {
+                    setAddComponentOpen(false);
+                    setComponentModuleData({
+                        homepage_component_id: 0,
+                        title: "",
+                        type: "module",
+                        description: "",
+                        image: null,
+                        link: "",
+                    });
+                    setImageUpload(null);
+                });
             })(),
             {
-                loading: "Adding component...",
-                success: "Component added successfully",
+                loading: t("loading_add_component"),
+                success: t("success_add_component"),
                 error: err => {
                     console.error(err);
                     return err.message;
@@ -267,17 +279,15 @@ export default function EditDialog() {
                     });
             }
 
-            toast.success("Component deleted successfully");
+            toast.success(t("delete_component_success"));
             await fetchComponent();
         } catch (err) {
-            toast.error("Failed to delete component");
+            toast.error(t("delete_component_failed"));
         }
     };
 
     const handleSaveImageSlider = () => {
         setIsClickingSaveButton(true);
-        // setShowImageSliderConfirmDialog(false);
-
         const imageSliderComponentCount = imageRows.length;
 
         toast.promise(
@@ -293,23 +303,24 @@ export default function EditDialog() {
                                     await AddImageSlider({ image: downloadURL, sequence: imageSliderComponentCount + 1, status: imageModuleData.status });
                                 })
                                 .catch(error => {
-                                    throw new Error("Failed to upload image");
+                                    throw new Error(t("failed_upload_image"));
                                 });
 
-                            await fetchImageSlider();
-                            setImageModuleData({
-                                image: "",
-                                sequence: 0,
-                                status: "Shown",
+                            await fetchImageSlider().then(() => {
+                                setImageModuleData({
+                                    image: "",
+                                    sequence: 0,
+                                    status: "Shown",
+                                });
+                                setImageSliderUpload(null);
+                                setShowAddImage(false);
+                                setHasAddItemToImageSlider(false);
+                                setOpen(false);
+                                setShowImageSliderConfirmDialog(false);
                             });
-                            setImageSliderUpload(null);
-                            setShowAddImage(false);
-                            setHasAddItemToImageSlider(false);
-                            setOpen(false);
-                            setShowImageSliderConfirmDialog(false);
                         } catch (err) {
                             console.error(err);
-                            throw new Error("Failed to add image slider");
+                            throw new Error(t("failed_add_image_slider"));
                         }
                     } else {
                         throw new Error("No file to upload, or the image is already a URL.");
@@ -317,6 +328,7 @@ export default function EditDialog() {
                 } else {
                     try {
                         await UpdateImageSlider(imageRows);
+
                         if (deleteImageRows.length > 0) {
                             for (const image of deleteImageRows) {
                                 const imageRef = ref(storage, image.image as string);
@@ -325,21 +337,25 @@ export default function EditDialog() {
                                         console.log("Image deleted successfully");
                                     })
                                     .catch(error => {
+                                        toast.error(t("failed_delete_image"));
                                         console.error("Failed to delete image", error);
                                     });
                             }
                         }
-                        setOpen(false);
-                        setShowSaveButton(false);
-                        setShowImageSliderConfirmDialog(false);
+
+                        await fetchImageSlider().then(() => {
+                            setOpen(false);
+                            setShowSaveButton(false);
+                            setShowImageSliderConfirmDialog(false);
+                        });
                     } catch (err) {
-                        throw new Error("Failed to update");
+                        throw new Error(t("failed_update_image_slider"));
                     }
                 }
             })(),
             {
-                loading: "Adding image slider...",
-                success: "Image slider added / updated successfully",
+                loading: t("loading_add_image_slider"),
+                success: t("success_add_image_slider"),
                 error: err => {
                     console.error(err);
                     return err.message;
@@ -386,12 +402,14 @@ export default function EditDialog() {
     }, [open, addComponentOpen]);
 
     const handleHideImageSlider = async (data: ImageModule) => {
-        const updatedData = {
+        let updatedData = {
             ...data,
             status: data.status === "Shown" ? "Hidden" : "Shown",
         };
         setImageRows(prevState => {
-            return prevState.map(row => (row.sequence === data.sequence ? updatedData : row));
+            const index = prevState.findIndex(row => row.sequence === data.sequence);
+            prevState[index] = updatedData;
+            return [...prevState];
         });
         setShowSaveButton(true);
     };
@@ -407,9 +425,6 @@ export default function EditDialog() {
         <Dialog.Root
             open={open}
             onOpenChange={open => {
-                console.log("open", open);
-                console.log("showSaveButton", showSaveButton);
-                console.log("isClickingSaveButton", isClickingSaveButton);
                 if (!open && showSaveButton && !isClickingSaveButton) {
                     setShowImageSliderConfirmDialog(true);
                 } else {
@@ -427,7 +442,7 @@ export default function EditDialog() {
                 <Dialog.Overlay className={style.overlay} />
                 <Dialog.Content className={style.content}>
                     <Dialog.Title className={style.dialog_title}>
-                        Edit Homepage
+                        {t("edit_homepage")}
                         <Dialog.Close asChild>
                             <button className={style.close_icon} aria-label="Close">
                                 <X size={30} />
@@ -439,11 +454,11 @@ export default function EditDialog() {
                         <Tabs.List className={style.tabs_list}>
                             <Tabs.Trigger className={style.tabs_trigger} value="image slider">
                                 <GalleryThumbnails />
-                                Image Slider
+                                {t("img_slider")}
                             </Tabs.Trigger>
                             <Tabs.Trigger className={style.tabs_trigger} value="components">
                                 <Component />
-                                Components
+                                {t("components")}
                             </Tabs.Trigger>
 
                             {activeTab === "components" ? (
@@ -459,24 +474,24 @@ export default function EditDialog() {
                                                         <Tooltip.Portal>
                                                             <Tooltip.Content className={style.TooltipContent} sideOffset={5}>
                                                                 {/* Recommended image size: 2205x906 */}
-                                                                <b style={{ fontSize: 13 }}>Component limits:</b> <br />
-                                                                &#x2022; Max 3 modules. <br />
-                                                                &#x2022; 1 'About Us' section. <br />
-                                                                &#x2022; 1 'YouTube Video'. <br />
-                                                                &#x2022; 1 'Location'.
+                                                                <b style={{ fontSize: 13 }}>{t("component_info")}</b> <br />
+                                                                &#x2022; {t("component_info_module")} <br />
+                                                                &#x2022; {t("componenet_info_about")} <br />
+                                                                &#x2022; {t("componenet_info_youtube")} <br />
+                                                                &#x2022; {t("componenet_info_location")}
                                                                 <Tooltip.Arrow className={style.TooltipArrow} />
                                                             </Tooltip.Content>
                                                         </Tooltip.Portal>
                                                     </Tooltip.Root>
                                                 </Tooltip.Provider>
-                                                <button className={style.add_btn}>Add</button>
+                                                <button className={style.add_btn}>{t("add")}</button>
                                             </div>
                                         </Dialog.Trigger>
                                         <Dialog.Portal>
                                             <Dialog.Overlay className={style.overlay} />
                                             <Dialog.Content className={style.content2}>
                                                 <Dialog.Title className={style.dialog_title}>
-                                                    Add Homepage Element
+                                                    {t("add_homepage_element")}
                                                     <Dialog.Close asChild>
                                                         <button className={style.close_icon} aria-label="Close">
                                                             <X size={30} />
@@ -501,9 +516,9 @@ export default function EditDialog() {
                                                                 setImageUpload(null);
                                                             }}
                                                             defaultValue={componentModuleData.type}>
-                                                            <Ariakit.SelectLabel className={style.select_label2}>Type</Ariakit.SelectLabel>
+                                                            <Ariakit.SelectLabel className={style.select_label2}>{t("type")}</Ariakit.SelectLabel>
                                                             <Ariakit.Select className={style.selectTrigger2}>
-                                                                {componentModuleData.type.charAt(0).toUpperCase() + componentModuleData.type.slice(1)}
+                                                                {t(componentModuleData.type)}
                                                                 <div className={`${style.selectTriggerIcon2} ${selectTypeOpen ? style.selectIconFocus2 : ""}`}>
                                                                     <ChevronDownIcon />
                                                                 </div>
@@ -521,7 +536,7 @@ export default function EditDialog() {
                                                                             }));
                                                                             setSelectTypeOpen(false);
                                                                         }}>
-                                                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                                                        {type === "youtube" ? "Youtube" : t(type)}
                                                                     </Ariakit.SelectItem>
                                                                 ))}
                                                             </Ariakit.SelectPopover>
@@ -530,7 +545,7 @@ export default function EditDialog() {
                                                     {componentModuleData.type === "module" && (
                                                         <div className={style.input_fieldset}>
                                                             <InputField
-                                                                label="Title"
+                                                                label={t("title")}
                                                                 name="Title"
                                                                 value={componentModuleData?.title}
                                                                 onChange={event => {
@@ -540,14 +555,14 @@ export default function EditDialog() {
                                                                     });
                                                                     setHasInteractedWithTitle(true);
                                                                 }}
-                                                                error={hasInteractedWithTitle && componentModuleData.title === "" ? "Title is required" : ""}
+                                                                error={hasInteractedWithTitle && componentModuleData.title === "" ? t("title_required") : ""}
                                                             />
                                                         </div>
                                                     )}
                                                     {componentModuleData.type === "about" && (
                                                         <div className={style.input_fieldset}>
                                                             <InputField
-                                                                label="Description"
+                                                                label={t("description")}
                                                                 name="Description"
                                                                 value={componentModuleData?.description}
                                                                 onChange={event => {
@@ -558,14 +573,14 @@ export default function EditDialog() {
                                                                     setHasInteractedWithDescription(true);
                                                                 }}
                                                                 multipleLines={true}
-                                                                error={hasInteractedWithDescription && componentModuleData.description === "" ? "Description is required" : ""}
+                                                                error={hasInteractedWithDescription && componentModuleData.description === "" ? t("description_required") : ""}
                                                             />
                                                         </div>
                                                     )}
                                                     {["module", "youtube", "location"].includes(componentModuleData.type) && (
                                                         <div className={style.input_fieldset}>
                                                             <InputField
-                                                                label="Link"
+                                                                label={t("link")}
                                                                 name="Link"
                                                                 value={componentModuleData?.link}
                                                                 onChange={event => {
@@ -575,7 +590,7 @@ export default function EditDialog() {
                                                                     });
                                                                     setHasInteractedWithLink(true);
                                                                 }}
-                                                                error={hasInteractedWithLink && componentModuleData.link === "" ? "Link is required" : ""}
+                                                                error={hasInteractedWithLink && componentModuleData.link === "" ? t("link_required") : ""}
                                                             />
                                                         </div>
                                                     )}
@@ -587,17 +602,17 @@ export default function EditDialog() {
                                                                         <img src={imageUpload} alt="thumbnail" className={style.thumbnail2} />
                                                                     ) : (
                                                                         <>
-                                                                            <UploadOutlined /> &nbsp; Upload an Image
+                                                                            <UploadOutlined /> &nbsp; {t("upload_an_image")}
                                                                         </>
                                                                     )}
                                                                     <input type="file" id="file" className={style.img_input} onChange={handleImageChange} accept="image/jpeg, image/png, image/jpg" />
                                                                 </>
                                                             </label>
-                                                            {hasInteractedWithImage && !imageUpload && <span className={style.error_message}>No file selected</span>}
+                                                            {hasInteractedWithImage && !imageUpload && <span className={style.error_message}>{t("no_file_selected")}</span>}
                                                         </div>
                                                     )}
                                                     <button className={style.save_btn} type="submit">
-                                                        Save
+                                                        {t("save")}
                                                     </button>
                                                 </form>
                                             </Dialog.Content>
@@ -613,11 +628,11 @@ export default function EditDialog() {
                                             setShowAddImage(true);
                                             imageContentRef.current?.scrollTo({ top: imageContentRef.current.scrollHeight, behavior: "smooth" });
                                         }}>
-                                        Add
+                                        {t("add")}
                                     </button>
                                     {showSaveButton && (
                                         <button className={style.save_btn} onClick={handleSaveImageSlider}>
-                                            Save Changes
+                                            {t("save_changes")}
                                         </button>
                                     )}
                                 </div>
@@ -629,9 +644,9 @@ export default function EditDialog() {
                                 <div className={style.table_container}>
                                     <div className={`${style.row} ${style.header_row}`}>
                                         <div>No</div>
-                                        <div>Images</div>
-                                        <div>Status</div>
-                                        <div>Action</div>
+                                        <div>{t("images")}</div>
+                                        <div>{t("dc_status")}</div>
+                                        <div>{t("action")}</div>
                                     </div>
                                     <hr className={style.divider} />
                                     <Reorder.Group
@@ -662,10 +677,10 @@ export default function EditDialog() {
                                                             <img src={imageSliderUpload} alt="thumbnail" className={style.thumbnail} />
                                                         ) : (
                                                             <>
-                                                                <UploadOutlined /> &nbsp; Upload an Image
+                                                                <UploadOutlined /> &nbsp; {t("upload_an_image")}
                                                             </>
                                                         )}
-                                                        <input type="file" name="" id="imageSliderFile" className={style.img_input} onChange={handleImageSliderChange} />
+                                                        <input type="file" name="" id="imageSliderFile" className={style.img_input} onChange={handleImageSliderChange} accept="image/jpeg, image/png, image/jpg" />
                                                     </label>
                                                 </div>
 
@@ -683,7 +698,7 @@ export default function EditDialog() {
                                                             }}
                                                             defaultValue={imageModuleData.status}>
                                                             <Ariakit.Select className={style.selectTrigger}>
-                                                                {imageModuleData.status.charAt(0).toUpperCase() + imageModuleData.status.slice(1)}
+                                                                {imageModuleData.status === "Shown" ? t("shown") : t("hidden")}
                                                                 <div className={`${style.selectTriggerIcon} ${selectTypeOpen ? style.selectIconFocus : ""}`}>
                                                                     <ChevronDownIcon />
                                                                 </div>
@@ -701,7 +716,7 @@ export default function EditDialog() {
                                                                             }));
                                                                             setSelectTypeOpen(false);
                                                                         }}>
-                                                                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                                                                        {status === "Shown" ? t("shown") : t("hidden")}
                                                                     </Ariakit.SelectItem>
                                                                 ))}
                                                             </Ariakit.SelectPopover>
@@ -720,24 +735,24 @@ export default function EditDialog() {
                                 <div className={style.table_container}>
                                     <div className={style.row2}>
                                         <div>No</div>
-                                        <div>Type</div>
-                                        <div>Action</div>
+                                        <div>{t("type")}</div>
+                                        <div>{t("action")}</div>
                                     </div>
                                     <hr className={style.divider} />
                                     {componentRows.map((row, index) => (
                                         <div className={style.row2} key={index}>
                                             <div>{index + 1}</div>
-                                            <div>{row.type === "module" ? "Available Modules" : row.type === "about" ? "About Us" : row.type === "youtube" ? "YouTube Video" : "Location"}</div>
+                                            <div>{row.type === "module" ? t("available") + " " + t("module") : row.type === "about" ? t("about") + " Neuon AI" : row.type === "youtube" ? "YouTube Video" : t("location")}</div>
                                             <div className={style.btn_grp}>
                                                 <Dialog.Root>
                                                     <Dialog.Trigger asChild>
-                                                        <button className={`${style.table_btn_grp} ${style.hide_button}`}>Edit</button>
+                                                        <button className={`${style.table_btn_grp} ${style.hide_button}`}>{t("edit")}</button>
                                                     </Dialog.Trigger>
                                                     <Dialog.Portal>
                                                         <Dialog.Overlay className={style.overlay} />
                                                         <Dialog.Content className={style.content2}>
                                                             <Dialog.Title className={style.dialog_title}>
-                                                                Edit Homepage Element
+                                                                {t("edit_homepage_element")}
                                                                 <Dialog.Close asChild>
                                                                     <button className={style.close_icon} aria-label="Close">
                                                                         <X size={30} />
@@ -747,7 +762,7 @@ export default function EditDialog() {
                                                             <div className={style.dialog_content2}>
                                                                 <div className={style.select_container2}>
                                                                     <Ariakit.SelectProvider defaultValue={row.type}>
-                                                                        <Ariakit.SelectLabel className={style.select_label2}>Type</Ariakit.SelectLabel>
+                                                                        <Ariakit.SelectLabel className={style.select_label2}>{t("type")}</Ariakit.SelectLabel>
                                                                         <Ariakit.Select className={style.selectTrigger2} disabled={isEditMode} style={{ backgroundColor: "rgb(231, 231, 231)", cursor: "not-allowed" }}>
                                                                             {row.type.charAt(0).toUpperCase() + row.type.slice(1)}
                                                                             <div className={`${style.selectTriggerIcon2} ${selectTypeOpen ? style.selectIconFocus2 : ""}`} style={{ cursor: "not-allowed" }}>
@@ -760,7 +775,7 @@ export default function EditDialog() {
                                                                 <div className={style.input_fieldset}>
                                                                     {row.type === "module" && (
                                                                         <InputField
-                                                                            label="Title"
+                                                                            label={t("title")}
                                                                             name="Title"
                                                                             value={row.title}
                                                                             onChange={event => {
@@ -775,7 +790,7 @@ export default function EditDialog() {
                                                                 <div className={style.input_fieldset}>
                                                                     {row.type === "about" && (
                                                                         <InputField
-                                                                            label="Description"
+                                                                            label={t("description")}
                                                                             name="Description"
                                                                             value={row.description}
                                                                             onChange={event => {
@@ -791,7 +806,7 @@ export default function EditDialog() {
                                                                 <div className={style.input_fieldset}>
                                                                     {["module", "youtube", "location"].includes(row.type) && (
                                                                         <InputField
-                                                                            label="Link"
+                                                                            label={t("link")}
                                                                             name="Link"
                                                                             value={row.link}
                                                                             onChange={event => {
@@ -810,7 +825,7 @@ export default function EditDialog() {
                                                                                 <img src={row.image as string} alt="thumbnail" className={style.thumbnail2} />
                                                                             ) : (
                                                                                 <>
-                                                                                    <UploadOutlined /> &nbsp; Upload an Image
+                                                                                    <UploadOutlined /> &nbsp; {t("upload_an_image")}
                                                                                 </>
                                                                             )}
                                                                             <input
@@ -831,7 +846,7 @@ export default function EditDialog() {
                                                                                         };
                                                                                         reader.readAsDataURL(file);
                                                                                     } else {
-                                                                                        toast.error("No file selected");
+                                                                                        toast.error(t("no_file_selected"));
                                                                                     }
                                                                                 }}
                                                                                 accept="image/jpeg, image/png, image/jpg"
@@ -846,13 +861,13 @@ export default function EditDialog() {
                                                                         onClick={async () => {
                                                                             try {
                                                                                 await UpdateComponent(row);
-                                                                                toast.success("Component updated successfully");
+                                                                                toast.success(t("update_component_success"));
                                                                             } catch (err) {
                                                                                 console.error(err);
-                                                                                toast.error("Failed to update component");
+                                                                                toast.error(t("update_component_failed"));
                                                                             }
                                                                         }}>
-                                                                        Save
+                                                                        {t("save")}
                                                                     </button>
                                                                 </Dialog.Close>
                                                             </div>
@@ -862,7 +877,7 @@ export default function EditDialog() {
 
                                                 <Dialog.Root>
                                                     <Dialog.Trigger asChild>
-                                                        <button className={`${style.table_btn_grp} ${style.delete_button}`}>Delete</button>
+                                                        <button className={`${style.table_btn_grp} ${style.delete_button}`}>{t("delete")}</button>
                                                     </Dialog.Trigger>
                                                     <Dialog.Portal>
                                                         <Dialog.Overlay className={style.dlt_dialog_overlay} />
@@ -896,8 +911,8 @@ export default function EditDialog() {
                 <Dialog.Portal>
                     <Dialog.Overlay className={style.dlt_dialog_overlay} />
                     <Dialog.Content className={style.dlt_dialog_content}>
-                        <Dialog.Title className={style.dialog_title}>Confirm Close</Dialog.Title>
-                        <Dialog.Description className={style.dlt_dialog_description}>Unsaved changes will be lost. Are you sure you want to close?</Dialog.Description>
+                        <Dialog.Title className={style.dialog_title}>{t("img_slider_confirm_close")}</Dialog.Title>
+                        <Dialog.Description className={style.dlt_dialog_description}>{t("img_slider_confirm_close_desc")}</Dialog.Description>
                         <div className={style.buttonsConfirmation}>
                             <Dialog.Close asChild>
                                 <button
@@ -907,7 +922,7 @@ export default function EditDialog() {
                                         setShowImageSliderConfirmDialog(false);
                                         setImageRows(copyImageRows);
                                     }}>
-                                    Yes, Close
+                                    {t("yes_close")}
                                 </button>
                             </Dialog.Close>
                             <Dialog.Close asChild>
@@ -917,7 +932,7 @@ export default function EditDialog() {
                                         setOpen(true);
                                         setShowImageSliderConfirmDialog(false);
                                     }}>
-                                    Cancel
+                                    {t("dc_cancel")}
                                 </button>
                             </Dialog.Close>
                         </div>

@@ -25,15 +25,15 @@
   },
   {
     "keyword": "BADAN",
-    "animations": ["Badan1", "Badan2", "Badan3"],
+    "animations": ["Badan"],
     "category":"Medical",
     "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
     "thumbnail": "./images/signImages/medical.jpg",
-    "frames": 90
+    "frames": 150
   },
   {
     "keyword": "BAHU",
-    "animations": ["Bahu1", "Bahu2", "Bahu3", "Bahu4"],
+    "animations": ["Bahu"],
     "category":"Medical",
     "contributor":"SARAWAK SOCIETY FOR THE DEAF (SSD)",
     "thumbnail": "./images/signImages/medical.jpg",
