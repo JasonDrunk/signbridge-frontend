@@ -49,7 +49,7 @@ export default function Education() {
 							playButtonClickedSound();
 							setIsLeaderboardPopupOpen(true); // Open the leaderboard popup
 						}}>
-						<img src="./images/trophy.png" alt="Leaderboard" width="30" height="30" />
+						<img className={styles.trophyImg} src="./images/trophy.png" alt="Leaderboard" />
 					</button>
 					<button
 						className={`${styles.game_btn} ${styles.setting_btn}`} 
@@ -58,7 +58,7 @@ export default function Education() {
 							playButtonClickedSound();
 							setIsSettingPopupOpen(true); // Open the setting popup
 						}}>
-						<img src="./images/setting.png" alt="Setting" width="30" height="30" />
+						<img className={styles.settingImg} src="./images/setting.png" alt="Setting" />
 					</button>
 					<button
 						className={`${styles.game_btn} ${styles.guess_the_word_btn}`} 

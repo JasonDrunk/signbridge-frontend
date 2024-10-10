@@ -52,15 +52,12 @@ const playWrongAnswerSound = () => {
 
 const GuessTheWord: React.FC = () => {
     const [lives, setLives, removeLives] = useSessionStorage("guessLives", 3);
-    const [currentLevel, setCurrentLevel] =
-        useSessionStorage("guessCurrentLevel", 1);
-    const [questionList, setQuestionList] =
-        useSessionStorage<Question[]>("guessQuestionList", []);
+    const [currentLevel, setCurrentLevel] = useSessionStorage("guessCurrentLevel", 1);
+    const [questionList, setQuestionList] = useSessionStorage<Question[]>("guessQuestionList", []);
     const [score, setScore] = useSessionStorage("guessScore", 0);
 
     const { t, i18n } = useTranslation();
-    const [isLoginRemindPopupVisible, setIsLoginRemindPopupVisible] =
-        useState(false);
+    const [isLoginRemindPopupVisible, setIsLoginRemindPopupVisible] = useState(false);
     const [isInnerSettingOpen, setIsInnerSettingOpen] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -71,9 +68,7 @@ const GuessTheWord: React.FC = () => {
     const [animationKeyword, setAnimationKeyword] = useState("");
     const [answerOptions, setAnswerOptions] = useState<string[]>([]);
     const [question, setQuestion] = useState<Question>();
-    const [clickedOptions, setClickedOptions] = useState<boolean[]>(
-        new Array(4).fill(false)
-    );
+    const [clickedOptions, setClickedOptions] = useState<boolean[]>(new Array(4).fill(false));
     const [gameOver, setGameOver] = useState(false);
 
     useEffect(() => {
@@ -103,20 +98,14 @@ const GuessTheWord: React.FC = () => {
 
     // Function to render hearts for lives
     const renderLives = () => {
-        return Array.from({ length: lives }, (_, i) => (
-            <img key={i} src={heartImage} alt="Heart" />
-        ));
+        return Array.from({ length: lives }, (_, i) => <img key={i} src={heartImage} alt="Heart" />);
     };
 
-    const loadAnimationKeywords = async (): Promise<
-        GlossAnimation[] | null
-    > => {
+    const loadAnimationKeywords = async (): Promise<GlossAnimation[] | null> => {
         try {
             const response = await fetch("/glosses/gloss.json");
             if (!response.ok) {
-                throw new Error(
-                    `Failed to fetch: ${response.status} ${response.statusText}`
-                );
+                throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
             }
             const data: GlossAnimation[] = await response.json();
             return data;
@@ -166,31 +155,20 @@ const GuessTheWord: React.FC = () => {
         fetchAnswerOptions();
     }, [animationKeyword]);
 
-    const generateAnswerOptions = async (
-        animationKeyword: string
-    ): Promise<string[]> => {
+    const generateAnswerOptions = async (animationKeyword: string): Promise<string[]> => {
         const options: string[] = [];
         const glossData = await loadAnimationKeywords();
         if (glossData) {
-            const glossKeys = glossData
-                .map((item) => item.keyword)
-                .filter((key) => /^[A-Z_]+$/.test(key));
+            const glossKeys = glossData.map((item) => item.keyword).filter((key) => /^[A-Z_]+$/.test(key));
 
-            const filteredGlossKeys = glossKeys.filter(
-                (key) => key.toLowerCase() !== animationKeyword.toLowerCase()
-            );
+            const filteredGlossKeys = glossKeys.filter((key) => key.toLowerCase() !== animationKeyword.toLowerCase());
 
             for (let i = filteredGlossKeys.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [filteredGlossKeys[i], filteredGlossKeys[j]] = [
-                    filteredGlossKeys[j],
-                    filteredGlossKeys[i],
-                ];
+                [filteredGlossKeys[i], filteredGlossKeys[j]] = [filteredGlossKeys[j], filteredGlossKeys[i]];
             }
 
-            let randomIndex = Math.floor(
-                Math.random() * filteredGlossKeys.length
-            );
+            let randomIndex = Math.floor(Math.random() * filteredGlossKeys.length);
 
             for (let i = 0; i < 4; i++) {
                 const randomKey = filteredGlossKeys[randomIndex];
@@ -218,10 +196,7 @@ const GuessTheWord: React.FC = () => {
         }
     };
 
-    const handleAnswerOptionClick = async (
-        selectedOption: string,
-        index: number
-    ) => {
+    const handleAnswerOptionClick = async (selectedOption: string, index: number) => {
         try {
             const glossData = await loadAnimationKeywords();
             if (clickedOptions[index]) {
@@ -248,16 +223,9 @@ const GuessTheWord: React.FC = () => {
                     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                     .join(" ");
 
-                const correctAnswerIndex = answerOptions.findIndex(
-                    (option) =>
-                        option.toLowerCase() ===
-                        correctAnswerFormatted.toLowerCase()
-                );
+                const correctAnswerIndex = answerOptions.findIndex((option) => option.toLowerCase() === correctAnswerFormatted.toLowerCase());
 
-                if (
-                    selectedOption.toLowerCase() ===
-                    correctAnswerFormatted.toLowerCase()
-                ) {
+                if (selectedOption.toLowerCase() === correctAnswerFormatted.toLowerCase()) {
                     setScore(score + 1);
                     setCorrectAnswerIndex(index);
                     playCorrectAnswerSound();
@@ -327,17 +295,8 @@ const GuessTheWord: React.FC = () => {
 
     return (
         <div className={styles.guess_the_word_layout}>
-            {isLoginRemindPopupVisible && (
-                <LoginRemindPopup
-                    onClose={() => setIsLoginRemindPopupVisible(false)}
-                />
-            )}
-            {gameOver && (
-                <GameOverPopup
-                    score={score}
-                    onClose={() => setGameOver(false)}
-                />
-            )}
+            {isLoginRemindPopupVisible && <LoginRemindPopup onClose={() => setIsLoginRemindPopupVisible(false)} />}
+            {gameOver && <GameOverPopup score={score} onClose={() => setGameOver(false)} />}
             <div className={styles.guess_the_word_container}>
                 <div className={styles.guess_the_word}>
                     <button
@@ -350,12 +309,7 @@ const GuessTheWord: React.FC = () => {
                     >
                         {t("rules")}
                     </button>
-                    <h1 className={styles.level_title}>
-                        {questionList.length > 0 &&
-                        questionList[currentQuestionIndex]
-                            ? `${t("level")} ${currentLevel}`
-                            : t("loading")}
-                    </h1>
+                    <h1 className={styles.level_title}>{questionList.length > 0 && questionList[currentQuestionIndex] ? `${t("level")} ${currentLevel}` : t("loading")}</h1>
                     <h2 className={styles.score_title}>
                         {t("score")}: {score}
                     </h2>
@@ -367,30 +321,10 @@ const GuessTheWord: React.FC = () => {
                             setIsInnerSettingOpen(true);
                         }}
                     >
-                        <img
-                            src="./images/setting.png"
-                            alt="Setting"
-                            width="30"
-                            height="30"
-                        />
+                        <img src="./images/setting.png" alt="Setting" width="30" height="30" />
                     </button>
-                    <div className={styles.lives_container}>
-                        {renderLives()}
-                    </div>
-                    {showRules && (
-                        <RulesPopup
-                            onClose={() => setShowRules(false)}
-                            title={t("game_rules")}
-                            rules={[
-                                t("gtw_rules1"),
-                                t("gtw_rules2"),
-                                t("gtw_rules3"),
-                                t("gtw_rules4"),
-                                t("gtw_rules5"),
-                                t("gtw_rules6"),
-                            ]}
-                        />
-                    )}
+                    <div className={styles.lives_container}>{renderLives()}</div>
+                    {showRules && <RulesPopup onClose={() => setShowRules(false)} title={t("game_rules")} rules={[t("gtw_rules1"), t("gtw_rules2"), t("gtw_rules3"), t("gtw_rules4"), t("gtw_rules5"), t("gtw_rules6")]} />}
                     <div>
                         <h3 className={styles.question}>
                             <div className={styles.education_canvas_wrapper}>
@@ -400,43 +334,23 @@ const GuessTheWord: React.FC = () => {
                                     }}
                                 >
                                     {/* Your 3D scene components */}
-                                    <directionalLight
-                                        intensity={1}
-                                        color="white"
-                                        position={[10, 10, 10]}
-                                    />
+                                    <directionalLight intensity={1} color="white" position={[10, 10, 10]} />
                                     <CharacterAnimationsProvider>
                                         <Experience />
                                         <CameraControl />
-                                        <Man
-                                            animationKeyword={animationKeyword}
-                                            speed={""}
-                                            showSkeleton={""}
-                                            repeat={"Yes"}
-                                            isPaused={""}
-                                        />
+                                        <Man animationKeyword={animationKeyword} speed={""} showSkeleton={""} repeat={"Yes"} isPaused={""} />
                                     </CharacterAnimationsProvider>
                                 </Canvas>
                             </div>
                         </h3>
-                        <div>
+                        <div className={styles.answer_btn}>
                             {answerOptions.map((option, index) => (
                                 <button
                                     className={`${styles.answer_option} 
-                                ${
-                                    correctAnswerIndex === index
-                                        ? styles.correct_answer
-                                        : ""
-                                } 
-                                ${
-                                    wrongAnswerIndex === index
-                                        ? styles.wrong_answer
-                                        : ""
-                                }`}
+                                ${correctAnswerIndex === index ? styles.correct_answer : ""} 
+                                ${wrongAnswerIndex === index ? styles.wrong_answer : ""}`}
                                     key={index}
-                                    onClick={() =>
-                                        handleAnswerOptionClick(option, index)
-                                    }
+                                    onClick={() => handleAnswerOptionClick(option, index)}
                                     disabled={clickedOptions[index]}
                                 >
                                     {option}
@@ -452,12 +366,7 @@ const GuessTheWord: React.FC = () => {
                 {t("not_support_music")}
             </audio>
             {/* Render InnerSetting if isInnerSettingOpen is true */}
-            {isInnerSettingOpen && (
-                <InnerSetting
-                    onClose={() => setIsInnerSettingOpen(false)}
-                    onVolumeChange={updateBackgroundMusicVolume}
-                />
-            )}
+            {isInnerSettingOpen && <InnerSetting onClose={() => setIsInnerSettingOpen(false)} onVolumeChange={updateBackgroundMusicVolume} />}
         </div>
     );
 };
