@@ -99,9 +99,9 @@ function App() {
         };
     }, []);
 
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
+    // useEffect(() => {
+    //     console.log(user);
+    // }, [user]);
 
     const [feedbackComponent, setFeedbackComponent] = useState<React.ReactNode>();
     useEffect(() => {
