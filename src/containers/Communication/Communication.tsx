@@ -2,10 +2,10 @@
 // General Imports
 import "regenerator-runtime/runtime";
 import "./Communication.css";
-import { useRef, useState, useEffect, SetStateAction } from "react";
+import React, { lazy, Suspense, useRef, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
-import { createLogsByUser} from "../../services/communication.service";
+import { fetchNLPOutput, createLogsByUser } from "../../services/communication.service";
 
 // SLP Imports
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -22,11 +22,12 @@ import Experience from "../../components/SLP/Experience";
 import Man from "../../components/AvatarModels/Man";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FPSCounter from "./FPSCounter"; // Adjust the import path as necessary
-import Communicationlog from "./Communicationlog"; // Adjust the import path as necessary
+const FPSCounter = lazy(() => import("./FPSCounter"));
+const Communicationlog = lazy(() => import("./Communicationlog"));
 // SLR Imports
-import SLRInput from "../../components/SLRInput/SLRInput";
-import SLROutput from "../../components/SLROutput/SLROutput";
+const SLRInput = lazy(() => import("../../components/SLRInput/SLRInput"));
+const SLROutput = lazy(() => import("../../components/SLROutput/SLROutput"));
+
 
 import SpeechRecognition, {
     useSpeechRecognition,
@@ -78,9 +79,8 @@ function Communication() {
                     }}
                 >
                     <i
-                        className={`fa ${
-                            isListening ? "fa-stop faStopBtn" : "fa-microphone"
-                        }`}
+                        className={`fa ${isListening ? "fa-stop faStopBtn" : "fa-microphone"
+                            }`}
                     ></i>
                 </button>
             );
@@ -153,12 +153,12 @@ function Communication() {
         setCurrentAnimationName(animationName);
     };
 
-        // @ts-ignore
+    // @ts-ignore
     const updateCurrentSignFrame = (signFrame) => {
         setCurrentSignFrame(signFrame);
     };
 
-     // @ts-ignore
+    // @ts-ignore
     const updateStatus = (status) => {
         setCurrentStatus(status);
     };
@@ -218,38 +218,28 @@ function Communication() {
         const submittedText = formData.get("sigmlUrl") as string; // Prevent null value
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/SLP", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ text: submittedText }),
-            });
+            const response = await fetchNLPOutput(submittedText);
+            const data = await response;
+            console.log("Data: ", data);
+            console.log("Submitted text: ", submittedText);
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Data: ", data);
-                console.log("Submitted text: ", submittedText);
-
-                if (previousSubmittedText === submittedText) {
-                    // If the current submitted text is the same as the previous one, append "#" to the returned text
-                    setInputText(data["return"] + "+");
-                } else {
-                    // If they are different, update the inputText directly
-                    setInputText(data["return"]);
-                    const logData = {
-                        text: data["return"],
-                        module: "SLP",
-                        user_id: Cookies.get("user_id") || "",
-                    }
-                    createLogsByUser(logData);
-                }
-
-                // Update the previousSubmittedText variable for the next comparison
-                previousSubmittedText = submittedText;
+            if (previousSubmittedText === submittedText) {
+                // If the current submitted text is the same as the previous one, append "#" to the returned text
+                setInputText(data["return"] + "+");
             } else {
-                console.error("Failed to process text");
+                // If they are different, update the inputText directly
+                setInputText(data["return"]);
+                const logData = {
+                    text: data["return"],
+                    module: "SLP",
+                    user_id: Cookies.get("user_id") || "",
+                }
+                createLogsByUser(logData);
             }
+
+            // Update the previousSubmittedText variable for the next comparison
+            previousSubmittedText = submittedText;
+
         } catch (error) {
             console.error("Error processing text: ", error);
         }
@@ -272,9 +262,8 @@ function Communication() {
 
     return (
         <div
-            className={`communication-body ${
-                leftHandedMode ? "left-handed" : ""
-            }`}
+            className={`communication-body ${leftHandedMode ? "left-handed" : ""
+                }`}
         >
             <div className="container-wrapper">
                 <div className="communication-menu">
@@ -293,9 +282,8 @@ function Communication() {
                         {t("slr")}
                     </button>
                     <div
-                        className={`animation ${
-                            isButtonActive("SLR") ? "start-about" : "start-home"
-                        }`}
+                        className={`animation ${isButtonActive("SLR") ? "start-about" : "start-home"
+                            }`}
                     ></div>
                 </div>
                 {activeButton === "SLP" && (
@@ -364,8 +352,8 @@ function Communication() {
                             </Canvas>
                         </div>
                         {isLoggedIn ? (
-                                                        <div>
-                           <Communicationlog userId={Cookies.get("user_id") || ""} moduleType={"SLP"} /></div>
+                            <div>
+                                <Communicationlog userId={Cookies.get("user_id") || ""} moduleType={"SLP"} /></div>
                         ) : (
                             <a></a>
                         )}
@@ -491,7 +479,9 @@ function Communication() {
                             <div className="bottomrow">
                                 <h1 className="communication-h1">{t("stats")}</h1>
                                 <div className="communication-bottomrow">
-                                <FPSCounter/>
+                                    <Suspense fallback={<div>Loading FPS Counter...</div>}>
+                                        <FPSCounter />
+                                    </Suspense>
                                     <input
                                         className="frame-box"
                                         type="text"
@@ -528,8 +518,8 @@ function Communication() {
                             />
                         </div>
                         {isLoggedIn ? (
-                                                        <div>
-                           <Communicationlog userId={Cookies.get("user_id") || ""} moduleType={"SLR"} /></div>
+                            <div>
+                                <Communicationlog userId={Cookies.get("user_id") || ""} moduleType={"SLR"} /></div>
                         ) : (
                             <a></a>
                         )}
@@ -541,4 +531,3 @@ function Communication() {
 }
 
 export default Communication;
-
