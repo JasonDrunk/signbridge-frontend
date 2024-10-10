@@ -10,7 +10,7 @@ const Experience = () => {
   // Set up camera controls and limits
   useFrame(() => {
 
-    controls.current.target.set(-7.5, 110, 30); // Manually set the target point
+    controls.current.target.set(0, 120, 30); // Manually set the target point
     controls.current.update();
 
   });

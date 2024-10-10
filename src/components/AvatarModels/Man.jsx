@@ -181,19 +181,41 @@ const Man = ({
   
 
   return (
-    <group ref={group} {...props} position={[0, 0, 0]} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="Armature001" rotation={[1.829, 0, 0]}>
+        <group name="Genesis8Female" scale={100.6}>
           <primitive object={nodes.root} />
-          <primitive object={nodes.Bone} />
-          <group name="rp_manuel_animated_001_dancing_geo">
-            <skinnedMesh name="Mesh003" geometry={nodes.Mesh003.geometry} material={materials['rp_manuel_animated_001_mat.005']} skeleton={nodes.Mesh003.skeleton} />
-            <skinnedMesh name="Mesh003_1" geometry={nodes.Mesh003_1.geometry} material={materials.Tongue} skeleton={nodes.Mesh003_1.skeleton} />
+          <group name="Genesis8FemaleShape">
+            <skinnedMesh name="Genesis8Female001" geometry={nodes.Genesis8Female001.geometry} material={materials['drb_Torso-dz0.001']} skeleton={nodes.Genesis8Female001.skeleton} />
+            <skinnedMesh name="Genesis8Female001_1" geometry={nodes.Genesis8Female001_1.geometry} material={materials['drb_Face-dz0.001']} skeleton={nodes.Genesis8Female001_1.skeleton} />
+            <skinnedMesh name="Genesis8Female001_2" geometry={nodes.Genesis8Female001_2.geometry} material={materials['drb_Lips-dz0.001']} skeleton={nodes.Genesis8Female001_2.skeleton} />
+            <skinnedMesh name="Genesis8Female001_3" geometry={nodes.Genesis8Female001_3.geometry} material={materials['drb_Teeth-dz0.001']} skeleton={nodes.Genesis8Female001_3.skeleton} />
+            <skinnedMesh name="Genesis8Female001_4" geometry={nodes.Genesis8Female001_4.geometry} material={materials['drb_Ears-dz0.001']} skeleton={nodes.Genesis8Female001_4.skeleton} />
+            <skinnedMesh name="Genesis8Female001_5" geometry={nodes.Genesis8Female001_5.geometry} material={materials['drb_Legs-dz0.001']} skeleton={nodes.Genesis8Female001_5.skeleton} />
+            <skinnedMesh name="Genesis8Female001_6" geometry={nodes.Genesis8Female001_6.geometry} material={materials['drb_EyeSocket-dz0.001']} skeleton={nodes.Genesis8Female001_6.skeleton} />
+            <skinnedMesh name="Genesis8Female001_7" geometry={nodes.Genesis8Female001_7.geometry} material={materials['drb_Mouth-dz0.001']} skeleton={nodes.Genesis8Female001_7.skeleton} />
+            <skinnedMesh name="Genesis8Female001_8" geometry={nodes.Genesis8Female001_8.geometry} material={materials['drb_Arms-dz0.001']} skeleton={nodes.Genesis8Female001_8.skeleton} />
+            <skinnedMesh name="Genesis8Female001_9" geometry={nodes.Genesis8Female001_9.geometry} material={materials['drb_Pupils-dz0.001']} skeleton={nodes.Genesis8Female001_9.skeleton} />
+            <skinnedMesh name="Genesis8Female001_10" geometry={nodes.Genesis8Female001_10.geometry} material={materials['drb_EyeMoisture-dz0.001']} skeleton={nodes.Genesis8Female001_10.skeleton} />
+            <skinnedMesh name="Genesis8Female001_11" geometry={nodes.Genesis8Female001_11.geometry} material={materials['drb_Fingernails-dz0.001']} skeleton={nodes.Genesis8Female001_11.skeleton} />
+            <skinnedMesh name="Genesis8Female001_12" geometry={nodes.Genesis8Female001_12.geometry} material={materials['drb_Cornea-dz0.001']} skeleton={nodes.Genesis8Female001_12.skeleton} />
+            <skinnedMesh name="Genesis8Female001_13" geometry={nodes.Genesis8Female001_13.geometry} material={materials['drb_Irises-dz0.001']} skeleton={nodes.Genesis8Female001_13.skeleton} />
+            <skinnedMesh name="Genesis8Female001_14" geometry={nodes.Genesis8Female001_14.geometry} material={materials['drb_Sclera-dz0.001']} skeleton={nodes.Genesis8Female001_14.skeleton} />
+            <skinnedMesh name="Genesis8Female001_15" geometry={nodes.Genesis8Female001_15.geometry} material={materials['drb_Toenails-dz0.001']} skeleton={nodes.Genesis8Female001_15.skeleton} />
+            <skinnedMesh name="Genesis8Female001_16" geometry={nodes.Genesis8Female001_16.geometry} material={materials['drb_EylsMoisture-dz0.001']} skeleton={nodes.Genesis8Female001_16.skeleton} />
+            <skinnedMesh name="Genesis8Female001_17" geometry={nodes.Genesis8Female001_17.geometry} material={materials['drb_Eyelashes-dz0.001']} skeleton={nodes.Genesis8Female001_17.skeleton} />
           </group>
+          <group name="Pumps01_5112Shape">
+            <skinnedMesh name="Pumps01_5112" geometry={nodes.Pumps01_5112.geometry} material={materials['inner_sole.001']} skeleton={nodes.Pumps01_5112.skeleton} />
+            <skinnedMesh name="Pumps01_5112_1" geometry={nodes.Pumps01_5112_1.geometry} material={materials['sole.001']} skeleton={nodes.Pumps01_5112_1.skeleton} />
+            <skinnedMesh name="Pumps01_5112_2" geometry={nodes.Pumps01_5112_2.geometry} material={materials['body.001']} skeleton={nodes.Pumps01_5112_2.skeleton} />
+          </group>
+          <skinnedMesh name="ANTO_STUDIO_7891Shape" geometry={nodes.ANTO_STUDIO_7891Shape.geometry} material={materials['Model001_Material001.001']} skeleton={nodes.ANTO_STUDIO_7891Shape.skeleton} morphTargetDictionary={nodes.ANTO_STUDIO_7891Shape.morphTargetDictionary} morphTargetInfluences={nodes.ANTO_STUDIO_7891Shape.morphTargetInfluences} />
+          <skinnedMesh name="untitled_74704Shape" geometry={nodes.untitled_74704Shape.geometry} material={materials['sleeves_FRONT_9234.001']} skeleton={nodes.untitled_74704Shape.skeleton} morphTargetDictionary={nodes.untitled_74704Shape.morphTargetDictionary} morphTargetInfluences={nodes.untitled_74704Shape.morphTargetInfluences} />
         </group>
       </group>
     </group>
-  );
-};
+  )
+}
 
 export default Man;
