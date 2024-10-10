@@ -68,26 +68,27 @@ const InstructionPopup: React.FC<InstructionPopupProps> = ({
             <strong>4.</strong> {t("insResetBtn")}
           </p>
         </div>
-        <hr className={styles.line_separator} />
+        {/* <hr className={styles.line_separator} /> */}
         <div className={styles.instruction_popup_details_section2}>
-          <p>{t("insNote")}</p>
-          <div className={styles.instruction_popup_content}>
-            <ul>
-              <li>{t("insVideoBg")}</li>
-              <li>{t("insVideoMp4")}</li>
-              <li>{t("insVideoBody")}</li>
-              <li>{t("insVideoPurpose")}</li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.instruction_popup_details_section3}>
-          <p>{t("insReferImage")}</p>
-          <div className={styles.instruction_popup_details_image}>
-            <img
-              src={InstructionImage}
-              alt="instruction-image"
-              className={styles.instruction_image}
-            />
+          <div className={styles.instruction_popup_content_wrapper}>
+            <div className={styles.instruction_popup_content}>
+              <p>{t("insNote")}</p>
+              <div className={styles.instruction_popup_sub_content}>
+                <ul>
+                  <li>{t("insVideoBg")}</li>
+                  <li>{t("insVideoMp4")}</li>
+                  <li>{t("insVideoBody")}</li>
+                  <li>{t("insVideoPurpose")}</li>
+                </ul>
+                <div className={styles.instruction_popup_details_image}>
+                  <img
+                    src={InstructionImage}
+                    alt="instruction-image"
+                    className={styles.instruction_image}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

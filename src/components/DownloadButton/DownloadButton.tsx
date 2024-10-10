@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import "./DownloadButton.css";
 
 interface DownloadButtonProps {
   type: string;
@@ -13,14 +14,13 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
 }) => {
   const { t, i18n } = useTranslation();
   return (
-    <Button
-      style={{ width: "175px", height: "40px" }}
-      onClick={() => downloadVideo(type)}
-    >
+    <Button className="responsive-button" onClick={() => downloadVideo(type)}>
       <span>
         <DownloadOutlined />
       </span>
-      <span style={{ marginLeft: "8px" }}>{t("download_btn")}</span>
+      <span className="download-text" style={{ marginLeft: "8px" }}>
+        {t("download_btn")}
+      </span>
     </Button>
   );
 };

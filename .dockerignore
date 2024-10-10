@@ -1,0 +1,32 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build output
+build/
+dist/
+
+# Git metadata
+.git/
+.gitignore
+
+# Documentation
+*.md
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+tmp/
+temp/
+
+# Cache directories
+.cache/

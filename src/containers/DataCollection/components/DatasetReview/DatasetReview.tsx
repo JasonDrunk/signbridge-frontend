@@ -243,7 +243,6 @@ const DatasetReview: React.FC<DatasetReviewProps> = ({ user }) => {
 
   return (
     <div className="dataCollection-bg">
-      testing123
       <h1>{t("dc_review")}</h1>
       <div className="filter-container">
         <DatasetFiltering

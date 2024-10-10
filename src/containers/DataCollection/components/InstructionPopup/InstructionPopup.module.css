@@ -62,51 +62,70 @@
     margin: 20px 0;
 }
 
+.instruction_popup_details_section1 {
+    background-color: rgb(235, 235, 235);
+
+}
 
 .instruction_popup_details_section1 p {
-    font-size: 20px;
+    font-size: 16px;
+    padding: 10px;
 }
 
-.instruction_popup_details_section1 p strong {
-    font-size: 26px;
+.instruction_popup_details_section2 {
+    width: 100%;
+    /* Ensures the section takes full width */
 }
 
-
-.instruction_popup_details_section2 p {
-    font-size: 26px;
-    font-weight: bold;
-
+.instruction_popup_content_wrapper {
+    display: flex;
+    /* Flex for overall content layout */
 }
 
 .instruction_popup_content {
-    padding: 10px 20px;
-    /* Add padding to the content area */
+    flex: 1;
+    max-width: 100%;
+    padding-right: 20px;
+    margin-top: 10px;
+}
+
+.instruction_popup_content p {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.instruction_popup_sub_content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .instruction_popup_content ul {
+    background-color: rgb(235, 235, 235);
     list-style-type: disc;
-    /* Use disc bullets */
+    padding-left: 30px;
+    flex: 1;
+    /* Allows list to take available space */
+    margin-right: 20px;
+    /* Space between the list and image */
 }
 
 .instruction_popup_content li {
-    margin-bottom: 5px;
-    font-size: 20px;
-    /* Add space between list items */
+    font-size: 16px;
+    padding: 10px 0;
+    /* Adds vertical spacing */
 }
 
 .instruction_popup_details_image {
-    display: flex;
-    justify-content: center;
-    /* Horizontally center the image */
-    align-items: center;
-    /* Vertically center the image */
-    margin: 30px auto;
+    flex: 1;
+    max-width: 40%;
 }
 
 .instruction_image {
-    width: 90%;
+    width: 100%;
     height: auto;
 }
+
 
 .fa {
     float: right;
@@ -122,188 +141,159 @@
 @media (min-width: 320px) and (max-width: 480px) {
     .instruction-popup {
         width: 90%;
-        height: 80vh;
-        /* Adjust height for smaller screens */
-        padding: 20px;
+        /* Full width on small screens */
+        height: auto;
+        /* Auto height for flexibility */
+        padding: 15px;
+        /* Reduced padding */
         font-size: 16px;
-        /* Enable vertical scroll if content overflows */
+        /* Smaller font size for readability */
     }
 
-    .instruction_popup_header h1 {
-        font-size: 20px;
+    .instruction_popup_header {
+        flex-direction: column;
+        /* Stack header elements */
+        align-items: flex-start;
+        /* Align items to the start */
     }
 
     .fa {
-        font-size: 28px;
+        font-size: 24px;
+        /* Smaller close icon */
+    }
+
+    .instruction_popup_details {
+        flex-direction: column;
+        /* Stack details vertically */
+    }
+
+    .instruction_popup_content_wrapper {
+        flex-direction: column;
+        /* Stack content and image */
+    }
+
+    .instruction_popup_sub_content {
+        flex-direction: column;
+        /* Stack list and image */
+        align-items: center;
+        /* Center align items */
+        margin-top: 10px;
+        /* Add top margin */
+    }
+
+    .instruction_popup_details_image {
+        max-width: 100%;
+        /* Full width for image */
     }
 
     .instruction_image {
         width: 100%;
+        /* Full width of image */
     }
-
-
-    .instruction_popup_details_section1 p {}
-
-    .instruction_popup_details_section1 p strong {}
-
-    .instruction_popup_details_section2 p {}
-
-    .instruction_popup_content li {}
 }
 
 /* For devices with a width between 481px and 640px (mobile) */
 @media (min-width: 481px) and (max-width: 640px) {
     .instruction-popup {
-        width: 80%;
-        height: 80vh;
-        padding: 25px;
-        font-size: 16px;
-        /* Enable vertical scroll */
+        width: 95%;
+        /* Nearly full width on mobile */
+        padding: 20px;
+        /* Slightly more padding */
     }
 
-    .instruction_popup_header h1 {
-        font-size: 24px;
+    .instruction_popup_content {
+        padding-right: 10px;
+        /* Adjust padding for list */
     }
 
+    .instruction_popup_sub_content {
+        flex-direction: row;
+        /* Keep the list and image side by side */
+    }
 
-    .fa {
-        font-size: 32px;
+    .instruction_popup_details_image {
+        max-width: 50%;
+        /* Limit image width */
     }
 
     .instruction_image {
         width: 100%;
+        /* Full width for image */
     }
-
-    .instruction_popup_details_section1 p {}
-
-    .instruction_popup_details_section1 p strong {}
-
-    .instruction_popup_details_section2 p {}
-
-    .instruction_popup_content li {}
 }
 
-/* For devices with a width between 641px and 768px (tablets) */
+/* For devices with a width between 641px and 768px (tablets and small devices) */
 @media (min-width: 641px) and (max-width: 768px) {
     .instruction-popup {
-        width: 70%;
-        height: 75vh;
-        padding: 30px;
-        font-size: 18px;
-        /* Enable vertical scroll */
+        width: 90%;
+        /* Set width to 90% for tablets */
     }
 
-    .instruction_popup_header h1 {
-        font-size: 26px;
+    .instruction_popup_content {
+        padding-right: 15px;
+        /* Slight padding adjustment */
     }
 
+    .instruction_popup_sub_content {
+        flex-direction: row;
+        /* Keep the list and image side by side */
+    }
 
-    .fa {
-        font-size: 34px;
+    .instruction_popup_details_image {
+        max-width: 45%;
+        /* Limit image width */
     }
 
     .instruction_image {
-        width: 95%;
+        width: 100%;
+        /* Ensure image fills its container */
     }
-
-    .instruction_popup_details_section1 p {}
-
-    .instruction_popup_details_section1 p strong {}
-
-    .instruction_popup_details_section2 p {}
-
-    .instruction_popup_content li {}
 }
 
 /* For devices with a width between 769px and 1024px (tablets) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .instruction-popup {
-        width: 65%;
-        height: 75vh;
-        padding: 35px;
-        font-size: 18px;
-        /* Enable vertical scroll */
+        width: 80%;
+        /* Set width to 80% for larger tablets */
     }
 
-    .instruction_popup_header h1 {
-        font-size: 28px;
+    .instruction_popup_content {
+        padding-right: 20px;
+        /* More padding for larger space */
     }
 
-    .fa {
-        font-size: 36px;
+    .instruction_popup_sub_content {
+        flex-direction: row;
+        /* Keep side by side layout */
     }
 
-    .instruction_image {
-        width: 90%;
+    .instruction_popup_details_image {
+        max-width: 40%;
+        /* Limit image width */
     }
-
-
-    .instruction_popup_details_section1 p {}
-
-    .instruction_popup_details_section1 p strong {}
-
-    .instruction_popup_details_section2 p {}
-
-    .instruction_popup_content li {}
 }
 
 /* For devices with a width between 1025px and 1280px (small desktops) */
 @media (min-width: 1025px) and (max-width: 1280px) {
     .instruction-popup {
-        width: 60%;
-        height: 70vh;
-        padding: 30px;
-        /* Enable vertical scroll */
+        width: 70%;
+        /* Set width to 70% for small desktops */
+        height: auto;
+        /* Allow auto height */
     }
 
-    .instruction_popup_header h1 {
-        font-size: 30px;
+    .instruction_popup_details {
+        flex-direction: column;
+        /* Keep details stacked vertically */
     }
-
-    .fa {
-        font-size: 36px;
-    }
-
-    .instruction_image {
-        width: 85%;
-    }
-
-
-    .instruction_popup_details_section1 p {}
-
-    .instruction_popup_details_section1 p strong {}
-
-    .instruction_popup_details_section2 p {}
-
-    .instruction_popup_content li {}
 }
 
-/* For devices with a width between 1281px and 1440px (small desktops) */
+/* For devices with a width between 1281px and 1440px (larger desktops) */
 @media (min-width: 1281px) and (max-width: 1440px) {
     .instruction-popup {
-        width: 55%;
-        height: 70vh;
-        padding: 30px;
-        /* Enable vertical scroll */
+        width: 60%;
+        /* Adjust width for larger desktops */
+        height: auto;
+        /* Allow auto height */
     }
-
-    .instruction_popup_header h1 {
-        font-size: 32px;
-    }
-
-    .fa {
-        font-size: 36px;
-    }
-
-    .instruction_image {
-        width: 80%;
-    }
-
-    .instruction_popup_details_section1 p {}
-
-    .instruction_popup_details_section1 p strong {}
-
-    .instruction_popup_details_section2 p {}
-
-    .instruction_popup_content li {}
 }
