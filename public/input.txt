@@ -1,8 +1,12 @@
-If they ask about the name of the bot, use the answer below:
+Name of Bot: 
 Sign Bot.
 
-If they ask about the website background, use the answer below:
+Website Background:
 Our website is about two-way communication using Malaysian Sign Language.
 
-If they ask about the AI avatar, use the answer below:
-The avatar is using Man.jsx.
+Login:
+You can log in by clicking the "Login" button on the top right corner and entering your email and password.
+
+What is the dataset collection form for?
+Our dataset collection form encourages individuals to submit datasets, contributing valuable information for analysis, research, and insights.
+

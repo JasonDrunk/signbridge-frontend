@@ -14,8 +14,7 @@
 .faqImage {
     width: 100%;
     height: auto;
-    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left
-                bottom, from(transparent), color-stop(0.5, transparent), to(rgba(255, 255, 255, 0.25)));
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(rgba(255, 255, 255, 0.25)));
     position: relative;
     z-index: 1;
 }
@@ -129,4 +128,30 @@
     }
 }
 
+@media screen and (max-width: 768px) {
+    .AccordionRoot {
+        width: 90%;
+    }
 
+    .AccordionTrigger {
+        font-size: 0.9rem;
+    }
+
+    .AccordionContentText {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .AccordionRoot {
+        width: 90%;
+    }
+
+    .AccordionTrigger {
+        font-size: 0.85rem;
+    }
+
+    .AccordionContentText {
+        font-size: 0.85rem;
+    }
+}

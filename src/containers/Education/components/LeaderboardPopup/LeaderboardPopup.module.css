@@ -23,6 +23,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    max-width: 90%;
 }
 
 .box__line {
@@ -94,7 +95,7 @@
     padding: 20px 20px 10px 20px;
     color: #fff;
     text-align: center;
-    font-size: 35px;
+    font-size: 1.9em;
 }
 
 .fa_close_btn {
@@ -382,4 +383,40 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+@media screen and (max-width: 480px) {
+    .leaderboard_content p {
+        padding: 0 10px;
+        font-size: 0.9rem;
+    }
+
+    .tab_buttons {
+        padding: 0 10px;
+        height: 5vh;
+    }
+
+    .tab_buttons button {
+        font-size: 0.75rem;
+    }
+
+    .playerCard {
+        width: 100px;
+        height: 210px;
+    }
+
+    .champion,
+    .secthird {
+        width: 60px;
+        height: 60px;
+    }
+
+    .table_row {
+        grid-template-columns: 20px 40px 1fr auto;
+        padding: 13px 8px;
+    }
+
+    .table_player{
+        margin: 0 20px;
+    }
 }

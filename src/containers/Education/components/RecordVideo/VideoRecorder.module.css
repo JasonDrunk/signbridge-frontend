@@ -15,7 +15,6 @@
     touch-action: manipulation;
     width: 100px;
     height: 70px;
-    margin-bottom: 20px;
   }
   
 .open_cam_btn_shadow {
@@ -99,7 +98,6 @@
 
 .video_controls {
     display: flex; 
-    margin-bottom: 0px;
     justify-content: center;
 }
 
@@ -107,23 +105,24 @@
     position: relative;
 }
 
-.video_player,
-.recorded_player {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.video_player {
+    background-color: #fff7ec;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    width: 100%;
 }
 
 .livePlayer {
 	width: 100%;
     border-radius: 10px;
-    margin-bottom: 90px;
 }
 
 .recorded_player .recorded {
     width: 100%;
+    height: fit-content;
     border-radius: 10px;
-    margin-bottom: 80px;
 }
 
 .initialHeight{
@@ -131,7 +130,7 @@
 }
 
 .upload_btn_pushable {
-    position: absolute;
+    position: relative;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -142,7 +141,6 @@
     touch-action: manipulation;
     width: 100px;
     height: 70px;
-    margin-top: -80px;
     right: 0;
 }
   
@@ -230,4 +228,27 @@
     color: white;
     font-size: 17px;
     font-family: "Russo One", sans-serif;
+}
+
+@media (width > 768px) {
+    .mobile_button_group {
+        display: none;
+    }
+
+    .desktop_button_group {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+@media (width < 768px) {
+    .desktop_button_group {
+        display: none;
+    }
+
+    .mobile_button_group {
+        display: flex;
+        gap: 1rem;
+    }
 }
