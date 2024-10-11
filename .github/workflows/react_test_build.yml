@@ -1,7 +1,4 @@
-name: Push Code to Testing-Build to Test Build File
-permissions:
-  contents: write
-  pull-requests: write
+name: Test & Build Code
 
 # Controls when the action will run
 on:
@@ -15,21 +12,24 @@ on:
 
 jobs:
   build:
-    name: Test Building
+    name: Run npm run build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create Pull Request from Develop to Testing-Build
-        uses: devops-infra/action-pull-request@v0.5.5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: develop
-          target_branch: testing-build
-          title: "Auto PR: Develop to Testing-Build"
-          body: "**This PR was automatically created from the develop branch to test build the files**"
-          old_string: "<!-- Add your description here -->"
-          new_string: "**Automated pull request from develop to testing-build**"
-          draft: false
+          node-version: "20.11.1"
+
+      - name: Install Dependencies
+        run: npm install
+
+      # - name: Run Jest Tests
+      #   working-directory: ./client
+      #   run: npm run test -- -u
+
+      - name: Build React App
+        run: npm run build
