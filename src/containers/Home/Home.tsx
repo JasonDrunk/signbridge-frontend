@@ -156,13 +156,13 @@ export default function HomepageSection() {
                                 </>
                             )}
                         </h1>
-                        <div className={`${style.available_module_container} ${style.fade_in}`}>
+                        <div className={`${style.available_module_container}`}>
                             {components.length > 0 &&
                                 components
                                     .filter(component => component.type === "module")
                                     .map((component, index) => (
                                         <motion.div key={index} className={`${style.avail_module_box}`} initial={{ opacity: 0 }} transition={{ duration: 1, delay: index * 0.2 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.5 }}>
-                                            <div className={style.avail_module_image}>
+                                            <div className={style.avail_module_image} key={component.homepage_component_id}>
                                                 <img src={component.image as string} alt={component.title} />
                                                 <div className={style.avail_module_text}>
                                                     <Link to={component.link} className={style.cart_btn}>
@@ -177,14 +177,14 @@ export default function HomepageSection() {
 
                     {/* For the about section */}
                     <motion.section className={style.about} id="about" initial={{ opacity: 0 }} transition={{ duration: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.25 }}>
-                        <h1 className={`${style.heading} ${style.fade_in}`} style={{ background: secondaryColor }}>
+                        <h1 className={`${style.heading}`} style={{ background: secondaryColor }}>
                             {t("about")} <span style={{ color: primaryColor }}>Neuon AI</span>
                         </h1>
                         {components.length > 0 &&
                             components
                                 .filter(component => component.type === "about")
                                 .map((component, index) => (
-                                    <div className={`${style.row} ${style.fade_in}`}>
+                                    <div className={`${style.row}`} key={component.homepage_component_id}>
                                         <div className={style.video_container}>
                                             <img src={component.image as string} alt="Company" />
                                         </div>
@@ -196,20 +196,33 @@ export default function HomepageSection() {
                     </motion.section>
 
                     {/* YouTube Section */}
-                    <motion.section className={`${style.youtube_video} ${style.fade_in}`} initial={{ opacity: 0 }} transition={{ duration: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.25 }}>
+                    <motion.section className={`${style.youtube_video}`} initial={{ opacity: 0 }} transition={{ duration: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.25 }}>
                         <h1 className={style.heading} style={{ background: secondaryColor }} id="ytvideo">
                             <span style={{ color: primaryColor }}> YouTube </span> Video{" "}
                         </h1>
-                        {components.length > 0 && components.filter(component => component.type === "youtube").map((component, index) => <iframe src={component.link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>)}
+                        {components.length > 0 &&
+                            components
+                                .filter(component => component.type === "youtube")
+                                .map((component, index) => (
+                                    <div key={index}>
+                                        {component.link.includes("youtube.com") ? (
+                                            <iframe key={component.homepage_component_id} src={component.link.replace("watch?v=", "embed/")} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                                        ) : component.link.includes("vimeo.com") ? (
+                                            <iframe key={component.homepage_component_id} src={component.link.replace("vimeo.com", "player.vimeo.com/video")} title="Vimeo video player" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                                        ) : (
+                                            <p>Unsupported video type or link format</p>
+                                        )}
+                                    </div>
+                                ))}{" "}
                     </motion.section>
 
                     {/* Location Section */}
-                    <motion.section className={`${style.location} ${style.fade_in}`} initial={{ opacity: 0 }} transition={{ duration: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.25 }}>
+                    <motion.section className={`${style.location}`} initial={{ opacity: 0 }} transition={{ duration: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.25 }}>
                         <h1 className={style.heading} style={{ background: secondaryColor }} id="gmap_canvas">
                             {t("location")}
                         </h1>
                         <div className={style.mapouter}>
-                            <div className="gmap_canvas">{components.length > 0 && components.filter(component => component.type === "location").map((component, index) => <iframe src={component.link}></iframe>)}</div>
+                            <div className="gmap_canvas">{components.length > 0 && components.filter(component => component.type === "location").map((component, index) => <iframe key={component.homepage_component_id} src={component.link}></iframe>)}</div>
                         </div>
                     </motion.section>
 

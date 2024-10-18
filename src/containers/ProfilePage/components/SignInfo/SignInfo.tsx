@@ -240,7 +240,7 @@ const SignInfo = () => {
 					</div>
 
 					<div className={style.pagination}>
-						<span>{t("rowsPerPage")} </span>
+						<div className={style.rowsPerPage}>{t("rowsPerPage")} </div>
 						<select
 							value={table.getState().pagination.pageSize}
 							onChange={e => {
