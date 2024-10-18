@@ -463,27 +463,27 @@ export default function EditDialog() {
 
                             {activeTab === "components" ? (
                                 <div className={style.submit_btn_grp}>
+                                    <Tooltip.Provider>
+                                        <Tooltip.Root>
+                                            <Tooltip.Trigger asChild>
+                                                <Info className={style.infoIcon} />
+                                            </Tooltip.Trigger>
+                                            <Tooltip.Portal>
+                                                <Tooltip.Content className={style.TooltipContent} sideOffset={5}>
+                                                    {/* Recommended image size: 2205x906 */}
+                                                    <b style={{ fontSize: 13 }}>{t("component_info")}</b> <br />
+                                                    &#x2022; {t("component_info_module")} <br />
+                                                    &#x2022; {t("componenet_info_about")} <br />
+                                                    &#x2022; {t("componenet_info_youtube")} <br />
+                                                    &#x2022; {t("componenet_info_location")}
+                                                    <Tooltip.Arrow className={style.TooltipArrow} />
+                                                </Tooltip.Content>
+                                            </Tooltip.Portal>
+                                        </Tooltip.Root>
+                                    </Tooltip.Provider>
                                     <Dialog.Root open={addComponentOpen} onOpenChange={setAddComponentOpen}>
                                         <Dialog.Trigger asChild>
                                             <div className={style.info_add_grp}>
-                                                <Tooltip.Provider>
-                                                    <Tooltip.Root>
-                                                        <Tooltip.Trigger asChild>
-                                                            <Info className={style.infoIcon} />
-                                                        </Tooltip.Trigger>
-                                                        <Tooltip.Portal>
-                                                            <Tooltip.Content className={style.TooltipContent} sideOffset={5}>
-                                                                {/* Recommended image size: 2205x906 */}
-                                                                <b style={{ fontSize: 13 }}>{t("component_info")}</b> <br />
-                                                                &#x2022; {t("component_info_module")} <br />
-                                                                &#x2022; {t("componenet_info_about")} <br />
-                                                                &#x2022; {t("componenet_info_youtube")} <br />
-                                                                &#x2022; {t("componenet_info_location")}
-                                                                <Tooltip.Arrow className={style.TooltipArrow} />
-                                                            </Tooltip.Content>
-                                                        </Tooltip.Portal>
-                                                    </Tooltip.Root>
-                                                </Tooltip.Provider>
                                                 <button className={style.add_btn}>{t("add")}</button>
                                             </div>
                                         </Dialog.Trigger>

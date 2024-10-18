@@ -49,7 +49,7 @@
 .linkRedirect {
     text-decoration: none;
     font-weight: 600;
-    color: #1A1D1F;
+    color: #1a1d1f;
 }
 
 .linkRedirect:hover {
@@ -80,7 +80,7 @@
 .tableRow:first-child .tableColumn {
     padding: 0 12px 16px;
     font-weight: 600;
-    color: #6F767E;
+    color: #6f767e;
 }
 
 /* .tableRow:not(:first-child):hover {
@@ -88,7 +88,7 @@
 } */
 
 .tableRow:not(.headerRow):nth-child(odd) {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
 }
 
 .tableColumn:first-child {
@@ -101,7 +101,7 @@
     display: table-cell;
     /* vertical-align: top; */
     padding: 16px 12px;
-    color: #1A1D1F;
+    color: #1a1d1f;
 }
 
 .tableColumn:after {
@@ -111,7 +111,7 @@
     bottom: 0;
     right: 0;
     height: 1px;
-    background: #EFEFEF;
+    background: #efefef;
 }
 
 .tableColumn:first-child:after {
@@ -124,8 +124,8 @@
 
 .tableStatusCell {
     width: fit-content;
-    background: #B5E4CA;
-    color: #1A1D1F;
+    background: #b5e4ca;
+    color: #1a1d1f;
     padding: 8px;
     border-radius: 6px;
     font-size: 12px;
@@ -147,7 +147,7 @@
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
-    color: #6F767E;
+    color: #6f767e;
 }
 
 .searchInputBox {
@@ -157,9 +157,9 @@
     font-size: 15px;
     border: none;
     outline: none;
-    background: #F4F4F4;
+    background: #f4f4f4;
     font-weight: 600;
-    color: #1A1D1F;
+    color: #1a1d1f;
     width: auto;
 }
 
@@ -174,7 +174,7 @@
     font-size: 13px;
 }
 
-.pagination select{
+.pagination select {
     border: none;
     background: none;
     cursor: pointer;
@@ -182,16 +182,23 @@
     margin-right: 15px;
 }
 
-.pagination .dataNumber {
-    font-size: 13px;  
-    margin-right: 15px;
+.rowsPerPage {
+    display: flex;
+    align-items: center;
 }
 
-.pagination button{
+.pagination .dataNumber {
+    font-size: 13px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.pagination button {
+    padding: 6px;
     border: none;
     background: none;
     cursor: pointer;
-    
 }
 
 .pagination button:hover {
@@ -213,7 +220,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1000px) {
     .signInfoContainer {
         flex-direction: row;
         gap: 10px;
@@ -258,13 +265,13 @@
         gap: 5px;
     }
 
-    .pagination select{
+    .pagination select {
         font-size: 12px;
         margin-right: 10px;
     }
 
     .pagination .dataNumber {
-        font-size: 12px;  
+        font-size: 12px;
         margin-right: 10px;
     }
 
@@ -324,13 +331,72 @@
         gap: 5px;
     }
 
-    .pagination select{
+    .pagination select {
         font-size: 13px;
         margin-right: 10px;
     }
 
     .pagination .dataNumber {
-        font-size: 13px;  
+        font-size: 13px;
+        margin-right: 10px;
+    }
+
+    .paginationIcon {
+        width: 13px;
+    }
+
+    .sortIcon {
+        width: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .signInfoContainer {
+        width: 100%;
+        padding: 0;
+    }
+
+    .slot {
+        padding: 15px 5px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .number {
+        font-size: 14px;
+    }
+
+    .searchInputBox {
+        font-size: 12px;
+    }
+
+    .searchIcon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .tableColumn {
+        font-size: 12px;
+    }
+
+    .pagination {
+        gap: 3px;
+        font-size: 10px;
+    }
+
+    .pagination span {
+        font-size: 10px;
+    }
+
+    .pagination select {
+        font-size: 10px;
+        margin-right: 10px;
+    }
+
+    .pagination .dataNumber {
+        font-size: 10px;
         margin-right: 10px;
     }
 
