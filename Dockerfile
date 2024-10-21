@@ -1,8 +1,11 @@
 # Stage 1: Builder Stage
-FROM node:20-alpine AS builder
+FROM ubuntu:20.04 AS builder
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+RUN apt-get update
+RUN apt-get -y install nodejs
+RUN apt-get -y install npm
+# Copy  package.json and package-lock.json
 COPY package.json package-lock.json ./
 RUN npm install
 
@@ -12,7 +15,7 @@ COPY . .
 # Build the application using the environment file (like .env.staging)
 RUN npm run build
 
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get install -y openssh-server
 
 RUN useradd -rm -d /home/neuon -s /bin/bash -g root -G sudo -u 1000 neuon
 RUN echo 'neuon:jason2024' | chpasswd
