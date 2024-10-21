@@ -1,37 +1,7 @@
 import "./App.css";
-import Navbar from "./containers/Navbar/Navbar";
-import Footer from "./containers/Footer/Footer";
 import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Home from "./containers/Home/Home";
-import Library from "./containers/Library/Library";
-import Communication from "./containers/Communication/Communication";
-import Education from "./containers/Education/Education";
-import DataCollectionPublic from "./containers/DataCollection/Public/DataCollectionPublic";
-import DatasetReviewAdmin from "./containers/DataCollection/Admin/DatasetReviewAdmin";
-import DatasetReviewSE from "./containers/DataCollection/SignExpert/DatasetReviewSE/DatasetReviewSE";
-import DatasetCollectionSE from "./containers/DataCollection/SignExpert/DatasetCollection/DatasetCollectionSE";
-import Feedback from "./containers/Feedback/Feedback";
-import Faq from "./containers/Faq/Faq";
-import Notification from "./containers/Notification/Notification";
-import Login from "./containers/Login/Login";
-import SignUp from "./containers/SignUp/SignUp";
-import ForgotPassword from "./containers/Login/ForgotPwd/ForgotPassword";
-import ResetPassword from "./containers/Login/ResetPwd/ResetPassword";
-import React, { useEffect, useState } from "react";
-import HomeLayout from "./HomeLayout";
-import ForgotResetPasswordLayout from "./ForgotResetPasswordLayout";
+import React, { useEffect, useState, Suspense } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import GuessTheWord from "./containers/Education/Game/GuessTheWord";
-import DoTheSign from "./containers/Education/Game/DoTheSign";
-// import DataCollectionReview from "./containers/DataCollection/Admin/DataCollectionReview";
-import FeedbackAdmin from "./containers/Feedback/Admin/FeedbackAdmin";
-import FeedbackSuccess from "./containers/Feedback/FeedbackSuccess";
-import FaqAdmin from "./containers/Faq/Admin/FaqAdmin";
-import ProfilePage from "./containers/ProfilePage/ProfilePage";
-import LibraryAdmin from "./containers/Library/Admin/LibraryAdmin";
-import References from "./containers/References/References";
-import PageNotFound from "./containers/PageNotFound/PageNotFound";
-import InternalServerError from "./containers/InternalServerError/InternalServerError";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 import resources from "./i18n";
@@ -41,11 +11,10 @@ import { useThemeStore } from "@root/store/theme";
 // @ts-ignore
 import { auth } from "../firebase";
 import { User } from "firebase/auth";
-import { GetUserByEmail, FetchAllUsers } from "@root/services/account.service";
+import { GetUserByEmail } from "@root/services/account.service";
 
 import { useUserStore } from "@root/store/userStore";
 import useNetworkStatus from "@root/hook/useNetworkStatus";
-
 import axios from "axios";
 
 i18n.use(initReactI18next).init({
@@ -53,6 +22,37 @@ i18n.use(initReactI18next).init({
     lng: "en",
     fallbackLng: "en",
 });
+
+// Lazy-loaded components
+const Navbar = React.lazy(() => import("./containers/Navbar/Navbar"));
+const Footer = React.lazy(() => import("./containers/Footer/Footer"));
+const Home = React.lazy(() => import("./containers/Home/Home"));
+const Library = React.lazy(() => import("./containers/Library/Library"));
+const Communication = React.lazy(() => import("./containers/Communication/Communication"));
+const Education = React.lazy(() => import("./containers/Education/Education"));
+const DataCollectionPublic = React.lazy(() => import("./containers/DataCollection/Public/DataCollectionPublic"));
+const DatasetReviewAdmin = React.lazy(() => import("./containers/DataCollection/Admin/DatasetReviewAdmin"));
+const DatasetReviewSE = React.lazy(() => import("./containers/DataCollection/SignExpert/DatasetReviewSE/DatasetReviewSE"));
+const DatasetCollectionSE = React.lazy(() => import("./containers/DataCollection/SignExpert/DatasetCollection/DatasetCollectionSE"));
+const Feedback = React.lazy(() => import("./containers/Feedback/Feedback"));
+const Faq = React.lazy(() => import("./containers/Faq/Faq"));
+const Notification = React.lazy(() => import("./containers/Notification/Notification"));
+const Login = React.lazy(() => import("./containers/Login/Login"));
+const SignUp = React.lazy(() => import("./containers/SignUp/SignUp"));
+const ForgotPassword = React.lazy(() => import("./containers/Login/ForgotPwd/ForgotPassword"));
+const ResetPassword = React.lazy(() => import("./containers/Login/ResetPwd/ResetPassword"));
+const HomeLayout = React.lazy(() => import("./HomeLayout"));
+const ForgotResetPasswordLayout = React.lazy(() => import("./ForgotResetPasswordLayout"));
+const GuessTheWord = React.lazy(() => import("./containers/Education/Game/GuessTheWord"));
+const DoTheSign = React.lazy(() => import("./containers/Education/Game/DoTheSign"));
+const FeedbackAdmin = React.lazy(() => import("./containers/Feedback/Admin/FeedbackAdmin"));
+const FeedbackSuccess = React.lazy(() => import("./containers/Feedback/FeedbackSuccess"));
+const FaqAdmin = React.lazy(() => import("./containers/Faq/Admin/FaqAdmin"));
+const ProfilePage = React.lazy(() => import("./containers/ProfilePage/ProfilePage"));
+const LibraryAdmin = React.lazy(() => import("./containers/Library/Admin/LibraryAdmin"));
+const References = React.lazy(() => import("./containers/References/References"));
+const PageNotFound = React.lazy(() => import("./containers/PageNotFound/PageNotFound"));
+const InternalServerError = React.lazy(() => import("./containers/InternalServerError/InternalServerError"));
 
 function App() {
     const { isOnline } = useNetworkStatus();
@@ -225,42 +225,21 @@ function App() {
                     <span>Loading</span>
                 </div>
             ) : (
-                <>
+                <Suspense fallback={<div>Loading...</div>}>
                     {isOnline ? (
                         <Routes>
                             <Route path="*" element={<PageNotFound />} />
-
-                            {/* <Route path="/loading" element={<><div className="loading_wrapper">
-									<div className="loading_circle"></div>
-									<div className="loading_circle"></div>
-									<div className="loading_circle"></div>
-									<div className="loading_shadow"></div>
-									<div className="loading_shadow"></div>
-									<div className="loading_shadow"></div>
-									<span>Loading</span>
-								</div></>} /> */}
-
                             <Route element={<HomeLayout />}>
                                 <Route path="/" element={<Home />} />
-                                <Route path="/library" element={libraryComponent} />
+                                <Route path="/library" element={<Library />} />
                                 <Route path="/communication" element={<Communication />} />
                                 <Route path="/education" element={<Education />} />
-                                <Route path="/dataset-collection" element={datasetComponent} />
-                                <Route path="/dataset-collection-review" element={datasetReviewComponent} />
-                                <Route path="/feedback" element={feedbackComponent} />
-                                <Route path="/faq" element={faqComponent} />
-                                <Route path="/notifications" element={<Notification />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/sign-up" element={<SignUp />} />
-                                <Route path="/guess-the-word" element={<GuessTheWord />} />
-                                <Route path="/do-the-sign" element={<DoTheSign />} />
-                                <Route path="/profile" element={<ProfilePage />} />
-                                <Route path="/references" element={<References />} />
+                                <Route path="/dataset-collection" element={<DataCollectionPublic />} />
+                                {/* Add more routes here */}
                             </Route>
                             <Route element={<ForgotResetPasswordLayout />}>
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
                                 <Route path="/reset-password" element={<ResetPassword />} />
-                                <Route path="/feedback-success" element={<FeedbackSuccess />} />
                             </Route>
                         </Routes>
                     ) : (
@@ -272,7 +251,7 @@ function App() {
                             <Footer />
                         </>
                     )}
-                </>
+                </Suspense>
             )}
         </>
     );
