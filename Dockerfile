@@ -2,9 +2,21 @@
 FROM ubuntu:20.04 AS builder
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get -y install nodejs
-RUN apt-get -y install npm
+
+# Install dependencies
+RUN apt-get update && apt-get install -y curl wget xz-utils
+
+# Download and extract Node.js 20.11.1
+RUN wget https://nodejs.org/dist/v20.11.1/node-v20.11.1-linux-x64.tar.xz
+RUN tar -xf node-v20.11.1-linux-x64.tar.xz
+
+# Move Node.js binaries to /usr/local
+RUN cp -r node-v20.11.1-linux-x64/* /usr/local/
+
+# Verify the Node.js version
+RUN node -v
+RUN npm -v
+
 # Copy  package.json and package-lock.json
 COPY package.json package-lock.json ./
 RUN npm install
@@ -24,29 +36,20 @@ RUN apt-get -y install nano
 RUN adduser neuon sudo
 RUN mkdir /var/run/sshd
 EXPOSE 22
-
-# RUN apt-get install -y dos2unix
-# COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-# RUN dos2unix /usr/local/bin/entrypoint.sh
-# RUN chmod +x /usr/local/bin/entrypoint.sh
-# ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
-
-# Stage 2: Production Stage (Nginx to serve the built application)
-# FROM nginx:latest
-# WORKDIR /usr/share/nginx/html
-
-# # Remove default Nginx static files
-# RUN rm -rf ./*
-
-# # Copy the build files from the dist directory
-# COPY --from=builder /app/dist/ .
-# Expose port 5173
-
 EXPOSE 5173  
+
+RUN apt-get install -y dos2unix
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN dos2unix /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+
 # entrypoint.sh
 # Start the SSH daemon
-CMD [ "/usr/sbin/sshd", "&", "npm", "run", "dev"]
+# entrypoint.sh
+# Start the SSH daemon
+# CMD [ "/usr/sbin/sshd", "&", "npm", "run", "dev"]
 
 # Start Nginx in the foreground
 # CMD ["nginx", "-g", "daemon off;"]
