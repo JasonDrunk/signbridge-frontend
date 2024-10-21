@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
+
 // ---------- Create Notification ----------
 export const CreateNotification = async (data: any) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/notifications/create-notification",
+      `${BASE_API_URL}/notifications/create-notification`,
       data
     );
     return response;
@@ -17,7 +19,7 @@ export const CreateNotification = async (data: any) => {
 export const GetUserIdByEmail = async (email: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/notifications/user/${email}`
+      `${BASE_API_URL}/notifications/user/${email}`
     );
     return response;
   } catch (err) {
@@ -29,7 +31,7 @@ export const GetUserIdByEmail = async (email: any) => {
 export const GetNotificationsById = async (receiverId: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/notifications/fetch-notifications/${receiverId}`
+      `${BASE_API_URL}/notifications/fetch-notifications/${receiverId}`
     );
     return response;
   } catch (err) {
@@ -41,7 +43,7 @@ export const GetNotificationsById = async (receiverId: any) => {
 export const GetSenderInfoBySenderId = async (senderId: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/notifications/fetch-sender-info/${senderId}`
+      `${BASE_API_URL}/notifications/fetch-sender-info/${senderId}`
     );
     return response;
   } catch (err) {
@@ -53,8 +55,8 @@ export const GetSenderInfoBySenderId = async (senderId: any) => {
 export const DeleteNotification = async (notificationIds: number[]) => {
   try {
     const response = await axios.delete(
-      `http://localhost:3000/notifications/delete-notifications`,
-      { data: { notificationIds } } 
+      `${BASE_API_URL}/notifications/delete-notifications`,
+      { data: { notificationIds } }
     );
     return response;
   } catch (err) {
@@ -63,10 +65,13 @@ export const DeleteNotification = async (notificationIds: number[]) => {
 };
 
 // ---------- Update Notification Status ----------
-export const UpdateNotificationStatus = async (notificationIds: number[], newStatus: number) => {
+export const UpdateNotificationStatus = async (
+  notificationIds: number[],
+  newStatus: number
+) => {
   try {
     const response = await axios.put(
-      "http://localhost:3000/notifications/update-statuses",
+      `${BASE_API_URL}/notifications/update-statuses`,
       { notificationIds, status: newStatus }
     );
     return response;
@@ -76,14 +81,16 @@ export const UpdateNotificationStatus = async (notificationIds: number[], newSta
 };
 
 // ---------- fetch notification counts by receiver_id and status ----------
-export const FetchNotificationCounts = async (receiverId: number, status: number) => {
+export const FetchNotificationCounts = async (
+  receiverId: number,
+  status: number
+) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/notifications/fetch-notifications-count/${receiverId}/${status}`
+      `${BASE_API_URL}/notifications/fetch-notifications-count/${receiverId}/${status}`
     );
     return response;
   } catch (err) {
     throw err;
   }
 };
-
