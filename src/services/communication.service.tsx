@@ -36,7 +36,7 @@ export const fetchLogsByUser = async (data: any) => {
 export const fetchNLPOutput = async (submittedText: string) => {
   try {
     const response = await axios.post(
-      `${BASE_API_URL}/api/SLP`,
+      `http://127.0.0.1:5000/api/slp`,
       { text: submittedText },
       {
         headers: {

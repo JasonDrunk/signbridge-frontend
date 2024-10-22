@@ -107,7 +107,7 @@ const VideoRecorder = ({ countdown, onStartRecording, onStopRecording, onVideoDa
                 const formData = new FormData();
                 formData.append("video", videoBlob);
 
-                const response = await fetch("http://localhost:5000/api/individual_SLR", {
+                const response = await fetch("http://127.0.0.1:5000/api/slr", {
                     method: "POST",
                     body: formData,
                 });
