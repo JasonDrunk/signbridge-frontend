@@ -227,21 +227,43 @@ function App() {
             ) : (
                 <Suspense fallback={<div>Loading...</div>}>
                     {isOnline ? (
-                        <Routes>
-                            <Route path="*" element={<PageNotFound />} />
+                    <Routes>
+                        <Route path="*" element={<PageNotFound />} />
+                        {/* <Route path="/loading" element={<><div className="loading_wrapper">
+                                <div className="loading_circle"></div>
+                                <div className="loading_circle"></div>
+                                <div className="loading_circle"></div>
+                                <div className="loading_shadow"></div>
+                                <div className="loading_shadow"></div>
+                                <div className="loading_shadow"></div>
+                                <span>Loading</span>
+                            </div></>} /> */}
                             <Route element={<HomeLayout />}>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/library" element={<Library />} />
-                                <Route path="/communication" element={<Communication />} />
-                                <Route path="/education" element={<Education />} />
-                                <Route path="/dataset-collection" element={<DataCollectionPublic />} />
-                                {/* Add more routes here */}
-                            </Route>
-                            <Route element={<ForgotResetPasswordLayout />}>
-                                <Route path="/forgot-password" element={<ForgotPassword />} />
-                                <Route path="/reset-password" element={<ResetPassword />} />
-                            </Route>
-                        </Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/library" element={libraryComponent} />
+                            <Route path="/library" element={<Library />} />
+                            <Route path="/communication" element={<Communication />} />
+                            <Route path="/education" element={<Education />} />
+                            <Route path="/dataset-collection" element={datasetComponent} />
+                            <Route path="/dataset-collection-review" element={datasetReviewComponent} />
+                            <Route path="/feedback" element={feedbackComponent} />
+                            <Route path="/faq" element={faqComponent} />
+                            <Route path="/notifications" element={<Notification />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/sign-up" element={<SignUp />} />
+                            <Route path="/guess-the-word" element={<GuessTheWord />} />
+                            <Route path="/do-the-sign" element={<DoTheSign />} />
+                            <Route path="/profile" element={<ProfilePage />} />
+                            <Route path="/references" element={<References />} />
+                            <Route path="/dataset-collection" element={<DataCollectionPublic />} />
+                            {/* Add more routes here */}
+                        </Route>
+                    <Route element={<ForgotResetPasswordLayout />}>
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/reset-password" element={<ResetPassword />} />
+                        <Route path="/feedback-success" element={<FeedbackSuccess />} />
+                    </Route>
+                    </Routes>
                     ) : (
                         <>
                             <Navbar />
